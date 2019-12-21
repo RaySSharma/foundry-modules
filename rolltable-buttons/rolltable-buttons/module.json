@@ -1,0 +1,12 @@
+{
+  "name": "rolltable-buttons",
+  "title": "RollTable Buttons",
+  "description": "This module adds buttons for rolling from chosen rollable tables",
+  "version": "0.0.1",
+  "author": "RaySSharma",
+  "scripts": ["./scripts/add-buttons.js"],
+  "systems": ["dnd5e"],
+  "styles": ["./css/rolltable-buttons.css"],
+  "packs": [],
+  "minimumCoreVersion": "0.4.2"
+}
