@@ -1,13 +1,15 @@
-# Roll Table Buttons
+## Roll Table Buttons
 
-- **Author:** RaySSharma#4736
-- **Version:** 0.1.0
-- **Foundry VTT Compatibility:** 0.4.3+
-- **Module Requirement(s):** None
-- **Module Conflicts:** None
+* **Author:** RaySSharma#4736
+* **Version:** 0.1.0
+* **Foundry VTT Compatibility:** 0.4.3+
+* **Module Requirement(s):** None
+* **Module Conflicts:** None
+* **Translation Support**: en
 
 ### Link to Module
-- [https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons](https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons)
+* [https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons](https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons)
+* [https://raw.githubusercontent.com/RaySSharma/foundry-modules/master/rolltable-buttons/rolltable-buttons/module.json](https://raw.githubusercontent.com/RaySSharma/foundry-modules/master/rolltable-buttons/rolltable-buttons/module.json)
 
 ### Description
 
