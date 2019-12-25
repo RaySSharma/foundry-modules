@@ -1,6 +1,6 @@
 # Roll Table Buttons
 
-- **Author:** RaySSharma
+- **Author:** RaySSharma#4736
 - **Version:** 0.1.0
 - **Foundry VTT Compatibility:** 0.4.3+
 - **Module Requirement(s):** None
