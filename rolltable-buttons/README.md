@@ -26,15 +26,20 @@ This module adds a button to the chat controls for easier access to rolltables. 
 - Click "Install" and it should appear in your modules list.
 
 ### Updates
-- 0.0.1
+**0.0.1**
+
     - Added buttons to Token scene controls for rolling all available rolltables.
-- 0.0.2
+**0.0.2**
+
     - Moved button to chat controls.
     - Added dialog box with rolltables, roll-able on click.
     - Added handling of different rolltable entry-types.
         - Text and JournalEntry entries now have a custom chat card
         - All other entry-types use the default rolltable chat output.
     - Added en localization (pretty minimal).
+
+**0.1.0**
+    
     
 ### License
 The source code is licensed under GPL-3.0.

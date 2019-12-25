@@ -32,7 +32,15 @@ class RollTableTools {
     static openDialog() {
         const templateData = {entities: []};
         for (let i = 0; i < game.tables.entities.length; i++) {
-            templateData.entities.push(game.tables.entities[i]);
+            let relevantEntity = game.tables.entities[i];
+            let userPermission = relevantEntity.data.permission[game.user.id];
+            let defaultPermission = relevantEntity.data.permission.default;
+
+            if (relevantEntity.data.results.length > 0) {
+                if (userPermission || defaultPermission >= CONST.ENTITY_PERMISSIONS.LIMITED) {
+                    templateData.entities.push(game.tables.entities[i]);
+                }
+            }
         }
         const templatePath = "modules/rolltable-buttons/templates/rolltable-menu.html";
         const dialogOptions = {
@@ -66,28 +74,27 @@ class RollTableTools {
      */
     static roll(rollTableName) {
         const rollTable = game.tables.entities.find(b => b.name === rollTableName);
-        const rollTableOutcome = rollTable.roll();
+        if (rollTable.data.results.length > 0) {
+            const rollTableOutcome = rollTable.roll();
 
-        if (rollTableOutcome[1].collection === "JournalEntry") {
-            let tableName = rollTable.data.name;
-            let outcomeName = rollTableOutcome[1].text;
-            let outcomeContent = game.journal.entities.find(b => b._id === rollTableOutcome[1].resultId).data.content;
-            outcomeName = RollTableTools.removeHTMLTags(outcomeName);
-            outcomeContent = RollTableTools.removeHTMLTags(outcomeContent);
-            RollTableTools.addChatMessage(tableName, outcomeName, outcomeContent).then();
+            if (rollTableOutcome[1].collection === "JournalEntry") {
+                let tableName = rollTable.data.name;
+                let outcomeName = rollTableOutcome[1].text;
+                let outcomeContent = game.journal.entities.find(b => b._id === rollTableOutcome[1].resultId).data.content;
+                outcomeName = RollTableTools.removeHTMLTags(outcomeName);
+                outcomeContent = RollTableTools.removeHTMLTags(outcomeContent);
+                RollTableTools.addChatMessage(tableName, outcomeName, outcomeContent).then();
+            } else if (rollTableOutcome[1].type === 0) {
+                let tableName = rollTable.data.name;
+                let outcomeName = null;
+                let outcomeContent = rollTableOutcome[1].text;
+                outcomeContent = RollTableTools.removeHTMLTags(outcomeContent);
+                RollTableTools.addChatMessage(tableName, outcomeName, outcomeContent).then();
+            } else {
+                let speaker = ChatMessage.getSpeaker({user: game.user});
+                rollTable._displayChatResult(rollTableOutcome[1], speaker).then()
+            }
         }
-        else if (rollTableOutcome[1].type === 0) {
-            let tableName = rollTable.data.name;
-            let outcomeName = null;
-            let outcomeContent = rollTableOutcome[1].text;
-            outcomeContent = RollTableTools.removeHTMLTags(outcomeContent);
-            RollTableTools.addChatMessage(tableName, outcomeName, outcomeContent).then();
-        }
-        else {
-            let speaker = ChatMessage.getSpeaker({user: game.user});
-            rollTable._displayChatResult(rollTableOutcome[1], speaker).then()
-        }
-
     }
 
     /**
