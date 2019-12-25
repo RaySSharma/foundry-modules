@@ -40,6 +40,7 @@ This module adds a button to the chat controls for easier access to rolltables. 
 
 **0.1.0**
     
-    
+    - Added handling for empty roll tables
+    - Added checks for user permission to view tables
 ### License
 The source code is licensed under GPL-3.0.
