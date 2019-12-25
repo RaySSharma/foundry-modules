@@ -13,6 +13,8 @@
   }],
   "styles": ["./css/rolltable-buttons.css"],
   "packs": [],
-  "minimumCoreVersion": "0.4.2",
-  "url": "https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons"
+  "minimumCoreVersion": "0.4.3",
+  "url": "https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons",
+  "manifest": "https://raw.githubusercontent.com/RaySSharma/foundry-modules/master/rolltable-buttons/rolltable-buttons/module.json",
+  "download": "https://github.com/RaySSharma/foundry-modules/raw/master/rolltable-buttons/rolltable-buttons.zip"
 }

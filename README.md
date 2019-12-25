@@ -1,2 +1,2 @@
 # foundry-modules
-Ray's modules for Foundry Virtual Tabletop software
+Ray's custom modules for [Foundry Virtual Tabletop](foundryvtt.com/) software.
