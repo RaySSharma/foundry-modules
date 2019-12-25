@@ -1,12 +1,18 @@
 {
   "name": "rolltable-buttons",
   "title": "RollTable Buttons",
-  "description": "This module adds buttons for rolling from chosen rollable tables",
+  "description": "This module adds buttons for rolling from rollable tables",
   "version": "0.0.1",
   "author": "RaySSharma",
-  "scripts": ["./scripts/add-buttons.js"],
+  "scripts": ["./scripts/RTB.js"],
   "systems": ["dnd5e"],
+  "languages": [{
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+  }],
   "styles": ["./css/rolltable-buttons.css"],
   "packs": [],
-  "minimumCoreVersion": "0.4.2"
+  "minimumCoreVersion": "0.4.2",
+  "url": "https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons"
 }
