@@ -1,24 +1,13 @@
 class RollTableTools {
-    static init() {
-        // Register module configuration settings
-        game.settings.register("rolltable", "enableRollTableButtons", {
-            name: game.i18n.localize('RTB.Title'),
-            hint: game.i18n.localize('RTB.Description'),
-            scope: "world",
-            config: true,
-            default: true,
-            type: Boolean,
-            onChange: () => window.location.reload()
-        });
-    }
-
     /**
      * Adds button to chat controls and adds functionality
      */
     static addChatControl() {
         const chatControlLeft = document.getElementsByClassName("roll-type-select")[0];
         let tableNode = document.getElementById("RTB-button");
+
         if (chatControlLeft && !tableNode) {
+
             const chatControlLeftNode = chatControlLeft.children[1];
             tableNode = document.createElement("label");
             tableNode.innerHTML = `<i id="RTB-button" class="fas fa-bullseye"></i>`;
@@ -26,6 +15,7 @@ class RollTableTools {
             chatControlLeft.insertBefore(tableNode, chatControlLeftNode);
         }
     }
+
     /**
      * Opens dialog menu for selecting roll tables
      */
@@ -35,9 +25,8 @@ class RollTableTools {
             let relevantEntity = game.tables.entities[i];
             let userPermission = relevantEntity.data.permission[game.user.id];
             let defaultPermission = relevantEntity.data.permission.default;
-
             if (relevantEntity.data.results.length > 0) {
-                if (userPermission || defaultPermission >= CONST.ENTITY_PERMISSIONS.LIMITED) {
+                if (game.user.isGM || (userPermission || defaultPermission >= CONST.ENTITY_PERMISSIONS.LIMITED)) {
                     templateData.entities.push(game.tables.entities[i]);
                 }
             }
@@ -47,7 +36,7 @@ class RollTableTools {
             width: 200,
             top: event.clientY - 80,
             left: window.innerWidth - 510,
-            classes: ['RTB-menu']
+            classes: ['RTB-container']
         };
         renderTemplate(templatePath, templateData).then(dlg => {
             new Dialog({
@@ -74,6 +63,7 @@ class RollTableTools {
      */
     static roll(rollTableName) {
         const rollTable = game.tables.entities.find(b => b.name === rollTableName);
+
         if (rollTable.data.results.length > 0) {
             const rollTableOutcome = rollTable.roll();
 
@@ -104,7 +94,6 @@ class RollTableTools {
      * @param outcomeContent {String} - Text entry of roll table outcome
      */
     static async addChatMessage(tableName, outcomeName, outcomeContent) {
-
         let content = await renderTemplate("modules/rolltable-buttons/templates/chat-card.html", {
             tableName: tableName,
             outcomeName: outcomeName,
@@ -119,5 +108,4 @@ class RollTableTools {
         await ChatMessage.create(chatData, {});
     }
 }
-Hooks.on('init', RollTableTools.init);
-Hooks.on('renderChatMessage', RollTableTools.addChatControl);
+Hooks.on('canvasReady', RollTableTools.addChatControl);
