@@ -1,7 +1,7 @@
 ## Roll Table Buttons
 
 * **Author:** RaySSharma#4736
-* **Version:** 0.1.0
+* **Version:** 0.2.0
 * **Foundry VTT Compatibility:** 0.4.3+
 * **Module Requirement(s):** None
 * **Module Conflicts:** None
@@ -29,20 +29,24 @@ This module adds a button to the chat controls for easier access to rolltables. 
 
 ### Updates
 **0.0.1**
+- Added buttons to Token scene controls for rolling all available rolltables.
 
-    - Added buttons to Token scene controls for rolling all available rolltables.
 **0.0.2**
-
-    - Moved button to chat controls.
-    - Added dialog box with rolltables, roll-able on click.
-    - Added handling of different rolltable entry-types.
-        - Text and JournalEntry entries now have a custom chat card
-        - All other entry-types use the default rolltable chat output.
-    - Added en localization (pretty minimal).
+- Moved button to chat controls.
+- Added dialog box with rolltables, roll-able on click.
+- Added handling of different rolltable entry-types.
+    - Text and JournalEntry entries now have a custom chat card
+    - All other entry-types use the default rolltable chat output.
+- Added en localization (pretty minimal).
 
 **0.1.0**
-    
-    - Added handling for empty roll tables
-    - Added checks for user permission to view tables
+- Added handling for empty roll tables
+- Added checks for user permission to view tables
+
+**0.2.0**
+- Changed Hook for chat button to `canvasReady`
+- Changed button style
+- Trimmed excess CSS
+- Added check for user GM status to show table buttons
 ### License
 The source code is licensed under GPL-3.0.
