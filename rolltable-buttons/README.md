@@ -1,7 +1,7 @@
 ## Roll Table Buttons
 
 * **Author:** RaySSharma#4736
-* **Version:** 0.2.0
+* **Version:** 0.3.0
 * **Foundry VTT Compatibility:** 0.4.3+
 * **Module Requirement(s):** None
 * **Module Conflicts:** None
@@ -13,7 +13,16 @@
 
 ### Description
 
-This module adds a button to the chat controls for easier access to rolltables. Came about as a way to add critical-hit decks for players.
+This module makes it more convenient to roll from existing roll-tables.
+- Adds a button to the chat to access a list of roll-tables
+- Takes into account `rollMode` to allow global or private roll-table results.
+- Roll-tables only appear in the list if "Display in Chat" is checked
+- JournalEntry results come with a custom chat-card. 
+
+![New Button + Dialog](./images/rolltable-dialog.png "New Button + Dialog")
+![Chat Card + GM Roll](./images/gmroll.png "Chat Card + GM Roll")
+
+
 
 ### Installation
 
@@ -44,9 +53,15 @@ This module adds a button to the chat controls for easier access to rolltables. 
 - Added checks for user permission to view tables
 
 **0.2.0**
-- Changed Hook for chat button to `canvasReady`
-- Changed button style
-- Trimmed excess CSS
-- Added check for user GM status to show table buttons
+- Changed Hook for chat button to `canvasReady`.
+- Changed button style.
+- Trimmed excess CSS.
+- Added check for user GM status to show table buttons.
+
+**0.3.0**
+- Refactored code to use more FoundryVTT terminology.
+- Made use of `rollMode` dropdown menu to determine whether chat message is global, GM-only, etc.
+- Added check for whether "Display in Chat" is marked in the rollTable form. Table button does not appear in the RTB Dialog if "Display in Chat" is not marked.
+
 ### License
 The source code is licensed under GPL-3.0.

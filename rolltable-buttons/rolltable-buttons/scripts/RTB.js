@@ -1,4 +1,4 @@
-class RollTableTools {
+class RTB {
     /**
      * Adds button to chat controls and adds functionality
      */
@@ -11,7 +11,7 @@ class RollTableTools {
             const chatControlLeftNode = chatControlLeft.children[1];
             tableNode = document.createElement("label");
             tableNode.innerHTML = `<i id="RTB-button" class="fas fa-bullseye"></i>`;
-            tableNode.onclick = RollTableTools.openDialog;
+            tableNode.onclick = RTB._openDialog;
             chatControlLeft.insertBefore(tableNode, chatControlLeftNode);
         }
     }
@@ -19,15 +19,15 @@ class RollTableTools {
     /**
      * Opens dialog menu for selecting roll tables
      */
-    static openDialog() {
+    static _openDialog() {
         const templateData = {entities: []};
         for (let i = 0; i < game.tables.entities.length; i++) {
             let relevantEntity = game.tables.entities[i];
             let userPermission = relevantEntity.data.permission[game.user.id];
             let defaultPermission = relevantEntity.data.permission.default;
-            if (relevantEntity.data.results.length > 0) {
+            if ((relevantEntity.data.results.length > 0) && (relevantEntity.data.displayRoll)) {
                 if (game.user.isGM || (userPermission || defaultPermission >= CONST.ENTITY_PERMISSIONS.LIMITED)) {
-                    templateData.entities.push(game.tables.entities[i]);
+                    templateData.entities.push(relevantEntity);
                 }
             }
         }
@@ -51,7 +51,7 @@ class RollTableTools {
      * Convenience function for stripping HTML tags from input string
      * @param html {String}
      */
-    static removeHTMLTags(html) {
+    static _removeHTMLTags(html) {
         const div = document.createElement("div");
         div.innerHTML = html;
         return div.textContent || div.innerText || "";
@@ -61,29 +61,28 @@ class RollTableTools {
      * Finds and rolls input roll table, then outputs to chat according to type of outcome
      * @param rollTableName {String} - Name of roll table.
      */
-    static roll(rollTableName) {
+    static draw(rollTableName) {
         const rollTable = game.tables.entities.find(b => b.name === rollTableName);
 
         if (rollTable.data.results.length > 0) {
-            const rollTableOutcome = rollTable.roll();
+            const result = rollTable.roll()[1];
+            const tableName = rollTable.data.name;
+            let outcomeName = null
+            let outcomeContent = null
 
-            if (rollTableOutcome[1].collection === "JournalEntry") {
-                let tableName = rollTable.data.name;
-                let outcomeName = rollTableOutcome[1].text;
-                let outcomeContent = game.journal.entities.find(b => b._id === rollTableOutcome[1].resultId).data.content;
-                outcomeName = RollTableTools.removeHTMLTags(outcomeName);
-                outcomeContent = RollTableTools.removeHTMLTags(outcomeContent);
-                RollTableTools.addChatMessage(tableName, outcomeName, outcomeContent).then();
-            } else if (rollTableOutcome[1].type === 0) {
-                let tableName = rollTable.data.name;
-                let outcomeName = null;
-                let outcomeContent = rollTableOutcome[1].text;
-                outcomeContent = RollTableTools.removeHTMLTags(outcomeContent);
-                RollTableTools.addChatMessage(tableName, outcomeName, outcomeContent).then();
+            if ((result.type === CONST.TABLE_RESULT_TYPES.ENTITY) && (result.collection === "JournalEntry")) {
+                outcomeName = this._removeHTMLTags(result.text);
+                outcomeContent = game.journal.entities.find(b => b._id === result.resultId).data.content;
+                outcomeContent = this._removeHTMLTags(outcomeContent);
+            } else if (result.type === CONST.TABLE_RESULT_TYPES.TEXT) {
+                outcomeContent = this._removeHTMLTags(result.text);
             } else {
                 let speaker = ChatMessage.getSpeaker({user: game.user});
-                rollTable._displayChatResult(rollTableOutcome[1], speaker).then()
+                rollTable._displayChatResult(result, speaker);
+                return result;
             }
+            this._addChatMessage(tableName, outcomeName, outcomeContent).then();
+            return result;
         }
     }
 
@@ -93,19 +92,25 @@ class RollTableTools {
      * @param outcomeName {String} - Title of roll table outcome
      * @param outcomeContent {String} - Text entry of roll table outcome
      */
-    static async addChatMessage(tableName, outcomeName, outcomeContent) {
+    static async _addChatMessage(tableName, outcomeName, outcomeContent) {
         let content = await renderTemplate("modules/rolltable-buttons/templates/chat-card.html", {
             tableName: tableName,
             outcomeName: outcomeName,
             outcomeContent: outcomeContent
         });
+        let speaker = ChatMessage.getSpeaker({user: game.user});
         let chatData = {
             user: game.user._id,
             content: content,
             type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            sound: CONFIG.sounds.dice
+            sound: CONFIG.sounds.dice,
+            speaker: speaker
         };
+        let rollMode = game.settings.get("core", "rollMode");
+        if ( ["gmroll", "blindroll"].includes(rollMode) ) chatData["whisper"] = ChatMessage.getWhisperIDs("GM");
+        if ( rollMode === "blindroll" ) chatData["blind"] = true;
+
         await ChatMessage.create(chatData, {});
     }
 }
-Hooks.on('canvasReady', RollTableTools.addChatControl);
+Hooks.on('canvasReady', RTB.addChatControl);

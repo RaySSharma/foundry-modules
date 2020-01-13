@@ -2,7 +2,7 @@
   "name": "rolltable-buttons",
   "title": "RollTable Buttons",
   "description": "This module adds buttons for rolling from rollable tables",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "RaySSharma",
   "scripts": ["./scripts/RTB.js"],
   "systems": ["dnd5e"],
