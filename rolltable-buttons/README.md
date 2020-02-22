@@ -65,6 +65,7 @@ This module makes it more convenient to roll from existing roll-tables.
 
 **0.4.0**
 - Forced roll-mode selection list to smaller size, so RTB button will fit.
+- Updated minimum Foundry version to 0.4.7
 
 ### License
 The source code is licensed under GPL-3.0.
