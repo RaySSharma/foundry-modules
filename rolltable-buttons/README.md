@@ -63,5 +63,8 @@ This module makes it more convenient to roll from existing roll-tables.
 - Made use of `rollMode` dropdown menu to determine whether chat message is global, GM-only, etc.
 - Added check for whether "Display in Chat" is marked in the rollTable form. Table button does not appear in the RTB Dialog if "Display in Chat" is not marked.
 
+**0.4.0**
+- Forced roll-mode selection list to smaller size, so RTB button will fit.
+
 ### License
 The source code is licensed under GPL-3.0.

@@ -16,3 +16,7 @@
     background-color: #a9a9a7;
     box-shadow: none;
 }
+
+#chat-controls .roll-type-select select {
+    width: 150px !important;
+}
