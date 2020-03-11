@@ -1,14 +1,12 @@
-
-<form id="EBForm" autocomplete="off" onsubmit="event.preventDefault();" >
+<form>
     <div id="EBContainers">
-
-        <fieldset class="leftContainer">
-            <legend>Players</legend>
-            <div class="leftField">
-                {{#each pcs}}
-                    <div class='pc-container'>
-                        <img class="pc-portraits" src="{{this.img}}" title="{{this.name}}" id="{{this.id}}"/>
-                        <div class="subtract">
+        <fieldset class="group-container ally-container">
+            <legend class='group-legend'>Allies</legend>
+            <div class="group-field ally-field">
+                {{#each allies}}
+                    <div class='actor-container'>
+                        <img class="actor-portrait" src="{{this.img}}" title="{{this.name}}" id="{{this.id}}"/>
+                        <div class="actor-subtract">
                             <i class="fas fa-minus" title="{{this.name}}" id="{{this.id}}"></i>
                         </div>
                     </div>
@@ -16,12 +14,12 @@
             </div>
         </fieldset>
 
-        <div class="centerContainer">
+        <div class="center-container">
             <div class="difficulty-rating">
                 <h1>{{capitalizeAll this.difficulty}}</h1>
             </div>
             <div class="difficulty-threshold">
-                {{#with pcrating}}
+                {{#with ratings}}
                     <label>Easy: {{easy}} XP</label>
                     <label>Medium: {{medium}} XP</label>
                     <label>Hard: {{hard}} XP</label>
@@ -33,29 +31,33 @@
             </div>
         </div>
 
-        <fieldset class="rightContainer">
-            <legend>Opponents</legend>
-            <div class="rightField">
-                {{#each npcs}}
-                    <div class='npc-container'>
-                        <img class='npc-portraits' src="{{this.img}}" title="{{this.name}}" id="{{this.id}}"/>
-                        <div class="subtract">
+        <fieldset class="group-container opponent-container">
+            <legend class='group-legend'>Opponents</legend>
+            <div class="group-field opponent-field">
+                {{#each opponents}}
+                    <div class='actor-container'>
+                        <img class='actor-portrait' src="{{this.img}}" title="{{this.name}}" id="{{this.id}}"/>
+                        <div class="actor-subtract">
                             <i class="fas fa-minus" title="{{this.name}}" id="{{this.id}}"></i>
                         </div>
                     </div>
                 {{/each}}
             </div>
         </fieldset>
-        
     </div>
-    <div id="EBOutcome">
+
+    <div id="EBXP">
         <div class='scores'>
             <h2>
                 Total XP: {{this.totalxp}}
             </h2>
+
             <h3>
-                XP / player: {{this.perpcxp}}
+                XP / player: {{this.allyxp}}
             </h3>
         </div>
+        <button class='clear' type='button'>
+            clear
+        </button>
     </div>
 </form>
