@@ -1,5 +1,5 @@
-<div class="RTB-menu">
-    {{#each entities}}
-        <button onclick="RTB.draw('{{name}}')" class="RTB-entry">{{name}}</button>
+<div id="RTB-menu">
+    {{#each data}}
+        <button onclick="RTB._openFolder({{{json this}}})" class="RTB-entry" style="background-color:{{folder.data.color}}">{{folder.name}}</button>
     {{/each}}
 </div>

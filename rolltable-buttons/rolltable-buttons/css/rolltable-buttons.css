@@ -2,16 +2,25 @@
     color: #ff9898;
 }
 
-.RTB-entry {
-    background-color: #c4c3c0;
-    color: #111111;
+.RTB-window {
+    display: flex;
+    flex-direction: column;
+    max-height: 50%;
+    height: auto !important;
+    position: sticky;
+    margin-bottom: 8px;
+}
+
+#RTB-menu .RTB-entry {
+    background-color: rgba(0,0,0,0.8);
+    color: #f0f0e0;
     padding: 10px;
     font-size: 20px;
     margin-bottom: 5px;
     border: 1px solid #111111;
     cursor: pointer;
 }
-
+a
 .RTB-entry:hover, .RTB-entry:focus {
     background-color: #a9a9a7;
     box-shadow: none;

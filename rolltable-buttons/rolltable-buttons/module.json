@@ -1,8 +1,8 @@
 {
   "name": "rolltable-buttons",
   "title": "RollTable Buttons",
-  "description": "This module adds buttons for rolling from rollable tables",
-  "version": "0.4.1",
+  "description": "This module adds a convenient way to draw from RollTables",
+  "version": "1.0.0",
   "author": "RaySSharma",
   "scripts": ["./scripts/RTB.js"],
   "languages": [{
@@ -12,7 +12,8 @@
   }],
   "styles": ["./css/rolltable-buttons.css"],
   "packs": [],
-  "minimumCoreVersion": "0.4.7",
+  "minimumCoreVersion": "0.5.0",
+  "compatibleCoreVersion": "0.5.5",
   "url": "https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons",
   "manifest": "https://raw.githubusercontent.com/RaySSharma/foundry-modules/master/rolltable-buttons/rolltable-buttons/module.json",
   "download": "https://github.com/RaySSharma/foundry-modules/raw/master/rolltable-buttons/rolltable-buttons.zip"
