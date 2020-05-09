@@ -1,7 +1,7 @@
 ## RollTable Buttons
 
 * **Author:** RaySSharma#4736
-* **Version:** 1.1.0
+* **Version:** 1.1.1
 * **Foundry VTT Compatibility:** 0.5.0+
 * **Module Requirement(s):** None
 * **Module Conflicts:** None
@@ -90,6 +90,7 @@ This module adds a convenient way to draw from RollTables. Great for critical hi
 
 * RollTables and Folders containing RollTables both show up (thanks to mistamichal#5724).
 * Added icon to tell Folders apart from RollTables.
+* Folders no longer show unchecked DisplayRoll Tables (thanks to DocWhovian#9234).
 
 ### License
 

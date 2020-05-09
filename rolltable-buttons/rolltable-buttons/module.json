@@ -2,7 +2,7 @@
   "name": "rolltable-buttons",
   "title": "RollTable Buttons",
   "description": "This module adds a convenient way to draw from RollTables",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "RaySSharma",
   "scripts": ["./scripts/RTB.js"],
   "languages": [{

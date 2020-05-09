@@ -29,7 +29,8 @@ class RTB extends Application {
             }
         }
         for (let i = 0; i < folders.length; i++) {
-            let folder = Object.assign({}, folders[i])
+            let folder = Object.assign({}, folders[i]);
+            folder.content = folders[i].content.filter(x => (x.data.displayRoll) && ((game.user.hasPermission(x)) || (game.user.hasRole(x.permission))));
             folder.name = folders[i].name;
             folder.folder = true;
             templateData.data.push(folder);
@@ -60,7 +61,7 @@ class RTB extends Application {
             }, dialogOptions).render(true);
         });
     }
-    
+
     /**
      * Convenience function for stripping HTML tags from input string
      *
@@ -74,7 +75,7 @@ class RTB extends Application {
         div.innerHTML = html;
         return div.textContent || div.innerText || "";
     }
-    
+
     /**
      * Finds and rolls input roll table, then outputs to chat according to type of outcome
      *
@@ -107,7 +108,7 @@ class RTB extends Application {
             return result;
         }
     }
-  
+
     /**
      * Outputs roll table parameters to chat
      *
@@ -147,8 +148,8 @@ class RTB extends Application {
      * @memberof RTB
      */
     static _openFolder(data) {
-        let folder = game.folders.entities.find(x => x._id === data[0].folder)
-        data.map(x => x.color = folder.data.color)
+        let folder = game.folders.entities.find(x => x._id === data[0].folder);
+        data.map(x => x.color = folder.data.color);
         let html = '{{#each data}}<button onclick="RTB.draw(' + "'{{this.name}}')" + '" class="RTB-entry" style="background-color:{{this.color}}">{{this.name}}</button>{{/each}}';
         let template = Handlebars.compile(html);
         let compiled = template({ data });
