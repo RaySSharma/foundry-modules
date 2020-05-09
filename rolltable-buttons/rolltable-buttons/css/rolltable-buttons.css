@@ -2,13 +2,8 @@
     color: #ff9898;
 }
 
-.RTB-window {
-    display: flex;
-    flex-direction: column;
-    max-height: 50%;
-    height: auto !important;
-    position: sticky;
-    margin-bottom: 8px;
+#chat-controls .roll-type-select select {
+    width: 150px !important;
 }
 
 #RTB-menu .RTB-entry {
@@ -20,12 +15,16 @@
     border: 1px solid #111111;
     cursor: pointer;
 }
-a
-.RTB-entry:hover, .RTB-entry:focus {
-    background-color: #a9a9a7;
-    box-shadow: none;
+
+#RTB-menu .RTB-entry:hover, .RTB-entry:focus {
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
 }
 
-#chat-controls .roll-type-select select {
-    width: 150px !important;
+.RTB-window {
+    display: flex;
+    flex-direction: column;
+    max-height: 50%;
+    height: auto !important;
+    position: sticky;
+    margin-bottom: 8px;
 }

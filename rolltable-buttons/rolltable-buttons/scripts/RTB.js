@@ -5,24 +5,10 @@ class RTB extends Application {
     }
 
     /**
-     * Adds button to chat controls and adds functionality
-     */
-    addChatControl() {
-        const chatControlLeft = document.getElementsByClassName("roll-type-select")[0];
-        let tableNode = document.getElementById("RTB-button");
-
-        if (chatControlLeft && !tableNode) {
-
-            const chatControlLeftNode = chatControlLeft.children[1];
-            tableNode = document.createElement("label");
-            tableNode.innerHTML = `<i id="RTB-button" class="fas fa-bullseye"></i>`;
-            tableNode.onclick = this.openDialog;
-            chatControlLeft.insertBefore(tableNode, chatControlLeftNode);
-        }
-    }
-
-    /**
      * Opens dialog menu for selecting roll tables
+     *
+     * @returns
+     * @memberof RTB
      */
     openDialog() {
         let $dialog = $('.RTB-window');
@@ -33,32 +19,32 @@ class RTB extends Application {
 
         const templateData = { data: [] };
         const templatePath = "modules/rolltable-buttons/templates/rolltable-menu.html";
-        const rollTableFolders = game.folders.filter(b => b.type === "RollTable");
+        const rollTables = game.tables.filter(x => (x.data.displayRoll) && ((game.user.hasPermission(x)) || (game.user.hasRole(x.permission))));
+        const folders = game.folders.filter(x => x.data.type == "RollTable");
 
-        if (rollTableFolders.length > 0) {
-            for (let i = 0; i < rollTableFolders.length; i++) {
-                let folder = rollTableFolders[i];
-                let folderContents = game.tables.filter(b => (b.data.folder === folder.data._id) && (b.data.displayRoll) && ((game.user.hasPermission(b)) || (game.user.hasRole(b.permission))));
-
-                let data = { folder: folder, contents: folderContents };
-                if (folderContents.length > 0) {
-                    templateData.data.push(data);
-                }
-            }
-            RTB.renderMenu(templatePath, templateData);
-        }
-        else {
-            const rollTables = game.tables.filter(b => (b.data.displayRoll) && ((game.user.hasPermission(b)) || (game.user.hasPermission(b.permission))));
-            
-            if (rollTables.length > 0) {
-                let dummyFolder = {name:"Rollable Tables"}
-                let data = { folder: dummyFolder, contents: rollTables}
-                templateData.data.push(data);
-                RTB.renderMenu(templatePath, templateData);
+        for (let i = 0; i < rollTables.length; i++) {
+            let rollTable = rollTables[i];
+            if (!rollTable.folder) {
+                templateData.data.push(rollTable);
             }
         }
+        for (let i = 0; i < folders.length; i++) {
+            let folder = Object.assign({}, folders[i])
+            folder.name = folders[i].name;
+            folder.folder = true;
+            templateData.data.push(folder);
+        }
+        RTB.renderMenu(templatePath, templateData);
     }
 
+    /**
+     * Render dialog menu with input data
+     *
+     * @static
+     * @param {String} path
+     * @param {Object} data
+     * @memberof RTB
+     */
     static renderMenu(path, data) {
         const dialogOptions = {
             width: 200,
@@ -74,20 +60,28 @@ class RTB extends Application {
             }, dialogOptions).render(true);
         });
     }
-
+    
     /**
      * Convenience function for stripping HTML tags from input string
-     * @param html {String}
+     *
+     * @static
+     * @param {String} html
+     * @returns
+     * @memberof RTB
      */
     static _removeHTMLTags(html) {
         const div = document.createElement("div");
         div.innerHTML = html;
         return div.textContent || div.innerText || "";
     }
-
+    
     /**
      * Finds and rolls input roll table, then outputs to chat according to type of outcome
-     * @param rollTableName {String} - Name of roll table.
+     *
+     * @static
+     * @param {String} rollTableName
+     * @returns
+     * @memberof RTB
      */
     static draw(rollTableName) {
         const rollTable = game.tables.entities.find(b => b.name === rollTableName);
@@ -113,12 +107,15 @@ class RTB extends Application {
             return result;
         }
     }
-
+  
     /**
      * Outputs roll table parameters to chat
-     * @param tableName {String} - Name of roll table.
-     * @param outcomeName {String} - Title of roll table outcome
-     * @param outcomeContent {String} - Text entry of roll table outcome
+     *
+     * @static
+     * @param {String} tableName
+     * @param {String} outcomeName
+     * @param {String} outcomeContent
+     * @memberof RTB
      */
     static async _addChatMessage(tableName, outcomeName, outcomeContent) {
         let content = await renderTemplate("modules/rolltable-buttons/templates/chat-card.html", {
@@ -141,13 +138,20 @@ class RTB extends Application {
         await ChatMessage.create(chatData, {});
     }
 
-    static _openFolder(data) {
-        let contents = data.contents;
-        contents.map(x => x.color = data.folder.color);
 
-        let html = '{{#each contents}}<button onclick="RTB.draw(' + "'{{this.name}}')" + '" class="RTB-entry" style="background-color:{{this.color}}">{{this.name}}</button>{{/each}}';
+    /**
+     * Open Folder to get RollTables within
+     *
+     * @static
+     * @param {Object} data
+     * @memberof RTB
+     */
+    static _openFolder(data) {
+        let folder = game.folders.entities.find(x => x._id === data[0].folder)
+        data.map(x => x.color = folder.data.color)
+        let html = '{{#each data}}<button onclick="RTB.draw(' + "'{{this.name}}')" + '" class="RTB-entry" style="background-color:{{this.color}}">{{this.name}}</button>{{/each}}';
         let template = Handlebars.compile(html);
-        let compiled = template({ contents });
+        let compiled = template({ data });
         document.getElementById("RTB-menu").innerHTML = compiled;
     }
 }
@@ -155,8 +159,10 @@ class RTB extends Application {
 class RTBControl {
 
     /**
-    * Adds button to chat controls and adds functionality
-    */
+     * Adds button to chat controls and sets button functionality
+     *
+     * @memberof RTB
+     */
     static addChatControl() {
         const chatControlLeft = document.getElementsByClassName("roll-type-select")[0];
         let tableNode = document.getElementById("RTB-button");

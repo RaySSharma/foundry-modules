@@ -1,7 +1,7 @@
 ## RollTable Buttons
 
 * **Author:** RaySSharma#4736
-* **Version:** 1.0.0
+* **Version:** 1.1.0
 * **Foundry VTT Compatibility:** 0.5.0+
 * **Module Requirement(s):** None
 * **Module Conflicts:** None
@@ -75,16 +75,21 @@ This module adds a convenient way to draw from RollTables. Great for critical hi
 #### 0.4.0
 
 * Forced roll-mode selection list to smaller size, so RTB button will fit.
-* Updated minimum Foundry version to 0.4.7
-* Made module system-agnostic (thanks to #imposeren3557)
+* Updated minimum Foundry version to 0.4.7.
+* Made module system-agnostic (thanks to imposeren#3557).
 
 #### 1.0.0
 
 * Major rewrite includes:
-  * Support for folders containing roll tables
-  * Color buttons according to folder colors
-  * More robust support of user permissions
-  * Pressing chat button closes dialog
+  * Support for folders containing roll tables.
+  * Color buttons according to folder colors.
+  * More robust support of user permissions.
+  * Pressing chat button closes dialog.
+
+#### 1.1.0
+
+* RollTables and Folders containing RollTables both show up (thanks to mistamichal#5724).
+* Added icon to tell Folders apart from RollTables.
 
 ### License
 
