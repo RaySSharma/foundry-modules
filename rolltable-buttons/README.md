@@ -23,7 +23,7 @@ This module adds a convenient way to draw from RollTables. Great for critical hi
 * Adheres to user permissions.
 * JournalEntry results come with a custom chat-card.
 
-![New Button + Dialog](./images/rolltable-dialog.png "New Button + Dialog")
+![New Button + Dialog](./images/rolltable-dialog.png? "New Button + Dialog")
 
 ### Installation
 
