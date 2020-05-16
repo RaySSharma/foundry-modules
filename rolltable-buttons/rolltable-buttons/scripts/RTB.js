@@ -88,7 +88,7 @@ class RTB extends Application {
         const rollTable = game.tables.entities.find(b => b.name === rollTableName);
 
         if (rollTable.data.results.length > 0) {
-            const result = rollTable.roll()[1];
+            const result = rollTable.roll().results[0];
             const tableName = rollTable.data.name;
             let outcomeName = null;
             let outcomeContent = null;
