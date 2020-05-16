@@ -12,8 +12,8 @@
   }],
   "styles": ["./css/rolltable-buttons.css"],
   "packs": [],
-  "minimumCoreVersion": "0.5.0",
-  "compatibleCoreVersion": "0.5.5",
+  "minimumCoreVersion": "0.5.6",
+  "compatibleCoreVersion": "0.5.7",
   "url": "https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons",
   "manifest": "https://raw.githubusercontent.com/RaySSharma/foundry-modules/master/rolltable-buttons/rolltable-buttons/module.json",
   "download": "https://github.com/RaySSharma/foundry-modules/raw/master/rolltable-buttons/rolltable-buttons.zip"
