@@ -19,7 +19,7 @@ class RTB extends Application {
 
         const templateData = { data: [] };
         const templatePath = "modules/rolltable-buttons/templates/rolltable-menu.html";
-        const rollTables = game.tables.filter(x => (x.data.displayRoll) && ((game.user.hasPermission(x)) || (game.user.hasRole(x.permission))));
+        const rollTables = game.tables.filter(x => (x.data.displayRoll) && ((x.data.permission.default >= CONST.ENTITY_PERMISSIONS.LIMITED) || (x.data.permission[game.user.id] >= CONST.ENTITY_PERMISSIONS.LIMITED) || (game.user.isGM)));
         const folders = game.folders.filter(x => x.data.type == "RollTable");
 
         for (let i = 0; i < rollTables.length; i++) {
@@ -30,7 +30,7 @@ class RTB extends Application {
         }
         for (let i = 0; i < folders.length; i++) {
             let folder = Object.assign({}, folders[i]);
-            folder.content = folders[i].content.filter(x => (x.data.displayRoll) && ((game.user.hasPermission(x)) || (game.user.hasRole(x.permission))));
+            folder.content = folders[i].content.filter(x => (x.data.displayRoll) && ((x.data.permission.default >= CONST.ENTITY_PERMISSIONS.LIMITED) || (x.data.permission[game.user.id] >= CONST.ENTITY_PERMISSIONS.LIMITED) || (game.user.isGM)));
             folder.name = folders[i].name;
             folder.folder = true;
             templateData.data.push(folder);
@@ -92,7 +92,6 @@ class RTB extends Application {
             const tableName = rollTable.data.name;
             let outcomeName = null;
             let outcomeContent = null;
-
             if ((result.type === CONST.TABLE_RESULT_TYPES.ENTITY) && (result.collection === "JournalEntry")) {
                 outcomeName = RTB._removeHTMLTags(result.text);
                 outcomeContent = game.journal.entities.find(b => b._id === result.resultId).data.content;
