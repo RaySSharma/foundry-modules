@@ -1,0 +1,43 @@
+<div id='HC-form'>
+    <form autocomplete='off'>
+        <!-- Tabs -->
+        <div id='HC-header'>
+            <button type='submit' class='tablinks race'>RACE</button>
+            <button type='submit' class='tablinks class'>CLASS</button>
+            <button type='submit' class='tablinks abilities'>ABILITIES</button>
+            <button type='submit' class='tablinks background'>BACKGROUND</button>
+            <button type='submit' class='tablinks equipment'>EQUIPMENT</button>
+            <button type='submit' class='tablinks spells'>SPELLS</button>
+            <button type='submit' class='tablinks feats'>FEATS</button>
+            <button type='submit' class='tablinks bio'>BIO</button>
+            <button type='submit' class='tablinks summary'>SUMMARY</button>
+        </div>
+        
+        <!-- Tab content -->
+        <div id='HC-content'>
+            {{#with data.bio as | bio |}}
+                <div class='choice'>
+                    <label class='choice-label' for='name'>Hero name</label>
+                    <input class='choice-input' type='text' id='name' name='name' value='{{bio.name}}'>
+                    <label class='choice-label' for='age'>Age</label>
+                    <input class='choice-input' type='text' id='age' name='age' value='{{bio.age}}'>
+                    <label class='choice-label' for='height'>Height</label>
+                    <input class='choice-input' type='text' id='height' name='height' value='{{bio.height}}'>
+                    <label class='choice-label' for='weight'>Weight</label>
+                    <input class='choice-input' type='text' id='weight' name='weight' value='{{bio.weight}}'>
+                    <label class='choice-label' for='eyes'>Eyes</label>
+                    <input class='choice-input' type='text' id='eyes' name='eyes' value='{{bio.eyes}}'>
+                    <label class='choice-label' for='hair'>Hair</label>
+                    <input class='choice-input' type='text' id='hair' name='hair' value='{{bio.hair}}'>
+                    <label class='choice-label' for='skin'>Skin</label>
+                    <input class='choice-input' type='text' id='skin' name='skin' value='{{bio.skin}}'>
+                </div>
+            {{/with}}
+        </div>
+
+        <div id='HC-navigate'>
+            <button type='submit' class='submit prev' value='Submit'>PREVIOUS</button>
+            <button type='submit' class='submit next' value='Submit'>NEXT</button>
+        </div>
+    </form>
+</div>

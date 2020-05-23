@@ -1,0 +1,21 @@
+{
+    "name": "hero-conjurer",
+    "title": "Hero Conjurer",
+    "description": "This module makes it easy to create new heroes!",
+    "version": "0.1.0",
+    "author": "RaySSharma",
+    "scripts": ["./src/conjurer.js"],
+    "languages": [{
+        "lang": "en",
+        "name": "English",
+        "path": "lang/en.json"
+    }],
+    "styles": ["./css/conjurer.css"],
+    "packs": [],
+    "minimumCoreVersion": "0.5.6",
+    "compatibleCoreVersion": "0.5.7",
+    "url": "https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons",
+    "manifest": "https://raw.githubusercontent.com/RaySSharma/foundry-modules/master/rolltable-buttons/rolltable-buttons/module.json",
+    "download": "https://github.com/RaySSharma/foundry-modules/raw/master/rolltable-buttons/rolltable-buttons.zip"
+  }
+  

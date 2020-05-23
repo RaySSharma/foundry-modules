@@ -1,0 +1,96 @@
+/* Parent form */
+#HC-form {
+  display: flex;
+  width: 941px;
+  height: 600px;
+}
+/* Container for banner */
+#HC-form .banner-container {
+  position: relative;
+  margin: auto;
+  width: 50%;
+  height: 110px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Banner */
+#HC-form .banner {
+  width: 100%;
+  height: auto;
+  background: #fff0;
+  border-style: none;
+  box-shadow: none;
+  position: absolute;
+  top: 0px;
+}
+
+/* Tab header */
+#HC-header {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+/* Tab buttons hover */
+#HC-header .tablinks:hover {
+  color: #dbdbdb;
+  background-color: #b30000;
+  box-shadow: none;
+}
+
+/* HC tab buttons */
+#HC-header .tablinks {
+  background-color: #cccccc;
+  border: 3px solid #000000;
+  transition: 0.3s;
+  width: auto;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 10px;
+  margin: 1em;
+}
+
+/* Style the tab content */
+#HC-content {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+} 
+
+#HC-content .choice {
+  width: 30%;
+  padding: 5%;
+}
+#HC-content .choice-label {
+  font-size: 1.4em;
+}
+#HC-content .choice-input {
+  height: 1.6em;
+}
+
+#HC-navigate .submit:hover {
+  color: #dbdbdb;
+  background-color: #b30000;
+  box-shadow: none;
+}
+#HC-navigate .submit.active {
+  color: #dbdbdb;
+  background-color: #b30000;
+  box-shadow: none;
+}
+
+#HC-navigate .submit {
+  background-color: #cccccc;
+  border: 3px solid #000000;
+  transition: 0.3s;
+  width: auto;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 10px;
+  margin: 1em;
+}
+#HC-navigate .prev {
+  float: left;
+}
+#HC-navigate .next {
+  float: right;
+}
