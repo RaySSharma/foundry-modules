@@ -1,7 +1,8 @@
 <div id='HC-form'>
-    <form autocomplete='off'>
+    <form autocomplete='off' class='form'>
+        <input type='hidden' name='sheet' id='sheet' value='race'>
         <!-- Tabs -->
-        <div id='HC-header'>
+        <nav id='HC-header'>
             <button type='submit' class='tablinks race'>RACE</button>
             <button type='submit' class='tablinks class'>CLASS</button>
             <button type='submit' class='tablinks abilities'>ABILITIES</button>
@@ -11,11 +12,47 @@
             <button type='submit' class='tablinks feats'>FEATS</button>
             <button type='submit' class='tablinks bio'>BIO</button>
             <button type='submit' class='tablinks summary'>SUMMARY</button>
-        </div>
+        </nav>
+
+        <!-- Abilities -->
+        <ul id='HC-abilities'>
+
+            {{#with data.abilities as | ability |}}
+                {{#each ability}}
+                    <li class='abilities'>
+                        <h3 class='score'>{{@key}}</h3>
+                        <p class='score'>{{this}}</p>
+                    </li>
+                {{/each}}
+            {{/with}}
+        </ul>
         
         <!-- Tab content -->
         <div id='HC-content'>
-            <h3 class='tabcontent'>Race menu</h3>
+            <label for='race'>Race:</label>
+            <select class='select' name='race' id='race'>
+                <option value='{{data.race.race}}' selected hidden>{{data.race.race}}</option> 
+                {{#with info.race as | race |}}
+                    {{#each race}}
+                        <option value='{{@key}}'>{{@key}}</option>
+                    {{/each}}
+                {{/with}}
+            </select>
+
+            {{#if data.race.race}}
+                <label for='alignment'>Alignment:</label>
+                <select class='select' name='alignment' id='alignment'>
+                    <option value='{{data.race.alignment}}' selected hidden>{{data.race.alignment}}</option> 
+                    {{#with info.alignment as | alignment |}}
+                        {{#each alignment}}
+                            <option value='{{@key}}'>{{@key}}</option>
+                        {{/each}}
+                    {{/with}}
+                </select>
+                <label for='size' name='size' id='size'>Size: {{data.race.size}}</label>
+                <label for='speed' name='speed' id='speed'>Speed: {{data.race.speed}}</label>
+            {{/if}}
+
         </div>
 
         <div id='HC-navigate' class='navigate'>

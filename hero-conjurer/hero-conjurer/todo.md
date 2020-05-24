@@ -14,16 +14,14 @@
 * [x] Template format
 * [x] Pipe inputs into backend
 * [] Integration with existing compendiums
+* [] Allow for custom races etc without compendium entries
 * [x] Button to open Conjurer
   * [] Integrate into *Create Actor*
   * [x] Add temporary button
 * [ ] Pipe inputs into character sheet
 * [ ] Compatibility with alternate sheets (probably just Sky5e)
 * [ ] Licensing under 5e SRD rules
-
-* Better name
-  * Hero Conjurer
-  * Hero Builder
+* [ ] Allow for localization
 
 * Flow
   * User interacts with template, which determines input data
@@ -33,19 +31,42 @@
 
 * Data Model
   * Race
-    * Subrace, size, speed, language, racial feats, bonus info?
+    * [] Subrace
+    * [x] Size
+    * [x] Speed
+    * [] Language
+    * [] Racial Feats
+    * [x] Add ability bonuses to total ability scores (including possible subrace bonuses)
   * Class
-    * Weapon prof, armor prof, skill prof, class reats, starting equipment, hit die, bonus info?
+    * [] Weapon prof
+    * [] Armor prof
+    * [] Skill prof
+    * [] Class feats
+    * [] Starting equipment
+    * [] Hit die
   * Abilities
-    * Input scores
-    * Maybe give option for different point systems?
+    * [] Input scores
+    * [] Give option for different point systems
   * Background
-    * Skill prof, language prof, personality traits, ideal, bond, flaw, equipment
+    * [] Skill prof
+    * [] Language prof
+    * [] Personality traits
+    * [] Ideal
+    * [] Bond
+    * [] Flaw
+    * [] Equipment
   * Equipment
-    * Choose equipment or starting wealth
+    * [] Choose equipment or starting wealth
   * Spells
-    * Cantrips
+    * [] Cantrips
   * Feats
-    * Does anyone get level 1 feats?
+    * [] Feats
   * Bio
+    * [x] Name
+    * [x] Age
+    * [x] Height
+    * [x] Weight
+    * [x] Eyes
+    * [x] Hair
+    * [x] Skin
   * Gather data and pipe into character sheet

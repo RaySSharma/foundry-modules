@@ -1,7 +1,6 @@
 {
-    "EB.Title": "5E Encounter Builder",
-    "EB.Description": "Adds an application to determine encounter difficulty, based on the Kobold Fight Club.",
-    "EB.id": "encounter-builder",
-    "EB.Submit": "Submit",
-    "EB.EntityError": "EncounterBuilder | App only accept Actors"
+    "HC.title": "5E Encounter Builder",
+    "HC.description": "Adds an application to determine encounter difficulty, based on the Kobold Fight Club.",
+    "HC.id": "encounter-builder",
+    "HC.submit": "Submit"
 }

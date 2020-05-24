@@ -1,0 +1,194 @@
+{
+    "Dragonborn": {
+        "abilities": {
+            "Str": 2,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 1
+        },
+        "size": "medium",
+        "speed": "30",
+        "feats": {},
+        "resistance": {},
+        "languages": ["Common", "Draconic"],
+        "subraces": {}
+    },
+    "Dwarf": {
+        "abilities": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 2,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 1
+        },
+        "size": "medium",
+        "speed": "25",
+        "feats": {},
+        "resistance": {},
+        "languages": ["Common", "Dwarvish"],
+        "subraces": {
+            "Hill Dwarf": {
+                "abilities": {
+                    "Str": 0,
+                    "Dex": 0,
+                    "Con": 0,
+                    "Int": 0,
+                    "Wis": 1,
+                    "Cha": 0
+                },
+                "feats": {}
+            } 
+        }
+    },
+    "Elf": {
+        "abilities": {
+            "Str": 0,
+            "Dex": 2,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "size": "medium",
+        "speed": "30",
+        "feats": {},
+        "resistance": {},
+        "languages": ["Common", "Elvish"],
+        "subraces": {
+            "High Elf": {
+                "abilities": {
+                    "Str": 0,
+                    "Dex": 0,
+                    "Con": 0,
+                    "Int": 1,
+                    "Wis": 0,
+                    "Cha": 0
+                },
+                "feats": {}
+            }
+        }
+    },
+    "Gnome": {
+        "abilities": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 2,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "size": "small",
+        "speed": "25",
+        "feats": {},
+        "resistance": {},
+        "languages": ["Common", "Gnomish"],
+        "subraces": {
+            "Rock Gnome": {
+                "abilities": {
+                    "Str": 0,
+                    "Dex": 0,
+                    "Con": 1,
+                    "Int": 0,
+                    "Wis": 0,
+                    "Cha": 0
+                },
+                "feats": {}
+            }
+        }
+    },
+    "Half-Elf": {
+        "abilities": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 2
+        },
+        "size": "medium",
+        "speed": "30",
+        "feats": {},
+        "resistance": {},
+        "languages": ["Common", "Elvish"],
+        "subraces": {}
+    },
+    "Half-Orc": {
+        "abilities": {
+            "Str": 2,
+            "Dex": 0,
+            "Con": 1,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "size": "medium",
+        "speed": "30",
+        "feats": {},
+        "resistance": {},
+        "languages": ["Common", "Orc"],
+        "subraces": {}
+    },
+    "Halfling": {
+        "abilities": {
+            "Str": 0,
+            "Dex": 2,
+            "Con": 0,
+            "Int": 0,
+            "Wis": 0,
+            "Cha": 0
+        },
+        "size": "medium",
+        "speed": "25",
+        "feats": {},
+        "resistance": {},
+        "languages": ["Common", "Halfling"],
+        "subraces": {
+            "Lightfoot": {
+                "abilities": {
+                    "Str": 0,
+                    "Dex": 0,
+                    "Con": 0,
+                    "Int": 0,
+                    "Wis": 0,
+                    "Cha": 1
+                },
+                "feats": {}
+            }
+        }
+    },
+    "Human": {
+        "abilities": {
+            "Str": 1,
+            "Dex": 1,
+            "Con": 1,
+            "Int": 1,
+            "Wis": 1,
+            "Cha": 1
+        },
+        "size": "medium",
+        "speed": "30",
+        "feats": {},
+        "resistance": {},
+        "languages": ["Common"],
+        "subraces": {}
+    },
+    "Tiefling": {
+        "abilities": {
+            "Str": 0,
+            "Dex": 0,
+            "Con": 0,
+            "Int": 1,
+            "Wis": 0,
+            "Cha": 2
+        },
+        "size": "medium",
+        "speed": "30",
+        "feats": {},
+        "resistance": {},
+        "languages": ["Common", "Infernal"],
+        "subraces": {}
+    }
+}

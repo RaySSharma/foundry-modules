@@ -5,13 +5,21 @@ class HeroConjurer extends FormApplication {
         this.data = {
             race: {},
             class: {},
-            abilities: {},
+            abilities: {
+                'Str': 0,
+                'Dex': 0,
+                'Con': 0,
+                'Int': 0,
+                'Wis': 0,
+                'Cha': 0
+            },
             background: {},
             spells: {},
             feats: {},
             bio: {},
             summary: {}
         };
+        this.info = {};
         this.templates = {
             'race': 'modules/hero-conjurer/templates/race.html',
             'class': 'modules/hero-conjurer/templates/class.html',
@@ -23,6 +31,7 @@ class HeroConjurer extends FormApplication {
             'bio': 'modules/hero-conjurer/templates/bio.html',
             'summary': 'modules/hero-conjurer/templates/summary.html'
         };
+        this.readDataFiles();
     }
 
     static get defaultOptions() {
@@ -41,20 +50,25 @@ class HeroConjurer extends FormApplication {
     async getData() {
         return {
             options: this.options,
-            data: this.data
+            data: this.data,
+            info: this.info
         };
     }
 
     activateListeners(html) {
         super.activateListeners(html);
         html[0].render = this.render;
-        let header = html.find('#HC-header .tablinks')
-        let navigate = html.find('#HC-navigate .submit')
+        let header = html.find('#HC-header .tablinks');
+        let navigate = html.find('#HC-navigate .submit');
+        let select = html.find('#HC-content .select');
         for (var i = 0; i < header.length; i++) {
             header[i].addEventListener('click', this._loadTemplate.bind(this));
         }
         for (var i = 0; i < navigate.length; i++) {
             navigate[i].addEventListener('click', this._loadTemplate.bind(this));
+        }
+        for (var i = 0; i < select.length; i++) {
+            select[i].addEventListener('change', this._submitAndRender.bind(this));
         }
     }
 
@@ -67,13 +81,24 @@ class HeroConjurer extends FormApplication {
             let template = this.templates[classlist[1]];
             this.options.template = template;
         }
+        this._submitAndRender();
+    }
+
+    _submitAndRender() {
         this.submit();
         this.render();
     }
-
     _updateObject(event, formData) {
         event.preventDefault();
-        this.data.bio = {
+        this.data.race = (formData.sheet == 'race') ? {
+            'race': formData.race,
+            'size': this.info.race[formData.race].size,
+            'speed': this.info.race[formData.race].speed,
+            'alignment': formData.alignment
+        } : this.data.race;
+        this.calculateAbilities();
+
+        this.data.bio = (formData.sheet == 'bio') ? {
             'name': formData.name,
             'age': formData.age,
             'height': formData.height,
@@ -81,10 +106,23 @@ class HeroConjurer extends FormApplication {
             'eyes': formData.eyes,
             'hair': formData.hair,
             'skin': formData.skin
-        };
-        const keys = Object.keys(formData);
+        } : this.data.bio;
+
     }
 
+    async readDataFiles() {
+        this.info.race = await fetch('modules/hero-conjurer/data/races.json').then(response => response.json());
+        this.info.alignment = await fetch('modules/hero-conjurer/data/alignments.json').then(response => response.json());
+    }
+
+    calculateAbilities() {
+        if (this.data.race.race) {
+            let raceInfo = this.info.race[this.data.race.race];
+            for (let [key, value] of Object.entries(raceInfo.abilities)) {
+                this.data.abilities[key] = value;
+            }
+        }
+    }
 }
 
 class ConjureButton {
