@@ -32,6 +32,10 @@ class HeroConjurer extends FormApplication {
             'summary': 'modules/hero-conjurer/templates/summary.html'
         };
         this.readDataFiles();
+
+        Handlebars.registerHelper("objectLength", function(json) {
+            return Object.keys(json).length;
+        });
     }
 
     static get defaultOptions() {
@@ -92,9 +96,11 @@ class HeroConjurer extends FormApplication {
         event.preventDefault();
         this.data.race = (formData.sheet == 'race') ? {
             'race': formData.race,
+            'data': this.info.race[formData.race],
             'size': this.info.race[formData.race].size,
             'speed': this.info.race[formData.race].speed,
-            'alignment': formData.alignment
+            'alignment': formData.alignment,
+            'subrace': formData.subrace
         } : this.data.race;
         this.calculateAbilities();
 
@@ -117,9 +123,17 @@ class HeroConjurer extends FormApplication {
 
     calculateAbilities() {
         if (this.data.race.race) {
+
             let raceInfo = this.info.race[this.data.race.race];
             for (let [key, value] of Object.entries(raceInfo.abilities)) {
                 this.data.abilities[key] = value;
+            }
+            if (raceInfo.subraces[this.data.race.subrace]) {
+
+                let subraceInfo = raceInfo.subraces[this.data.race.subrace];
+                for (let [key, value] of Object.entries(subraceInfo.abilities)) {
+                    this.data.abilities[key] += value;
+                }
             }
         }
     }

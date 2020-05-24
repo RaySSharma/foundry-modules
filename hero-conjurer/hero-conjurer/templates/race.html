@@ -29,6 +29,7 @@
         
         <!-- Tab content -->
         <div id='HC-content'>
+            <!-- Select Race-->
             <label for='race'>Race:</label>
             <select class='select' name='race' id='race'>
                 <option value='{{data.race.race}}' selected hidden>{{data.race.race}}</option> 
@@ -40,6 +41,21 @@
             </select>
 
             {{#if data.race.race}}
+
+                <!-- Select Subrace-->
+                {{#if (objectLength data.race.data.subraces)}}
+                    <label for='subrace'>Subrace:</label>
+                    <select class='select' name='subrace' id='subrace'>
+                        <option value='{{data.race.subrace}}' selected hidden>{{data.race.subrace}}</option> 
+                        {{#with data.race.data.subraces as | subrace |}}
+                            {{#each subrace}}
+                                <option value='{{@key}}'>{{@key}}</option>
+                            {{/each}}
+                        {{/with}}
+                    </select>
+                {{/if}}
+
+                <!--Select Alignment-->
                 <label for='alignment'>Alignment:</label>
                 <select class='select' name='alignment' id='alignment'>
                     <option value='{{data.race.alignment}}' selected hidden>{{data.race.alignment}}</option> 
@@ -49,8 +65,14 @@
                         {{/each}}
                     {{/with}}
                 </select>
+
+                <!-- Race Characteristics-->
                 <label for='size' name='size' id='size'>Size: {{data.race.size}}</label>
                 <label for='speed' name='speed' id='speed'>Speed: {{data.race.speed}}</label>
+                <label for='languages' name='languages' id='languages'>Languages:</label>
+                {{#each data.race.data.languages}}
+                    <label>{{this}}</label>
+                {{/each}}
             {{/if}}
 
         </div>

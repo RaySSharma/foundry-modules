@@ -31,10 +31,10 @@
 
 * Data Model
   * Race
-    * [] Subrace
+    * [x] Subrace
     * [x] Size
     * [x] Speed
-    * [] Language
+    * [x] Language
     * [] Racial Feats
     * [x] Add ability bonuses to total ability scores (including possible subrace bonuses)
   * Class
