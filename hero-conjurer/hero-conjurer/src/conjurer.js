@@ -33,7 +33,7 @@ class HeroConjurer extends FormApplication {
         };
         this.readDataFiles();
 
-        Handlebars.registerHelper("objectLength", function(json) {
+        Handlebars.registerHelper("objectLength", function (json) {
             return Object.keys(json).length;
         });
     }
@@ -65,6 +65,7 @@ class HeroConjurer extends FormApplication {
         let header = html.find('#HC-header .tablinks');
         let navigate = html.find('#HC-navigate .submit');
         let select = html.find('#HC-content .select');
+        let abilities = html.find('#HC-abilities .square');
         for (var i = 0; i < header.length; i++) {
             header[i].addEventListener('click', this._loadTemplate.bind(this));
         }
@@ -74,6 +75,11 @@ class HeroConjurer extends FormApplication {
         for (var i = 0; i < select.length; i++) {
             select[i].addEventListener('change', this._submitAndRender.bind(this));
         }
+
+        for (var i = 0; i < abilities.length; i++) {
+            abilities[i].addEventListener('click', this._abilityIncrementDecrement);
+        }
+
     }
 
     _loadTemplate(event) {
@@ -102,7 +108,6 @@ class HeroConjurer extends FormApplication {
             'alignment': formData.alignment,
             'subrace': formData.subrace
         } : this.data.race;
-        this.calculateAbilities();
 
         this.data.bio = (formData.sheet == 'bio') ? {
             'name': formData.name,
@@ -113,7 +118,7 @@ class HeroConjurer extends FormApplication {
             'hair': formData.hair,
             'skin': formData.skin
         } : this.data.bio;
-
+        this._calculateAbilities();
     }
 
     async readDataFiles() {
@@ -121,7 +126,7 @@ class HeroConjurer extends FormApplication {
         this.info.alignment = await fetch('modules/hero-conjurer/data/alignments.json').then(response => response.json());
     }
 
-    calculateAbilities() {
+    _calculateAbilities() {
         if (this.data.race.race) {
 
             let raceInfo = this.info.race[this.data.race.race];
@@ -136,6 +141,27 @@ class HeroConjurer extends FormApplication {
                 }
             }
         }
+    }
+
+    _abilityIncrementDecrement() {
+        let $button = $(this);
+        let oldValue = $button.siblings().find("input").val();
+        let newVal = undefined;
+
+        if ($button.hasClass("increment")) {
+            newVal = parseFloat(oldValue) + 1;
+        }
+        else if ($button.hasClass("decrement")) {
+            // Don't allow decrementing below zero
+            if (oldValue > 0) {
+                newVal = parseFloat(oldValue) - 1;
+            }
+            else {
+                newVal = 0;
+            }
+        }
+
+        $button.siblings().find("input").val(newVal);
     }
 }
 

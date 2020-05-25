@@ -19,10 +19,12 @@
 
             {{#with data.abilities as | ability |}}
                 {{#each ability}}
-                    <li class='abilities'>
+                <li class='abilities large'>
+                    <div class='abilities small border'>
                         <h3 class='score'>{{@key}}</h3>
                         <p class='score'>{{this}}</p>
-                    </li>
+                    </div>
+                </li>
                 {{/each}}
             {{/with}}
         </ul>

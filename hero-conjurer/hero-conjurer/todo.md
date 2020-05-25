@@ -19,6 +19,7 @@
   * [] Integrate into *Create Actor*
   * [x] Add temporary button
 * [ ] Pipe inputs into character sheet
+* [ ] Prettify HTML
 * [ ] Compatibility with alternate sheets (probably just Sky5e)
 * [ ] Licensing under 5e SRD rules
 * [ ] Allow for localization
@@ -36,7 +37,7 @@
     * [x] Speed
     * [x] Language
     * [] Racial Feats
-    * [x] Add ability bonuses to total ability scores (including possible subrace bonuses)
+    * [x] *Add* ability bonuses to total ability scores (including possible subrace bonuses)
   * Class
     * [] Weapon prof
     * [] Armor prof
@@ -45,7 +46,9 @@
     * [] Starting equipment
     * [] Hit die
   * Abilities
-    * [] Input scores
+    * [x] Input scores
+    * [x] Add/remove points
+    * [] *Add* ability bonuses to total ability scores
     * [] Give option for different point systems
   * Background
     * [] Skill prof

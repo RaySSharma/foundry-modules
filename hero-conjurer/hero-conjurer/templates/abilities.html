@@ -1,5 +1,7 @@
 <div id='HC-form'>
-    <form autocomplete='off'>
+    <form autocomplete='off' class='form'>
+        <input type='hidden' name='sheet' id='sheet' value='abilities'>
+
         <!-- Tabs -->
         <div id='HC-header'>
             <button type='submit' class='tablinks race'>RACE</button>
@@ -13,6 +15,22 @@
             <button type='submit' class='tablinks summary'>SUMMARY</button>
         </div>
         
+        <!-- Abilities -->
+        <ul id='HC-abilities'>
+            {{#with data.abilities as | ability |}}
+                {{#each ability}}
+                    <li class='abilities large'>
+                        <span class="icon square increment submit"></span>
+                        <div class='abilities small border'>
+                            <h3 class='score'>{{@key}}</h3>
+                            <input class='score' type="text" name="score" id="score" value="{{this}}"></input>
+                        </div>
+                        <span class="icon square decrement submit"></span>
+                    </li>
+                {{/each}}
+            {{/with}}
+        </ul>
+
         <!-- Tab content -->
         <div id='HC-content'>
             <h3 class='tabcontent'>Abilities menu</h3>
