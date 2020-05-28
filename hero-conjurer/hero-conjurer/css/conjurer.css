@@ -132,6 +132,8 @@
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+  width: 100%;
+  height: 100%;
 } 
 
 #HC-content .choice {
@@ -145,18 +147,51 @@
   height: 1.6em;
 }
 
-#HC-navigate .submit:hover {
+#HC-content .choice-pane {
+  width: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  float: left;
+}
+
+#HC-content .info-pane {
+  float: right;
+  width: 68%;
+  height: 100%;
+  overflow: scroll;
+}
+
+#HC-content .class-entry {
+  margin: auto;
+}
+
+#HC-content .class-img {
+  width: 80px;
+  height: 80px;
+}
+
+#HC-content .class-img:hover {
+  opacity: 0.5;
+}
+
+.shadow-border {
+  box-shadow: 0 0 8px #b30000;
+}
+.height {
+  height: auto;
+}
+#HC-navigate .navigate:hover {
   color: #dbdbdb;
   background-color: #b30000;
   box-shadow: none;
 }
-#HC-navigate .submit.active {
+#HC-navigate .navigate.active {
   color: #dbdbdb;
   background-color: #b30000;
   box-shadow: none;
 }
 
-#HC-navigate .submit {
+#HC-navigate .navigate {
   background-color: #cccccc;
   border: 3px solid #000000;
   transition: 0.3s;

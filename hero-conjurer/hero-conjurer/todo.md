@@ -1,25 +1,27 @@
 # Todo List
 
 * SRD Content
-  * [] Race
-  * [] Class
-  * [] Abilities
-  * [] Backgrounds
-  * [] Equipment
-  * [] Spells
-  * [] Feats
-  * [] Bio
-  * [] Review
+  * [ ] Race
+  * [ ] Class
+  * [x] Abilities
+  * [ ] Backgrounds
+  * [ ] Equipment
+  * [ ] Spells
+  * [ ] Feats
+  * [ ] Bio
+  * [ ] Review
 
 * [x] Template format
 * [x] Pipe inputs into backend
-* [] Integration with existing compendiums
-* [] Allow for custom races etc without compendium entries
+* [ ] Integration with existing compendiums
+* [ ] Allow for custom races etc without compendium entries
 * [x] Button to open Conjurer
-  * [] Integrate into *Create Actor*
+  * [ ] Integrate into *Create Actor*
   * [x] Add temporary button
 * [ ] Pipe inputs into character sheet
 * [ ] Prettify HTML
+* [ ] Clean CSS
+* [ ] Sanitize inputs
 * [ ] Compatibility with alternate sheets (probably just Sky5e)
 * [ ] Licensing under 5e SRD rules
 * [ ] Allow for localization
@@ -36,34 +38,37 @@
     * [x] Size
     * [x] Speed
     * [x] Language
-    * [] Racial Feats
+    * [ ] Racial Feats
     * [x] *Add* ability bonuses to total ability scores (including possible subrace bonuses)
+    * [ ] Information Panel
   * Class
-    * [] Weapon prof
-    * [] Armor prof
-    * [] Skill prof
-    * [] Class feats
-    * [] Starting equipment
-    * [] Hit die
+    * [ ] Weapon prof
+    * [ ] Armor prof
+    * [ ] Skill prof
+    * [ ] Class feats
+    * [ ] Starting equipment
+    * [ ] Hit die
+    * [ ] Information Panel
   * Abilities
     * [x] Input scores
     * [x] Add/remove points
-    * [] *Add* ability bonuses to total ability scores
-    * [] Give option for different point systems
+    * [x] *Add* ability bonuses to total ability scores
+    * [x] Display point-buy points
+    * [ ] Recommended abilities
   * Background
-    * [] Skill prof
-    * [] Language prof
-    * [] Personality traits
-    * [] Ideal
-    * [] Bond
-    * [] Flaw
-    * [] Equipment
+    * [ ] Skill prof
+    * [ ] Language prof
+    * [ ] Personality traits
+    * [ ] Ideal
+    * [ ] Bond
+    * [ ] Flaw
+    * [ ] Equipment
   * Equipment
-    * [] Choose equipment or starting wealth
+    * [ ] Choose equipment or starting wealth
   * Spells
-    * [] Cantrips
+    * [ ] Cantrips
   * Feats
-    * [] Feats
+    * [ ] Feats
   * Bio
     * [x] Name
     * [x] Age
@@ -72,4 +77,5 @@
     * [x] Eyes
     * [x] Hair
     * [x] Skin
+    * [ ] Information Panel
   * Gather data and pipe into character sheet

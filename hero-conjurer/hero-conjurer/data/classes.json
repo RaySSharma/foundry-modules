@@ -1,0 +1,98 @@
+{
+    "Barbarian": {
+        "template": "modules/hero-conjurer/templates/classes/barbarian.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Simple Weapons", "Martial Weapons"],
+        "armor_prof": ["Light Armor", "Medium Armor", "Shields"],
+        "num_skills": 2,
+        "skills": ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"]
+    },
+    "Bard": {
+        "template": "modules/hero-conjurer/templates/classes/bard.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"],
+        "armor_prof": ["Light Armor"],
+        "num_skills": 3,
+        "skills": ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight of Hand", "Stealth", "Survival"]
+    },
+    "Cleric": {
+        "template": "modules/hero-conjurer/templates/classes/cleric.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Simple Weapons"],
+        "armor_prof": ["Light Armor", "Medium Armor", "Shields"],
+        "num_skills": 2,
+        "skills": ["History", "Insight", "Medicine", "Persuasion", "Religion"]
+    },
+    "Druid": {
+        "template": "modules/hero-conjurer/templates/classes/druid.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears"],
+        "armor_prof": ["Light Armor", "Medium Armor", "Shields"],
+        "num_skills": 2,
+        "skills": ["Arcana", "Animal Handling", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"]
+    },
+    "Fighter": {
+        "template": "modules/hero-conjurer/templates/classes/fighter.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Simple Weapons", "Martial Weapons"],
+        "armor_prof": ["Light Armor", "Medium Armor", "Heavy Armor", "Shields"],
+        "num_skills": 2,
+        "skills": ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"]
+    },
+    "Monk": {
+        "template": "modules/hero-conjurer/templates/classes/monk.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Simple Weapons", "Shortswords"],
+        "armor_prof": [],
+        "num_skills": 2,
+        "skills": ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"]
+    },
+    "Paladin": {
+        "template": "modules/hero-conjurer/templates/classes/paladin.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Simple Weapons", "Martial Weapons"],
+        "armor_prof": ["Light Armor", "Medium Armor", "Heavy Armor", "Shields"],
+        "num_skills": 2,
+        "skills": ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"]
+    },
+    "Ranger": {
+        "template": "modules/hero-conjurer/templates/classes/ranger.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Simple Weapons", "Martial Weapons"],
+        "armor_prof": ["Light Armor", "Medium Armor", "Shields"],
+        "num_skills": 3,
+        "skills": ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"]
+    },
+    "Rogue": {
+        "template": "modules/hero-conjurer/templates/classes/rogue.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"],
+        "armor_prof": ["Light Armor"],
+        "num_skills": 4,
+        "skills": ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Sleight of Hand", "Stealth"]
+    },
+    "Sorcerer": {
+        "template": "modules/hero-conjurer/templates/classes/sorcerer.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"],
+        "armor_prof": [],
+        "num_skills": 2,
+        "skills": ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"]
+    },
+    "Warlock": {
+        "template": "modules/hero-conjurer/templates/classes/warlock.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Simple Weapons"],
+        "armor_prof": ["Light Armor"],
+        "num_skills": 2,
+        "skills": ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"]
+    },
+    "Wizard": {
+        "template": "modules/hero-conjurer/templates/classes/wizard.html",
+        "pack": "dnd5e.classes",
+        "weapon_prof": ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"],
+        "armor_prof": [],
+        "num_skills": 2,
+        "skills": ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"]
+    }
+}

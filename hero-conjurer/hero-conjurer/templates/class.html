@@ -1,26 +1,84 @@
 <div id='HC-form'>
-    <form autocomplete='off'>
+    <form autocomplete='off' class='form'>
+        <input type='hidden' name='sheet' id='sheet' value='class'>
         <!-- Tabs -->
-        <div id='HC-header'>
-            <button type='submit' class='tablinks race'>RACE</button>
-            <button type='submit' class='tablinks class'>CLASS</button>
-            <button type='submit' class='tablinks abilities'>ABILITIES</button>
-            <button type='submit' class='tablinks background'>BACKGROUND</button>
-            <button type='submit' class='tablinks equipment'>EQUIPMENT</button>
-            <button type='submit' class='tablinks spells'>SPELLS</button>
-            <button type='submit' class='tablinks feats'>FEATS</button>
-            <button type='submit' class='tablinks bio'>BIO</button>
-            <button type='submit' class='tablinks summary'>SUMMARY</button>
-        </div>
+        <nav id='HC-header'>
+            <button type='submit' class='tablinks navigate race'>RACE</button>
+            <button type='submit' class='tablinks navigate class'>CLASS</button>
+            <button type='submit' class='tablinks navigate abilities'>ABILITIES</button>
+            <button type='submit' class='tablinks navigate background'>BACKGROUND</button>
+            <button type='submit' class='tablinks navigate equipment'>EQUIPMENT</button>
+            <button type='submit' class='tablinks navigate spells'>SPELLS</button>
+            <button type='submit' class='tablinks navigate feats'>FEATS</button>
+            <button type='submit' class='tablinks navigate bio'>BIO</button>
+            <button type='submit' class='tablinks navigate summary'>SUMMARY</button>
+        </nav>
+
+        <!-- Abilities -->
+        <ul id='HC-abilities'>
+
+            {{#with data.abilities as | ability |}}
+                {{#each ability}}
+                <li class='abilities large'>
+                    <div class='abilities small border'>
+                        <h3 class='score'>{{@key}}</h3>
+                        <p class='score'>{{this}}</p>
+                    </div>
+                </li>
+                {{/each}}
+            {{/with}}
+        </ul>
         
         <!-- Tab content -->
         <div id='HC-content'>
-            <h3 class='tabcontent'>Class menu</h3>
+
+            <!-- Select Class-->
+            <h3>Classes:</h3>
+            <div class='choice-pane'>
+                {{#with info.classData as | class |}}
+                    {{#each this}}
+                        <div class='class-entry'>
+                            <img class='class-img' name='{{this.name}}' id='{{this.name}}' src='{{this.data.img}}'>
+                            <h3>{{this.name}}</h3> 
+                        </div>
+                    {{/each}}
+                {{/with}}
+
+                {{{data.class.pack.data.description.value}}}
+
+                <!-- Weapon Proficiencies -->
+                <h3>Weapon Proficiencies:&nbsp</h3>
+                <div>
+                    {{#each data.class.data.weapon_prof}}
+                        <h3>{{this}}&nbsp</h3>
+                    {{/each}}
+                </div>
+
+                <!-- Armor Proficiencies -->
+                <h3>Armor Proficiencies:&nbsp</h3>
+                <div>
+                    {{#each data.class.data.armor_prof}}
+                        <h3>{{this}}&nbsp</h3>
+                    {{/each}}
+                </div>
+
+                <!-- Choose Skills -->
+                <h3>Choose {{data.class.data.num_skills}} skills</h3>
+                {{#each data.class.data.skills}}
+                    <label for='{{this}}'>{{this}}</label>
+                    <input type='checkbox' id='{{this}}' name='skill' value='{{this}}'>
+                {{/each}}
+            </div>
+
+            <!-- Info Pane -->
+            <div class='info-pane class-info'>
+                <iframe width='100%' height='100%' src='{{info.classTemplate}}'></iframe>
+            </div>
         </div>
 
-        <div id='HC-navigate' class='navigate'>
-            <button type='submit' class='submit prev'>PREVIOUS</button>
-            <button type='submit' class='submit next'>NEXT</button>
+        <div id='HC-navigate'>
+            <button type='submit' class='navigate prev'>PREVIOUS</button>
+            <button type='submit' class='navigate next'>NEXT</button>
         </div>
     </form>
 </div>
