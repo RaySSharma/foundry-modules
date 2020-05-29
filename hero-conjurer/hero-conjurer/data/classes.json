@@ -24,7 +24,9 @@
             "(a) a greataxe or (b) any martial melee weapon",
             "(a) two handaxes or (b) any simple weapon",
             "An explorer's pack and four javelins"
-        ]
+        ],
+        "caster_type": "none",
+        "num_spells": [0, 0]
     },
     "Bard": {
         "template": "modules/hero-conjurer/templates/classes/bard.html",
@@ -65,7 +67,9 @@
             "(a) a diplomat’s pack or (b) an entertainer’s pack",
             "(a) a lute or (b) any other musical instrument",
             "Leather armor and a dagger"
-        ]
+        ],
+        "caster_type": "known",
+        "num_spells": [2, 2]
     },
     "Cleric": {
         "template": "modules/hero-conjurer/templates/classes/cleric.html",
@@ -92,7 +96,9 @@
             "(a) a light crossbow and 20 bolts or (b) any simple weapon",
             "(a) a priest's pack or (b) an explorer's pack",
             "A shield and a holy symbol"
-        ]
+        ],
+        "caster_type": "prepared",
+        "num_spells": [3, 2]
     },
     "Druid": {
         "template": "modules/hero-conjurer/templates/classes/druid.html",
@@ -129,7 +135,9 @@
             "(a) a wooden shield or (b) any simple weapon",
             "(a) a scimitar or (b) any simple melee weapon",
             "Leather armor, an explorer's pack, and a druidic focus"
-        ]
+        ],
+        "caster_type": "prepared",
+        "num_spells": [2, 2]
     },
     "Fighter": {
         "template": "modules/hero-conjurer/templates/classes/fighter.html",
@@ -160,7 +168,9 @@
             "(a) a martial weapon and a shield or (b) two martial weapons",
             "(a) a light crossbow and 20 bolts or (b) two handaxes",
             "(a) a dungeoneer's pack or (b) and explorer's pack"
-        ]
+        ],
+        "caster_type": "none",
+        "num_spells": [0, 0]
     },
     "Monk": {
         "template": "modules/hero-conjurer/templates/classes/monk.html",
@@ -183,7 +193,9 @@
             "(a) a shortsword or (b) any simple weapon",
             "(a) a dungeoneer’s pack or (b) an explorer’s pack",
             "10 darts"
-        ]
+        ],
+        "caster_type": "none",
+        "num_spells": [0, 0]
     },
     "Paladin": {
         "template": "modules/hero-conjurer/templates/classes/paladin.html",
@@ -212,7 +224,9 @@
             "(a) five javelins or (b) any simple melee weapon",
             "(a) a priest's pack or (b) an explorer's pack",
             "Chain mail and a holy symbol"
-        ]
+        ],
+        "caster_type": "prepared",
+        "num_spells": [0, 0]
     },
     "Ranger": {
         "template": "modules/hero-conjurer/templates/classes/ranger.html",
@@ -242,7 +256,9 @@
             "(a) two shortswords or (b) two simple melee weapons ",
             "(a) a dungeoneer's pack or (b) an explorer's pack",
             "A longbow and a quiver of 20 arrows"
-        ]
+        ],
+        "caster_type": "prepared",
+        "num_spells": [0, 0]
     },
     "Rogue": {
         "template": "modules/hero-conjurer/templates/classes/rogue.html",
@@ -276,7 +292,9 @@
             "(a) a shortbow and quiver of 20 arrows or (b) a shortsword",
             "(a) a burglar's pack, (b) a dungeoneer's pack, or (c) an explorer's pack",
             "(a) Leather armor, two daggers, and thieves' tools"
-        ]
+        ],
+        "caster_type": "none",
+        "num_spells": [0, 0]
     },
     "Sorcerer": {
         "template": "modules/hero-conjurer/templates/classes/sorcerer.html",
@@ -303,7 +321,9 @@
             "(a) a component pouch or (b) an arcane focus",
             "(a) a dungeoneer's pack or (b) an explorer's pack",
             "Two daggers"
-        ]
+        ],
+        "caster_type": "known",
+        "num_spells": [4, 2]
     },
     "Warlock": {
         "template": "modules/hero-conjurer/templates/classes/warlock.html",
@@ -329,7 +349,9 @@
             "(a) a component pouch or (b) an arcane focus",
             "(a) a scholar's pack or (b) a dungeoneer's pack",
             "Leather armor, any simple weapon, and two daggers"
-        ]
+        ],
+        "caster_type": "known",
+        "num_spells": [2, 2]
     },
     "Wizard": {
         "template": "modules/hero-conjurer/templates/classes/wizard.html",
@@ -356,6 +378,8 @@
             "(a) a component pouch or (b) an arcane focus",
             "(a) a scholar's pack or (b) an explorer's pack",
             "A spellbook"
-        ]
+        ],
+        "caster_type": "prepared",
+        "num_spells": [3, 6]
     }
 }

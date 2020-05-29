@@ -95,53 +95,32 @@ class HeroConjurer extends FormApplication {
 
         $('#HC-abilities .square').click(this._abilityIncrementDecrement.bind(this));
 
-        $('#HC-abilities .score').change( function(ev) {
-            let $button = $(ev.target);
+        $('#HC-abilities .score').change( function(event) {
+            let $button = $(event.target);
                 $button.next().val($button.val());
                 this._submitAndRender();
         }.bind(this));
 
         $('.data-click').click(this._loadDataTemplate.bind(this));
 
-        /*
-        let submit = html.find('.submit');
-        for (var i = 0; i < submit.length; i++) {
-            submit[i].addEventListener('change', this._submitAndRender.bind(this));
-        }
+        $('.spell-selector').change( function(event) {
 
-        let abilityCounter = html.find('#HC-abilities .square');
-        for (var i = 0; i < abilityCounter.length; i++) {
-            abilityCounter[i].addEventListener('click', this._abilityIncrementDecrement.bind(this));
-        }
+            $('.spell-selector').children(':not([hidden])').removeAttr('disabled');
+            $(event.target).children().removeAttr('selected');
 
-        let abilityInput = html.find('#HC-abilities .score');
-        for (var i = 0; i < abilityInput.length; i++) {
-            abilityInput[i].addEventListener('change', function (event) {
-                let $button = $(event.target);
-                $button.next().val($button.val());
-                this._submitAndRender();
-            }.bind(this));
-        }
-
-        let click = html.find('.data-click');
-        for (var i = 0; i < click.length; i++) {
-            click[i].addEventListener('click', this._loadDataTemplate.bind(this));
-        }
-        */
-        $('.change-disable').change( function(event) {
-            $('.change-disable').children(':not([hidden])').removeAttr('disabled');
-            $(this).children().removeAttr('selected');
-
-            let option = $(this).prop('selectedOptions')[0]
+            let option = $(event.target).prop('selectedOptions')[0]
             $(option).attr('selected', 'selected');
             $(option).attr('disabled', 'disabled');
 
-            $('.change-disable').children('[selected]:not([hidden])').each( function() {
+            $('.spell-selector').children('[selected]:not([hidden])').each( function() {
                 let name = $(this).attr('name')
-                $('.change-disable').children("[name='" + name + "']").attr('disabled', 'disabled')
+                $('.spell-selector').children("[name='" + name + "']").attr('disabled', 'disabled')
             })
 
-        });
+            let value = option.value.split(':')[1]
+            this.info.spellData.find(x => x.name == value)
+
+        }.bind(this));
     }
 
     /**
@@ -217,7 +196,10 @@ class HeroConjurer extends FormApplication {
             'pack': this.info.classData.find(x => x.name == this.data.class.name).data,
             'data': this.info.class[this.data.class.name],
             'skills': formData.skill,
-            'template': this.data.class.template
+            'template': this.data.class.template,
+            'spells': this.info.class[this.data.class.name].spellList,
+            'caster_type': this.info.class[this.data.class.name].caster_type,
+            'num_spells': this.info.class[this.data.class.name].num_spells
         } : this.data.class;
 
         this.data.background = (formData.sheet == 'background') ? {
@@ -242,6 +224,7 @@ class HeroConjurer extends FormApplication {
         this.info.alignment = await fetch('modules/hero-conjurer/data/alignments.json').then(response => response.json());
         this.info.class = await fetch('modules/hero-conjurer/data/classes.json').then(response => response.json());
         this.info.background = await fetch('modules/hero-conjurer/data/backgrounds.json').then(response => response.json());
+        this.info.spells = await fetch('modules/hero-conjurer/data/spells.json').then(response => response.json());
 
         let classPacks = [];
         for (let value of Object.values(this.info.class)) {
@@ -260,16 +243,38 @@ class HeroConjurer extends FormApplication {
         }
 
         this.info.spellPacks = ['dnd5e.spells'];
-        this.info.spellData = { 'L0': [], 'L1': [] };
+        this.info.spellData = [];
         for (let i = 0; i < this.info.spellPacks.length; i++) {
             let packName = this.info.spellPacks[i];
             let pack = game.packs.find(x => x.collection === packName);
+
             if (pack) {
                 pack = await pack.getContent();
-                for (let j = 0; j < 2; j++) {
-                    let subpack = pack.filter(x => x.data.data.level == j);
-                    this.info.spellData['L' + j] = this.info.spellData['L' + j].concat(subpack);
-                }
+                this.info.spellData = this.info.spellData.concat(pack)
+            }
+        }
+
+        var reducedSpellData = this.info.spells.map(function(d,i) {
+
+            return {
+              name: d.name,
+              level: d.level,
+              index: i + 1,
+              tags: d.tags
+            };
+          });
+        
+        for (let key of Object.keys(this.info.class)) {
+            this.info.class[key].spellList = {
+                'cantrip': [], '1': [],'2': [],'3': [],'4': [],'5': [],'6': [],'7': [],'8': [],'9': []
+            }
+            this.info.class[key].spellList['cantrip'] = reducedSpellData.filter( function(d) {
+                return (d.tags.includes(key.toLowerCase()))&(d.level == 'cantrip') 
+            });
+            for (let i = 1; i < 10; i++) {
+                this.info.class[key].spellList[i] = reducedSpellData.filter( function(d) {
+                    return (d.tags.includes(key.toLowerCase()))&(d.level == i) 
+                });
             }
         }
     }

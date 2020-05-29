@@ -18,26 +18,37 @@
         <!-- Tab content -->
         <div id='HC-content'>
 
-            <div class='choice-pane'>
-                <h3>Cantrips:&nbsp</h3>
-                {{#range 3}}
-                    <select class='change-disable' name='spell' id='spell'>
-                        <option disabled hidden selected></option>
-                        {{#each ../info.spellData.L0}}
-                            <option value='Spells:{{this.data.name}}' name='{{this.data.name}}'>{{this.data.name}}</option>
+            {{#if data.class.name}}
+                <div class='choice-pane'>
+                    <h3>Cantrips:&nbsp</h3>
+                    {{#range data.class.num_spells.[0]}}
+                        <select class='spell-selector' name='spell' id='{{this}}'>
+                            <option value='{{../data.spells.names.[this]}}' disabled hidden selected></option>
+                            {{#each ../data.class.spells.cantrip}}
+                                <option value='Spells:{{this.name}}' name='{{this.name}}'>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    {{/range}}
+
+
+                    <h3>1st Level Spells:&nbsp</h3>
+                    {{#range data.class.num_spells.[1]}}
+                        <select class='spell-selector' name='spell' id='spell'>
+                            <option disabled hidden selected></option>
+                            {{#each ../data.class.spells.[1]}}
+                                <option value='Spells:{{this.name}}' name='{{this.name}}'>{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    {{/range}}
+
+                    <h3>Spellbook:&nbsp</h3>
+                    <div class='spellbook'>
+                        {{#each data.spells.names}}
+                            <span>{{this}}</span>
                         {{/each}}
-                    </select>
-                {{/range}}
-
-
-                <h3>1st Level Spells:&nbsp</h3>
-                <select name='spell' id='spell'>
-                        {{#each info.spellData.L1}}
-                            <option value='Spells:{{this.data.name}}'>{{this.data.name}}</option>
-                        {{/each}}
-                </select>
-
-            </div>
+                    </div>
+                </div>
+            {{/if}}
 
         </div>
 
