@@ -34,7 +34,7 @@
             <!-- Select Race-->
             <label for='race'>Race:</label>
             <select class='submit' name='race' id='race'>
-                <option value='{{data.race.race}}' selected hidden>{{data.race.race}}</option> 
+                <option value='{{data.race.name}}' selected hidden>{{data.race.race}}</option> 
                 {{#with info.race as | race |}}
                     {{#each race}}
                         <option value='{{@key}}'>{{@key}}</option>
@@ -42,7 +42,7 @@
                 {{/with}}
             </select>
 
-            {{#if data.race.race}}
+            {{#if data.race.name}}
 
                 <!-- Select Subrace-->
                 {{#if (objectLength data.race.data.subraces)}}

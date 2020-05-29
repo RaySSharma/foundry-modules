@@ -1,7 +1,8 @@
 <div id='HC-form'>
-    <form autocomplete='off'>
+    <form autocomplete='off' class='form'>
+        <input type='hidden' name='sheet' id='sheet' value='background'>
         <!-- Tabs -->
-        <div id='HC-header'>
+        <nav id='HC-header'>
             <button type='submit' class='tablinks navigate race'>RACE</button>
             <button type='submit' class='tablinks navigate class'>CLASS</button>
             <button type='submit' class='tablinks navigate abilities'>ABILITIES</button>
@@ -11,11 +12,39 @@
             <button type='submit' class='tablinks navigate feats'>FEATS</button>
             <button type='submit' class='tablinks navigate bio'>BIO</button>
             <button type='submit' class='tablinks navigate summary'>SUMMARY</button>
-        </div>
+        </nav>
         
         <!-- Tab content -->
-        <div id='HC-content'>
-            <h3 class='tabcontent'>Background menu</h3>
+        <div id='HC-content' class='height'>
+
+            <h3>Backgrounds:</h3>
+            <div class='choice-pane'>
+                <select class='submit' name='background' id='background'>
+                    <option value='{{data.background.name}}' selected hidden>{{data.background.name}}</option> 
+                    {{#with info.background as | background |}}
+                        {{#each background}}
+                            <option value='{{@key}}'>{{@key}}</option>
+                        {{/each}}
+                    {{/with}}
+                </select>
+
+                {{#if data.background.name}}
+
+                    <!-- Starting Equipment-->
+                    <h3>Starting Equipment:&nbsp</h3>
+                    <ul>
+                        {{#each data.background.data.equipment}}
+                            <li>{{this}}&nbsp</li>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+
+            </div>
+
+            <!-- Info Pane -->
+            <div class='info-pane'>
+                <iframe width='100%' height='100%' src='{{data.background.template}}'></iframe>
+            </div>
         </div>
 
         <div id='HC-navigate'>

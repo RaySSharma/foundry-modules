@@ -42,13 +42,14 @@
     * [x] *Add* ability bonuses to total ability scores (including possible subrace bonuses)
     * [ ] Information Panel
   * Class
-    * [ ] Weapon prof
-    * [ ] Armor prof
+    * [x] Weapon prof
+    * [x] Armor prof
     * [ ] Skill prof
+      * Limit with num_skills
     * [ ] Class feats
-    * [ ] Starting equipment
-    * [ ] Hit die
-    * [ ] Information Panel
+    * [x] Starting equipment
+    * [x] Hit die
+    * [x] Information Panel
   * Abilities
     * [x] Input scores
     * [x] Add/remove points
@@ -56,17 +57,22 @@
     * [x] Display point-buy points
     * [ ] Recommended abilities
   * Background
-    * [ ] Skill prof
+    * [x] Skill prof
     * [ ] Language prof
     * [ ] Personality traits
     * [ ] Ideal
     * [ ] Bond
     * [ ] Flaw
     * [ ] Equipment
+    * [x] Information Panel
   * Equipment
     * [ ] Choose equipment or starting wealth
   * Spells
-    * [ ] Cantrips
+    * [x] Cantrips
+    * [x] 1st Level Spells
+    * [ ] Restrict to Spell List
+      * [ ] Sort through Vorpalhex tables per class
+    * [ ] Information Panel
   * Feats
     * [ ] Feats
   * Bio

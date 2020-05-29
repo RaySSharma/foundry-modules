@@ -2,97 +2,360 @@
     "Barbarian": {
         "template": "modules/hero-conjurer/templates/classes/barbarian.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Simple Weapons", "Martial Weapons"],
-        "armor_prof": ["Light Armor", "Medium Armor", "Shields"],
+        "weapon_prof": [
+            "Simple Weapons",
+            "Martial Weapons"
+        ],
+        "armor_prof": [
+            "Light Armor",
+            "Medium Armor",
+            "Shields"
+        ],
         "num_skills": 2,
-        "skills": ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"]
+        "skills": [
+            "Animal Handling",
+            "Athletics",
+            "Intimidation",
+            "Nature",
+            "Perception",
+            "Survival"
+        ],
+        "equipment": [
+            "(a) a greataxe or (b) any martial melee weapon",
+            "(a) two handaxes or (b) any simple weapon",
+            "An explorer's pack and four javelins"
+        ]
     },
     "Bard": {
         "template": "modules/hero-conjurer/templates/classes/bard.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"],
-        "armor_prof": ["Light Armor"],
+        "weapon_prof": [
+            "Simple Weapons",
+            "Hand Crossbows",
+            "Longswords",
+            "Rapiers",
+            "Shortswords"
+        ],
+        "armor_prof": [
+            "Light Armor"
+        ],
         "num_skills": 3,
-        "skills": ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight of Hand", "Stealth", "Survival"]
+        "skills": [
+            "Acrobatics",
+            "Animal Handling",
+            "Arcana",
+            "Athletics",
+            "Deception",
+            "History",
+            "Insight",
+            "Intimidation",
+            "Investigation",
+            "Medicine",
+            "Nature",
+            "Perception",
+            "Performance",
+            "Persuasion",
+            "Religion",
+            "Sleight of Hand",
+            "Stealth",
+            "Survival"
+        ],
+        "equipment": [
+            "(a) a rapier, (b) a longsword, or (c) any simple weapon",
+            "(a) a diplomat’s pack or (b) an entertainer’s pack",
+            "(a) a lute or (b) any other musical instrument",
+            "Leather armor and a dagger"
+        ]
     },
     "Cleric": {
         "template": "modules/hero-conjurer/templates/classes/cleric.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Simple Weapons"],
-        "armor_prof": ["Light Armor", "Medium Armor", "Shields"],
+        "weapon_prof": [
+            "Simple Weapons"
+        ],
+        "armor_prof": [
+            "Light Armor",
+            "Medium Armor",
+            "Shields"
+        ],
         "num_skills": 2,
-        "skills": ["History", "Insight", "Medicine", "Persuasion", "Religion"]
+        "skills": [
+            "History",
+            "Insight",
+            "Medicine",
+            "Persuasion",
+            "Religion"
+        ],
+        "equipment": [
+            "(a) a mace or (b) a warhammer (if proficient)",
+            "(a) scale mail, (b) leather armor, or (c) chain mail (if proficient)",
+            "(a) a light crossbow and 20 bolts or (b) any simple weapon",
+            "(a) a priest's pack or (b) an explorer's pack",
+            "A shield and a holy symbol"
+        ]
     },
     "Druid": {
         "template": "modules/hero-conjurer/templates/classes/druid.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Clubs", "Daggers", "Darts", "Javelins", "Maces", "Quarterstaffs", "Scimitars", "Sickles", "Slings", "Spears"],
-        "armor_prof": ["Light Armor", "Medium Armor", "Shields"],
+        "weapon_prof": [
+            "Clubs",
+            "Daggers",
+            "Darts",
+            "Javelins",
+            "Maces",
+            "Quarterstaffs",
+            "Scimitars",
+            "Sickles",
+            "Slings",
+            "Spears"
+        ],
+        "armor_prof": [
+            "Light Armor",
+            "Medium Armor",
+            "Shields"
+        ],
         "num_skills": 2,
-        "skills": ["Arcana", "Animal Handling", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"]
+        "skills": [
+            "Arcana",
+            "Animal Handling",
+            "Insight",
+            "Medicine",
+            "Nature",
+            "Perception",
+            "Religion",
+            "Survival"
+        ],
+        "equipment": [
+            "(a) a wooden shield or (b) any simple weapon",
+            "(a) a scimitar or (b) any simple melee weapon",
+            "Leather armor, an explorer's pack, and a druidic focus"
+        ]
     },
     "Fighter": {
         "template": "modules/hero-conjurer/templates/classes/fighter.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Simple Weapons", "Martial Weapons"],
-        "armor_prof": ["Light Armor", "Medium Armor", "Heavy Armor", "Shields"],
+        "weapon_prof": [
+            "Simple Weapons",
+            "Martial Weapons"
+        ],
+        "armor_prof": [
+            "Light Armor",
+            "Medium Armor",
+            "Heavy Armor",
+            "Shields"
+        ],
         "num_skills": 2,
-        "skills": ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"]
+        "skills": [
+            "Acrobatics",
+            "Animal Handling",
+            "Athletics",
+            "History",
+            "Insight",
+            "Intimidation",
+            "Perception",
+            "Survival"
+        ],
+        "equipment": [
+            "(a) chain mail or (b) leather armor, longbow, and 20 arrows",
+            "(a) a martial weapon and a shield or (b) two martial weapons",
+            "(a) a light crossbow and 20 bolts or (b) two handaxes",
+            "(a) a dungeoneer's pack or (b) and explorer's pack"
+        ]
     },
     "Monk": {
         "template": "modules/hero-conjurer/templates/classes/monk.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Simple Weapons", "Shortswords"],
+        "weapon_prof": [
+            "Simple Weapons",
+            "Shortswords"
+        ],
         "armor_prof": [],
         "num_skills": 2,
-        "skills": ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"]
+        "skills": [
+            "Acrobatics",
+            "Athletics",
+            "History",
+            "Insight",
+            "Religion",
+            "Stealth"
+        ],
+        "equipment": [
+            "(a) a shortsword or (b) any simple weapon",
+            "(a) a dungeoneer’s pack or (b) an explorer’s pack",
+            "10 darts"
+        ]
     },
     "Paladin": {
         "template": "modules/hero-conjurer/templates/classes/paladin.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Simple Weapons", "Martial Weapons"],
-        "armor_prof": ["Light Armor", "Medium Armor", "Heavy Armor", "Shields"],
+        "weapon_prof": [
+            "Simple Weapons",
+            "Martial Weapons"
+        ],
+        "armor_prof": [
+            "Light Armor",
+            "Medium Armor",
+            "Heavy Armor",
+            "Shields"
+        ],
         "num_skills": 2,
-        "skills": ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"]
+        "skills": [
+            "Athletics",
+            "Insight",
+            "Intimidation",
+            "Medicine",
+            "Persuasion",
+            "Religion"
+        ],
+        "equipment": [
+            "(a) a martial weapon and a shield or (b) two martial weapons",
+            "(a) five javelins or (b) any simple melee weapon",
+            "(a) a priest's pack or (b) an explorer's pack",
+            "Chain mail and a holy symbol"
+        ]
     },
     "Ranger": {
         "template": "modules/hero-conjurer/templates/classes/ranger.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Simple Weapons", "Martial Weapons"],
-        "armor_prof": ["Light Armor", "Medium Armor", "Shields"],
+        "weapon_prof": [
+            "Simple Weapons",
+            "Martial Weapons"
+        ],
+        "armor_prof": [
+            "Light Armor",
+            "Medium Armor",
+            "Shields"
+        ],
         "num_skills": 3,
-        "skills": ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"]
+        "skills": [
+            "Animal Handling",
+            "Athletics",
+            "Insight",
+            "Investigation",
+            "Nature",
+            "Perception",
+            "Stealth",
+            "Survival"
+        ],
+        "equipment": [
+            "(a) scale mail or (b) leather armor",
+            "(a) two shortswords or (b) two simple melee weapons ",
+            "(a) a dungeoneer's pack or (b) an explorer's pack",
+            "A longbow and a quiver of 20 arrows"
+        ]
     },
     "Rogue": {
         "template": "modules/hero-conjurer/templates/classes/rogue.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Simple Weapons", "Hand Crossbows", "Longswords", "Rapiers", "Shortswords"],
-        "armor_prof": ["Light Armor"],
+        "weapon_prof": [
+            "Simple Weapons",
+            "Hand Crossbows",
+            "Longswords",
+            "Rapiers",
+            "Shortswords"
+        ],
+        "armor_prof": [
+            "Light Armor"
+        ],
         "num_skills": 4,
-        "skills": ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Sleight of Hand", "Stealth"]
+        "skills": [
+            "Acrobatics",
+            "Athletics",
+            "Deception",
+            "Insight",
+            "Intimidation",
+            "Investigation",
+            "Perception",
+            "Performance",
+            "Persuasion",
+            "Sleight of Hand",
+            "Stealth"
+        ],
+        "equipment": [
+            "(a) a rapier or (b) a shortsword",
+            "(a) a shortbow and quiver of 20 arrows or (b) a shortsword",
+            "(a) a burglar's pack, (b) a dungeoneer's pack, or (c) an explorer's pack",
+            "(a) Leather armor, two daggers, and thieves' tools"
+        ]
     },
     "Sorcerer": {
         "template": "modules/hero-conjurer/templates/classes/sorcerer.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"],
+        "weapon_prof": [
+            "Daggers",
+            "Darts",
+            "Slings",
+            "Quarterstaffs",
+            "Light Crossbows"
+        ],
         "armor_prof": [],
         "num_skills": 2,
-        "skills": ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"]
+        "skills": [
+            "Arcana",
+            "Deception",
+            "Insight",
+            "Intimidation",
+            "Persuasion",
+            "Religion"
+        ],
+        "equipment": [
+            "(a) a light crossbow and 20 bolts or (b) any simple weapon",
+            "(a) a component pouch or (b) an arcane focus",
+            "(a) a dungeoneer's pack or (b) an explorer's pack",
+            "Two daggers"
+        ]
     },
     "Warlock": {
         "template": "modules/hero-conjurer/templates/classes/warlock.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Simple Weapons"],
-        "armor_prof": ["Light Armor"],
+        "weapon_prof": [
+            "Simple Weapons"
+        ],
+        "armor_prof": [
+            "Light Armor"
+        ],
         "num_skills": 2,
-        "skills": ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"]
+        "skills": [
+            "Arcana",
+            "Deception",
+            "History",
+            "Intimidation",
+            "Investigation",
+            "Nature",
+            "Religion"
+        ],
+        "equipment": [
+            "(a) a light crossbow and 20 bolts or (b) any simple weapon",
+            "(a) a component pouch or (b) an arcane focus",
+            "(a) a scholar's pack or (b) a dungeoneer's pack",
+            "Leather armor, any simple weapon, and two daggers"
+        ]
     },
     "Wizard": {
         "template": "modules/hero-conjurer/templates/classes/wizard.html",
         "pack": "dnd5e.classes",
-        "weapon_prof": ["Daggers", "Darts", "Slings", "Quarterstaffs", "Light Crossbows"],
+        "weapon_prof": [
+            "Daggers",
+            "Darts",
+            "Slings",
+            "Quarterstaffs",
+            "Light Crossbows"
+        ],
         "armor_prof": [],
         "num_skills": 2,
-        "skills": ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"]
+        "skills": [
+            "Arcana",
+            "History",
+            "Insight",
+            "Investigation",
+            "Medicine",
+            "Religion"
+        ],
+        "equipment": [
+            "(a) a quarterstaff or (b) a dagger",
+            "(a) a component pouch or (b) an arcane focus",
+            "(a) a scholar's pack or (b) an explorer's pack",
+            "A spellbook"
+        ]
     }
 }

@@ -1,0 +1,18 @@
+{
+    "Acolyte": {
+        "template": "modules/hero-conjurer/templates/backgrounds/acolyte.html",
+        "skills": [
+            "Insight",
+            "Religion"
+        ],
+        "equipment": [
+            "A holy symbol (a gift to you when you entered the priesthood)",
+            "A prayer book or prayer wheel",
+            "5 sticks of incense",
+            "Vestments",
+            "A set of common clothes",
+            "A pouch containing 15 gp"
+        ]
+    },
+    "Custom": {}
+}

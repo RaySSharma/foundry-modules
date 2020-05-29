@@ -1,20 +1,4 @@
 {
-    "" :{
-        "abilities": {
-            "Str": 0,
-            "Dex": 0,
-            "Con": 0,
-            "Int": 0,
-            "Wis": 0,
-            "Cha": 0
-        },
-        "size": "",
-        "speed": "",
-        "feats": {},
-        "resistance": {},
-        "languages": [],
-        "subraces": {}
-    },
     "Dragonborn": {
         "abilities": {
             "Str": 2,
