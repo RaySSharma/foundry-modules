@@ -1,6 +1,6 @@
 {
     "Barbarian": {
-        "template": "modules/hero-conjurer/templates/classes/barbarian.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/barbarian.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Simple Weapons",
@@ -29,7 +29,7 @@
         "num_spells": [0, 0]
     },
     "Bard": {
-        "template": "modules/hero-conjurer/templates/classes/bard.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/bard.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Simple Weapons",
@@ -72,7 +72,7 @@
         "num_spells": [2, 2]
     },
     "Cleric": {
-        "template": "modules/hero-conjurer/templates/classes/cleric.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/cleric.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Simple Weapons"
@@ -101,7 +101,7 @@
         "num_spells": [3, 2]
     },
     "Druid": {
-        "template": "modules/hero-conjurer/templates/classes/druid.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/druid.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Clubs",
@@ -140,7 +140,7 @@
         "num_spells": [2, 2]
     },
     "Fighter": {
-        "template": "modules/hero-conjurer/templates/classes/fighter.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/fighter.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Simple Weapons",
@@ -173,7 +173,7 @@
         "num_spells": [0, 0]
     },
     "Monk": {
-        "template": "modules/hero-conjurer/templates/classes/monk.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/monk.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Simple Weapons",
@@ -198,7 +198,7 @@
         "num_spells": [0, 0]
     },
     "Paladin": {
-        "template": "modules/hero-conjurer/templates/classes/paladin.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/paladin.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Simple Weapons",
@@ -229,7 +229,7 @@
         "num_spells": [0, 0]
     },
     "Ranger": {
-        "template": "modules/hero-conjurer/templates/classes/ranger.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/ranger.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Simple Weapons",
@@ -261,7 +261,7 @@
         "num_spells": [0, 0]
     },
     "Rogue": {
-        "template": "modules/hero-conjurer/templates/classes/rogue.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/rogue.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Simple Weapons",
@@ -297,7 +297,7 @@
         "num_spells": [0, 0]
     },
     "Sorcerer": {
-        "template": "modules/hero-conjurer/templates/classes/sorcerer.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/sorcerer.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Daggers",
@@ -326,7 +326,7 @@
         "num_spells": [4, 2]
     },
     "Warlock": {
-        "template": "modules/hero-conjurer/templates/classes/warlock.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/warlock.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Simple Weapons"
@@ -354,7 +354,7 @@
         "num_spells": [2, 2]
     },
     "Wizard": {
-        "template": "modules/hero-conjurer/templates/classes/wizard.html",
+        "template": "modules/hero-conjurer/templates/parts/classes/wizard.html",
         "pack": "dnd5e.classes",
         "weapon_prof": [
             "Daggers",

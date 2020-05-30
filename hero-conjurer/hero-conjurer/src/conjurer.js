@@ -36,6 +36,8 @@ class HeroConjurer extends FormApplication {
             'background': 'modules/hero-conjurer/templates/background.html',
             'equipment': 'modules/hero-conjurer/templates/equipment.html',
             'spells': 'modules/hero-conjurer/templates/spells.html',
+            'spells-cantrip': 'modules/hero-conjurer/templates/parts/spells/spells-cantrip.html',
+            'spells-first': 'modules/hero-conjurer/templates/parts/spells/spells-first.html',
             'feats': 'modules/hero-conjurer/templates/feats.html',
             'bio': 'modules/hero-conjurer/templates/bio.html',
             'summary': 'modules/hero-conjurer/templates/summary.html'
@@ -95,69 +97,47 @@ class HeroConjurer extends FormApplication {
 
         $('#HC-abilities .square').click(this._abilityIncrementDecrement.bind(this));
 
-        $('#HC-abilities .score').change( function(event) {
+        $('#HC-abilities .score').change(function (event) {
             let $button = $(event.target);
-                $button.next().val($button.val());
-                this._submitAndRender();
+            $button.next().val($button.val());
+            this._submitAndRender();
         }.bind(this));
 
         $('.data-click').click(this._loadDataTemplate.bind(this));
+        $('.selector').click(function(event) {
+            if (event.target.name == "class") {
+                var target = this.info.classData.find(x => x.name == event.target.id)
+                var nonTarget = this.info.classData.filter(x => x.name != event.target.id)
+            }
+            else if (event.target.name == "spell") {
+                var target = this.info.spellData.find(x => x.name == event.target.id)
+                var nonTarget = this.info.spellData.filter(x => x.name != event.target.id)
+            }
+            else{
+                return
+            }
+            target.border = '0 0 18px red'
+            nonTarget.forEach(x => x.border = 'none')
+        }.bind(this))
 
-        $('.spell-selector').change( function(event) {
+        $('.spell-selector').change(function (event) {
 
             $('.spell-selector').children(':not([hidden])').removeAttr('disabled');
             $(event.target).children().removeAttr('selected');
 
-            let option = $(event.target).prop('selectedOptions')[0]
+            let option = $(event.target).prop('selectedOptions')[0];
             $(option).attr('selected', 'selected');
             $(option).attr('disabled', 'disabled');
 
-            $('.spell-selector').children('[selected]:not([hidden])').each( function() {
-                let name = $(this).attr('name')
-                $('.spell-selector').children("[name='" + name + "']").attr('disabled', 'disabled')
-            })
+            $('.spell-selector').children('[selected]:not([hidden])').each(function () {
+                let name = $(this).attr('name');
+                $('.spell-selector').children("[name='" + name + "']").attr('disabled', 'disabled');
+            });
 
-            let value = option.value.split(':')[1]
-            this.info.spellData.find(x => x.name == value)
+            let value = option.value.split(':')[1];
+            this.info.spellData.find(x => x.name == value);
 
         }.bind(this));
-    }
-
-    /**
-     * Navigate and page templates for each tab
-     *
-     * @param {*} event
-     * @memberof HeroConjurer
-     */
-    _loadNavigationTemplate(event) {
-        let classlist = event.currentTarget.classList;
-        if (classlist.contains('next') | classlist.contains('prev')) {
-            /* This will change when next/prev buttons are fixed */
-        }
-        else {
-            let template = this.pages[classlist[2]];
-            this.options.template = template;
-        }
-        this._submitAndRender();
-    }
-
-    /**
-     * Load iframe templates for specific data entries, e.g, class information
-     *
-     * @param {*} event
-     * @memberof HeroConjurer
-     */
-    _loadDataTemplate(event) {
-        let templateType = event.target.name;
-        let templateChild = event.target.id;
-        this.data[templateType].template = this.info[templateType][templateChild].template;
-        this.data[templateType].name = templateChild;
-        this._submitAndRender();
-    }
-
-    _submitAndRender() {
-        this.submit();
-        this.render();
     }
 
     _updateObject(event, formData) {
@@ -211,7 +191,52 @@ class HeroConjurer extends FormApplication {
 
         this.data.spells = (formData.sheet == 'spells') ? {
             'names': formData.spell
-        } : this.data.spells
+        } : this.data.spells;
+    }
+
+    /**
+     * Navigate and page templates for each tab
+     *
+     * @param {*} event
+     * @memberof HeroConjurer
+     */
+    _loadNavigationTemplate(event) {
+        let classlist = event.currentTarget.classList;
+        if (classlist.contains('next') | classlist.contains('prev')) {
+            /* This will change when next/prev buttons are fixed */
+        }
+        else {
+            let template = this.pages[classlist[2]];
+            this.options.template = template;
+        }
+        this._submitAndRender();
+    }
+
+    /**
+     * Load iframe templates for specific data entries, e.g, class information
+     *
+     * @param {*} event
+     * @memberof HeroConjurer
+     */
+    _loadDataTemplate(event) {
+        let templateType = event.target.name;
+        let templateChild = event.target.id;
+
+        if (templateType == "spells") {
+            this.data[templateType].template = this.info.spellData.find(x => x.name == templateChild).data.data.description.value
+            this.data[templateType].name = templateChild;
+        }
+        else {
+            this.data[templateType].template = this.info[templateType][templateChild].template;
+            this.data[templateType].name = templateChild;
+        }
+
+        this._submitAndRender();
+    }
+
+    _submitAndRender() {
+        this.submit();
+        this.render();
     }
 
     /**
@@ -224,8 +249,9 @@ class HeroConjurer extends FormApplication {
         this.info.alignment = await fetch('modules/hero-conjurer/data/alignments.json').then(response => response.json());
         this.info.class = await fetch('modules/hero-conjurer/data/classes.json').then(response => response.json());
         this.info.background = await fetch('modules/hero-conjurer/data/backgrounds.json').then(response => response.json());
-        this.info.spells = await fetch('modules/hero-conjurer/data/spells.json').then(response => response.json());
+        this.info.extraSpellInfo = await fetch('modules/hero-conjurer/data/spells.json').then(response => response.json());
 
+        /* Pull out class compendiums according to classes.json */
         let classPacks = [];
         for (let value of Object.values(this.info.class)) {
             classPacks.push(value.pack);
@@ -236,12 +262,14 @@ class HeroConjurer extends FormApplication {
         for (let i = 0; i < this.info.classPacks.length; i++) {
             let packName = this.info.classPacks[i];
             let pack = game.packs.find(x => x.collection === packName);
+
             if (pack) {
                 pack = await pack.getContent();
                 this.info.classData = this.info.classData.concat(pack);
             }
         }
 
+        /* Pull out spell data compendiums */
         this.info.spellPacks = ['dnd5e.spells'];
         this.info.spellData = [];
         for (let i = 0; i < this.info.spellPacks.length; i++) {
@@ -250,30 +278,33 @@ class HeroConjurer extends FormApplication {
 
             if (pack) {
                 pack = await pack.getContent();
-                this.info.spellData = this.info.spellData.concat(pack)
+                this.info.spellData = this.info.spellData.concat(pack);
             }
         }
 
-        var reducedSpellData = this.info.spells.map(function(d,i) {
+        /* Add additional info to spell data if its missing */
+        for (let i = 0; i < this.info.spellData.length; i++) {
+            if (!this.info.spellData[i].tags) {
+                let extraSpellInfo = this.info.extraSpellInfo.filter(spell => spell.name == this.info.spellData[i].name, this)[0];
+                if (extraSpellInfo) {
+                    this.info.spellData[i].tags = extraSpellInfo.tags;
+                    this.info.spellData[i].level = extraSpellInfo.level;
+                }
+            }
+        }
+        this.info.spellData = this.info.spellData.filter(spell => spell.tags, this);
 
-            return {
-              name: d.name,
-              level: d.level,
-              index: i + 1,
-              tags: d.tags
-            };
-          });
-        
+        /* Generate class-specific spell-lists */
         for (let key of Object.keys(this.info.class)) {
             this.info.class[key].spellList = {
-                'cantrip': [], '1': [],'2': [],'3': [],'4': [],'5': [],'6': [],'7': [],'8': [],'9': []
-            }
-            this.info.class[key].spellList['cantrip'] = reducedSpellData.filter( function(d) {
-                return (d.tags.includes(key.toLowerCase()))&(d.level == 'cantrip') 
+                'cantrip': [], '1': [], '2': [], '3': [], '4': [], '5': [], '6': [], '7': [], '8': [], '9': []
+            };
+            this.info.class[key].spellList['cantrip'] = this.info.spellData.filter(function (spell) {
+                return (spell.tags.includes(key.toLowerCase())) & (spell.level == 'cantrip');
             });
             for (let i = 1; i < 10; i++) {
-                this.info.class[key].spellList[i] = reducedSpellData.filter( function(d) {
-                    return (d.tags.includes(key.toLowerCase()))&(d.level == i) 
+                this.info.class[key].spellList[i] = this.info.spellData.filter(function (spell) {
+                    return (spell.tags.includes(key.toLowerCase())) & (spell.level == i);
                 });
             }
         }

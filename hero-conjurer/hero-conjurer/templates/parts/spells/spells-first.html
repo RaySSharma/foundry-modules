@@ -19,18 +19,19 @@
         <div id='HC-content'>
             <nav class='subtab'>
                 <a class='subtablinks navigate spells-cantrip'>0</a>
-                <a class='subtablinks navigate spells-first'>I</a>
+                <a class='subtablinks navigate spells-first active'>I</a>
             </nav>
-
-            {{#unless data.class.name}}
-                <div class='choice-pane'>
-                    <h3>Choose a class first</h3>
-                </div>
-            {{/unless}}
 
             {{#if data.class.name}}
                 <div class='choice-pane'>
-                    <h3>Choose a Spell Level</h3>
+
+                    <h3>1st Level Spells:&nbsp</h3>
+                    {{#each data.class.spells.[1]}}
+                        <div class='class-entry'>
+                            <img class='selector data-click' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells' id='{{this.name}}'>
+                            <h3>{{this.name}}</h3> 
+                        </div>
+                    {{/each}}
                 </div>
 
                 <!-- Info Pane -->

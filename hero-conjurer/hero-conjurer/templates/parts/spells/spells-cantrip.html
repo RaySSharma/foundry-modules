@@ -18,28 +18,28 @@
         <!-- Tab content -->
         <div id='HC-content'>
             <nav class='subtab'>
-                <a class='subtablinks navigate spells-cantrip'>0</a>
+                <a class='subtablinks navigate spells-cantrip active'>0</a>
                 <a class='subtablinks navigate spells-first'>I</a>
             </nav>
 
-            {{#unless data.class.name}}
-                <div class='choice-pane'>
-                    <h3>Choose a class first</h3>
-                </div>
-            {{/unless}}
-
             {{#if data.class.name}}
                 <div class='choice-pane'>
-                    <h3>Choose a Spell Level</h3>
-                </div>
+                    <h3>Cantrips:&nbsp</h3>
 
-                <!-- Info Pane -->
-                <div class='secondary-choice-pane'>
-                    <h3>Spellbook:&nbsp</h3>
-                    {{#each data.spells.names}}
-                        <span>{{this}}</span>
+                    {{#each data.class.spells.cantrip}}
+                        <div class='class-entry'>
+                            <img class='selector data-click' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells' id='{{this.name}}'>
+                            <h3>{{this.name}}</h3> 
+                        </div>
                     {{/each}}
                 </div>
+
+                {{#if data.class.name}}
+                    <!-- Info Pane -->
+                    <div class='info-pane'>
+                        <iframe width='100%' height='100%' src='{{data.spells.template}}'></iframe>
+                    </div>
+                {{/if}}
             {{/if}}
 
         </div>

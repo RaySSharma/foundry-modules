@@ -1,17 +1,18 @@
 <div id='HC-form'>
     <form autocomplete='off' class='form'>
         <input type='hidden' name='sheet' id='sheet' value='race'>
+        
         <!-- Tabs -->
         <nav id='HC-header'>
-            <button type='submit' class='tablinks navigate race'>RACE</button>
-            <button type='submit' class='tablinks navigate class'>CLASS</button>
-            <button type='submit' class='tablinks navigate abilities'>ABILITIES</button>
-            <button type='submit' class='tablinks navigate background'>BACKGROUND</button>
-            <button type='submit' class='tablinks navigate equipment'>EQUIPMENT</button>
-            <button type='submit' class='tablinks navigate spells'>SPELLS</button>
-            <button type='submit' class='tablinks navigate feats'>FEATS</button>
-            <button type='submit' class='tablinks navigate bio'>BIO</button>
-            <button type='submit' class='tablinks navigate summary'>SUMMARY</button>
+            <a class='tablinks navigate race active'>RACE</a>
+            <a class='tablinks navigate class'>CLASS</a>
+            <a class='tablinks navigate abilities'>ABILITIES</a>
+            <a class='tablinks navigate background'>BACKGROUND</a>
+            <a class='tablinks navigate equipment'>EQUIPMENT</a>
+            <a class='tablinks navigate spells'>SPELLS</a>
+            <a class='tablinks navigate feats'>FEATS</a>
+            <a class='tablinks navigate bio'>BIO</a>
+            <a class='tablinks navigate summary'>SUMMARY</a>
         </nav>
 
         <!-- Abilities -->
@@ -31,52 +32,53 @@
         
         <!-- Tab content -->
         <div id='HC-content'>
-            <!-- Select Race-->
-            <label for='race'>Race:</label>
-            <select class='submit' name='race' id='race'>
-                <option value='{{data.race.name}}' selected hidden>{{data.race.race}}</option> 
-                {{#with info.race as | race |}}
-                    {{#each race}}
-                        <option value='{{@key}}'>{{@key}}</option>
-                    {{/each}}
-                {{/with}}
-            </select>
-
-            {{#if data.race.name}}
-
-                <!-- Select Subrace-->
-                {{#if (objectLength data.race.data.subraces)}}
-                    <label for='subrace'>Subrace:</label>
-                    <select class='submit' name='subrace' id='subrace'>
-                        <option value='{{data.race.subrace}}' selected hidden>{{data.race.subrace}}</option> 
-                        {{#with data.race.data.subraces as | subrace |}}
-                            {{#each subrace}}
-                                <option value='{{@key}}'>{{@key}}</option>
-                            {{/each}}
-                        {{/with}}
-                    </select>
-                {{/if}}
-
-                <!--Select Alignment-->
-                <label for='alignment'>Alignment:</label>
-                <select class='submit' name='alignment' id='alignment'>
-                    <option value='{{data.race.alignment}}' selected hidden>{{data.race.alignment}}</option> 
-                    {{#with info.alignment as | alignment |}}
-                        {{#each alignment}}
+            <div class='choice-pane'>
+                <!-- Select Race-->
+                <label for='race'>Race:</label>
+                <select class='submit' style='width: 100%; margin: auto;' name='race' id='race'>
+                    <option value='{{data.race.name}}' selected hidden>{{data.race.name}}</option> 
+                    {{#with info.race as | race |}}
+                        {{#each race}}
                             <option value='{{@key}}'>{{@key}}</option>
                         {{/each}}
                     {{/with}}
                 </select>
 
-                <!-- Race Characteristics-->
-                <label for='size' name='size' id='size'>Size: {{data.race.size}}</label>
-                <label for='speed' name='speed' id='speed'>Speed: {{data.race.speed}}</label>
-                <label for='languages' name='languages' id='languages'>Languages:</label>
-                {{#each data.race.data.languages}}
-                    <label>{{this}}</label>
-                {{/each}}
-            {{/if}}
+                {{#if data.race.name}}
 
+                    <!-- Select Subrace-->
+                    {{#if (objectLength data.race.data.subraces)}}
+                        <label for='subrace'>Subrace:</label>
+                        <select class='submit' name='subrace' id='subrace'>
+                            <option value='{{data.race.subrace}}' selected hidden>{{data.race.subrace}}</option> 
+                            {{#with data.race.data.subraces as | subrace |}}
+                                {{#each subrace}}
+                                    <option value='{{@key}}'>{{@key}}</option>
+                                {{/each}}
+                            {{/with}}
+                        </select>
+                    {{/if}}
+
+                    <!--Select Alignment-->
+                    <label for='alignment'>Alignment:</label>
+                    <select class='submit' name='alignment' id='alignment'>
+                        <option value='{{data.race.alignment}}' selected hidden>{{data.race.alignment}}</option> 
+                        {{#with info.alignment as | alignment |}}
+                            {{#each alignment}}
+                                <option value='{{@key}}'>{{@key}}</option>
+                            {{/each}}
+                        {{/with}}
+                    </select>
+
+                    <!-- Race Characteristics-->
+                    <label for='size' name='size' id='size'>Size: {{data.race.size}}</label>
+                    <label for='speed' name='speed' id='speed'>Speed: {{data.race.speed}}</label>
+                    <label for='languages' name='languages' id='languages'>Languages:</label>
+                    {{#each data.race.data.languages}}
+                        <label>{{this}}</label>
+                    {{/each}}
+                {{/if}}
+            </div>
         </div>
 
         <div id='HC-navigate'>

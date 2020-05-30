@@ -1,6 +1,6 @@
 {
     "Acolyte": {
-        "template": "modules/hero-conjurer/templates/backgrounds/acolyte.html",
+        "template": "modules/hero-conjurer/templates/parts/backgrounds/acolyte.html",
         "skills": [
             "Insight",
             "Religion"

@@ -70,9 +70,11 @@
   * Spells
     * [x] Cantrips
     * [x] 1st Level Spells
-    * [ ] Restrict to Spell List
-      * [ ] Sort through Vorpalhex tables per class
+    * [x] Restrict to Spell List
+      * [x] Sort through Vorpalhex tables per class
     * [ ] Information Panel
+    * [x] Change to spellbook format
+      * [x] Tab for each spell level
   * Feats
     * [ ] Feats
   * Bio
