@@ -104,14 +104,19 @@ class HeroConjurer extends FormApplication {
         }.bind(this));
 
         $('.data-click').click(this._loadDataTemplate.bind(this));
-        $('.selector').click(function(event) {
+        $('.selector').click( async function(event) {
             if (event.target.name == "class") {
                 var target = this.info.classData.find(x => x.name == event.target.id)
                 var nonTarget = this.info.classData.filter(x => x.name != event.target.id)
             }
-            else if (event.target.name == "spell") {
-                var target = this.info.spellData.find(x => x.name == event.target.id)
-                var nonTarget = this.info.spellData.filter(x => x.name != event.target.id)
+            else if (event.target.name == "spells") {
+                let spellLevel = this.info.spellData.find(x => x.name == event.target.id).level
+                var target = this.data.class.spells[spellLevel].find(x => x.name == event.target.id)
+                var nonTarget = this.data.class.spells[spellLevel].filter(x => x.name != event.target.id)
+
+                let test = await game.packs.find(x => x.collection == "dnd5e.spells").getEntity(target.id)
+                let test2 = await test.sheet._renderInner()
+                this.data.spells.template = test2[0].innerHTML
             }
             else{
                 return
@@ -190,7 +195,9 @@ class HeroConjurer extends FormApplication {
         } : this.data.background;
 
         this.data.spells = (formData.sheet == 'spells') ? {
-            'names': formData.spell
+            'names': formData.spell,
+            'pack': this.info.spellData.filter(x => x.name.includes(formData.spell)).data,
+            'template': this.data.spells.template
         } : this.data.spells;
     }
 
