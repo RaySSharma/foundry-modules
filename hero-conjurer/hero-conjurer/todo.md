@@ -18,9 +18,11 @@
 * [x] Button to open Conjurer
   * [ ] Integrate into *Create Actor*
   * [x] Add temporary button
+* [x] Move to TabsV2
 * [ ] Pipe inputs into character sheet
 * [ ] Prettify HTML
 * [ ] Clean CSS
+* [ ] Add options menu
 * [ ] Sanitize inputs
 * [ ] Compatibility with alternate sheets (probably just Sky5e)
 * [ ] Licensing under 5e SRD rules
@@ -30,7 +32,7 @@
   * User interacts with template, which determines input data
     * Use a socket to connect template to JS?
     * Button onClick initiates script to pass in relevant data, into the correct template
-  * Each tab get its own template, with the same button templates
+  * Each tab get its own template to be used with TabsV2
 
 * Data Model
   * Race
@@ -75,6 +77,8 @@
     * [ ] Information Panel
     * [x] Change to spellbook format
       * [x] Tab for each spell level
+      * [ ] Drag and drop spells onto the spellbook
+    * [ ] Rethink spell data model
   * Feats
     * [ ] Feats
   * Bio

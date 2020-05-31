@@ -4,7 +4,7 @@
     "description": "This module makes it easy to create new heroes!",
     "version": "0.1.0",
     "author": "RaySSharma",
-    "scripts": ["./src/conjurer.js"],
+    "esmodules": ["./src/conjurer.js"],
     "languages": [{
         "lang": "en",
         "name": "English",

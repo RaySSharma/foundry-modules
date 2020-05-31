@@ -28,7 +28,7 @@
 
                     {{#each data.class.spells.cantrip}}
                         <div class='class-entry'>
-                            <img class='selector data-click' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells' id='{{this.name}}'>
+                            <img style="box-shadow:{{this.border}};" class='selector' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells' id='{{this.name}}'>
                             <h3>{{this.name}}</h3> 
                         </div>
                     {{/each}}

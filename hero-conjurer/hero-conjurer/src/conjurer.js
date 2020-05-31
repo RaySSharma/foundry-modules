@@ -1,5 +1,6 @@
+import { preloadHandlebarsTemplates } from "../templates/tab-templates.js";
 
-class HeroConjurer extends FormApplication {
+export class HeroConjurer extends FormApplication {
     constructor(options = {}) {
         super(options);
 
@@ -23,7 +24,11 @@ class HeroConjurer extends FormApplication {
                 'Cha': 8
             },
             background: {},
-            spells: {},
+            spells: {
+                'names': [],
+                'data': [],
+                'imgs': []
+            },
             feats: {},
             bio: {},
             summary: {}
@@ -43,8 +48,6 @@ class HeroConjurer extends FormApplication {
             'summary': 'modules/hero-conjurer/templates/summary.html'
         };
 
-        this.readDataFiles();
-
         Handlebars.registerHelper('objectLength', function (json) {
             return Object.keys(json).length;
         });
@@ -63,28 +66,31 @@ class HeroConjurer extends FormApplication {
                 accum += block.fn(i);
             return accum;
         });
-
     }
 
     static get defaultOptions() {
-        const options = super.defaultOptions;
-        options.title = 'Hero Conjurer';
-        options.id = 'hero-conjurer';
-        options.template = 'modules/hero-conjurer/templates/start.html';
-        options.closeOnSubmit = false;
-        options.submitOnClose = true;
-        options.popOut = true;
-        options.width = 'auto';
-        options.height = 'auto';
-        return options;
+        return mergeObject(super.defaultOptions, {
+            title: "Hero Conjurer",
+            id: 'hero-conjurer',
+            template: 'modules/hero-conjurer/templates/start.html',
+            closeOnSubmit: false,
+            submitOnClose: true,
+            popOut: true,
+            width: 'auto',
+            height: 'auto',
+            tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "start" }]
+        });
     }
 
     async getData() {
-        return {
+        if (jQuery.isEmptyObject(this.info)) {
+            await this.readDataFiles();
+        }
+        return mergeObject(super.getData(), {
             options: this.options,
             data: this.data,
             info: this.info
-        };
+        });
     }
 
     activateListeners(html) {
@@ -104,50 +110,48 @@ class HeroConjurer extends FormApplication {
         }.bind(this));
 
         $('.data-click').click(this._loadDataTemplate.bind(this));
-        $('.selector').click( async function(event) {
+        $('.selector').click(function (event) {
             if (event.target.name == "class") {
-                var target = this.info.classData.find(x => x.name == event.target.id)
-                var nonTarget = this.info.classData.filter(x => x.name != event.target.id)
+                var target = this.info.classData.find(x => x.name == event.target.id);
+                var nonTarget = this.info.classData.filter(x => x.name != event.target.id);
             }
             else if (event.target.name == "spells") {
-                let spellLevel = this.info.spellData.find(x => x.name == event.target.id).level
-                var target = this.data.class.spells[spellLevel].find(x => x.name == event.target.id)
-                var nonTarget = this.data.class.spells[spellLevel].filter(x => x.name != event.target.id)
-
-                let test = await game.packs.find(x => x.collection == "dnd5e.spells").getEntity(target.id)
-                let test2 = await test.sheet._renderInner()
-                this.data.spells.template = test2[0].innerHTML
+                let spellLevel = this.info.spellData.find(x => x.name == event.target.id).level;
+                var target = this.data.class.spells[spellLevel].find(x => x.name == event.target.id);
+                var nonTarget = this.data.class.spells[spellLevel].filter(x => x.name != event.target.id);
             }
-            else{
-                return
+            else {
+                return;
             }
-            target.border = '0 0 18px red'
-            nonTarget.forEach(x => x.border = 'none')
-        }.bind(this))
+            target.border = '0 0 18px red';
+            nonTarget.forEach(x => x.border = 'none');
 
-        $('.spell-selector').change(function (event) {
-
-            $('.spell-selector').children(':not([hidden])').removeAttr('disabled');
-            $(event.target).children().removeAttr('selected');
-
-            let option = $(event.target).prop('selectedOptions')[0];
-            $(option).attr('selected', 'selected');
-            $(option).attr('disabled', 'disabled');
-
-            $('.spell-selector').children('[selected]:not([hidden])').each(function () {
-                let name = $(this).attr('name');
-                $('.spell-selector').children("[name='" + name + "']").attr('disabled', 'disabled');
-            });
-
-            let value = option.value.split(':')[1];
-            this.info.spellData.find(x => x.name == value);
-
+            this.render();
         }.bind(this));
+
+        html.find(".draggable").each((i, li) => {
+            li.setAttribute("draggable", true);
+            li.addEventListener("dragstart", function (event) {
+                event.dataTransfer.setData("text/plain", JSON.stringify({
+                    src: event.target.src,
+                    id: event.target.id,
+                    name: event.target.name
+                }));
+            });
+        });
+
+        html.find(".droppable").each((i, li) => {
+            li.addEventListener("drop", function (event) {
+                let data = JSON.parse(event.dataTransfer.getData("text/plain"));
+                this.data.spells.imgs.push(data.src);
+                this.render();
+            }.bind(this));
+        });
     }
 
     _updateObject(event, formData) {
         event.preventDefault();
-        this.data.race = (formData.sheet == 'race') ? {
+        this.data.race = (formData.sheet.includes('race')) ? {
             'name': formData.race,
             'data': this.info.race[formData.race],
             'size': this.info.race[formData.race].size,
@@ -156,7 +160,7 @@ class HeroConjurer extends FormApplication {
             'subrace': formData.subrace
         } : this.data.race;
 
-        this.data.abilitiesForm = (formData.sheet == 'abilities') ? {
+        this.data.abilitiesForm = (formData.sheet.includes('abilities')) ? {
             'Str': formData.Str,
             'Dex': formData.Dex,
             'Con': formData.Con,
@@ -196,8 +200,8 @@ class HeroConjurer extends FormApplication {
 
         this.data.spells = (formData.sheet == 'spells') ? {
             'names': formData.spell,
-            'pack': this.info.spellData.filter(x => x.name.includes(formData.spell)).data,
-            'template': this.data.spells.template
+            'data': this.info.spellData.filter(x => x.name.includes(formData.spell)).data,
+            'imgs': this.data.spells.imgs,
         } : this.data.spells;
     }
 
@@ -228,15 +232,8 @@ class HeroConjurer extends FormApplication {
     _loadDataTemplate(event) {
         let templateType = event.target.name;
         let templateChild = event.target.id;
-
-        if (templateType == "spells") {
-            this.data[templateType].template = this.info.spellData.find(x => x.name == templateChild).data.data.description.value
-            this.data[templateType].name = templateChild;
-        }
-        else {
-            this.data[templateType].template = this.info[templateType][templateChild].template;
-            this.data[templateType].name = templateChild;
-        }
+        this.data[templateType].template = this.info[templateType][templateChild].template;
+        this.data[templateType].name = templateChild;
 
         this._submitAndRender();
     }
@@ -407,4 +404,10 @@ class ConjureButton {
         this.form.render(true);
     }
 }
+Hooks.once("init", () => {
+    preloadHandlebarsTemplates();
+});
 Hooks.on('getSceneControlButtons', ConjureButton.getSceneControlButtons);
+
+
+

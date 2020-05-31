@@ -2,31 +2,65 @@
     <form autocomplete='off' class='form'>
         <input type='hidden' name='sheet' id='sheet' value='start'>
 
-        <!-- Tabs -->
-        <nav id='HC-header'>
-            <a class='tablinks navigate race'>RACE</a>
-            <a class='tablinks navigate class'>CLASS</a>
-            <a class='tablinks navigate abilities'>ABILITIES</a>
-            <a class='tablinks navigate background'>BACKGROUND</a>
-            <a class='tablinks navigate equipment'>EQUIPMENT</a>
-            <a class='tablinks navigate spells'>SPELLS</a>
-            <a class='tablinks navigate feats'>FEATS</a>
-            <a class='tablinks navigate bio'>BIO</a>
-            <a class='tablinks navigate summary'>SUMMARY</a>
+        {{!-- Navigation --}}
+        <nav id='HC-header' class='tabs' data-group="primary">
+            <a class='tablinks item start active' data-tab="start">START</a>
+            <a class='tablinks item race' data-tab="race">RACE</a>
+            <a class='tablinks item class' data-tab='class'>CLASS</a>
+            <a class='tablinks item abilities' data-tab='abilities'>ABILITIES</a>
+            <a class='tablinks item background' data-tab='background'>BACKGROUND</a>
+            <a class='tablinks item equipment' data-tab='equipment'>EQUIPMENT</a>
+            <a class='tablinks item spells' data-tab='spells'>SPELLS</a>
+            <a class='tablinks item feats' data-tab='feats'>FEATS</a>
+            <a class='tablinks item bio' data-tab='bio'>BIO</a>
+            <a class='tablinks item summary' data-tab='summary'>SUMMARY</a>
         </nav>
-        
-        <!-- Banner -->
-        <div class='banner-container'>
-            <img class='banner' src="modules/hero-conjurer/images/banner.png">
-        </div>
 
-        <!-- Tab content -->
-        <div id='HC-content'>
-            <h3 class='tabcontent'>This is the Hero Conjurer!</h3>
-        </div>
+        <section id='HC-content' class='content'>
 
-        <div id='HC-navigate'>
-            <button type='submit' class='navigate next'>NEXT</button>
-        </div>
+            {{!-- Start Tab --}}
+            <div class='tab' data-tab='start' data-group="primary">
+                <div class='banner-container'>
+                    <img class='banner' src="modules/hero-conjurer/images/banner.png">
+                </div>
+            </div>
+
+            {{!-- Race Tab --}}
+            <div class='tab' data-tab='race' data-group="primary">
+                {{> "modules/hero-conjurer/templates/race.html"}}
+            </div>
+
+            <div class='tab' data-tab='class'>
+                {{> "modules/hero-conjurer/templates/class.html"}}
+            </div>
+
+            <div class='tab' data-tab='abilities'>
+                {{> "modules/hero-conjurer/templates/abilities.html"}}
+            </div>
+
+            <div class='tab' data-tab='background'>
+                {{> "modules/hero-conjurer/templates/background.html"}}
+            </div>
+
+            <div class='tab' data-tab='equipment'>
+                {{> "modules/hero-conjurer/templates/equipment.html"}}
+            </div>
+
+            <div class='tab' data-tab='spells'>
+                {{> "modules/hero-conjurer/templates/spells.html"}}
+            </div>
+
+            <div class='tab' data-tab='feats'>
+                {{> "modules/hero-conjurer/templates/feats.html"}}
+            </div>
+
+            <div class='tab' data-tab='bio'>
+                {{> "modules/hero-conjurer/templates/bio.html"}}
+            </div>
+
+            <div class='tab' data-tab='summary'>
+                {{> "modules/hero-conjurer/templates/summary.html"}}
+            </div>
+        </section>
     </form>
 </div>

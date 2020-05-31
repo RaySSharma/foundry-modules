@@ -1,56 +1,33 @@
-<div id='HC-form'>
-    <form autocomplete='off' class='form'>
-        <input type='hidden' name='sheet' id='sheet' value='background'>
-        
-        <!-- Tabs -->
-        <nav id='HC-header'>
-            <a class='tablinks navigate race'>RACE</a>
-            <a class='tablinks navigate class'>CLASS</a>
-            <a class='tablinks navigate abilities'>ABILITIES</a>
-            <a class='tablinks navigate background active'>BACKGROUND</a>
-            <a class='tablinks navigate equipment'>EQUIPMENT</a>
-            <a class='tablinks navigate spells'>SPELLS</a>
-            <a class='tablinks navigate feats'>FEATS</a>
-            <a class='tablinks navigate bio'>BIO</a>
-            <a class='tablinks navigate summary'>SUMMARY</a>
-        </nav>
-        
-        <!-- Tab content -->
-        <div id='HC-content' class='height'>
+<div class='background-tab'>
+    <input type='hidden' name='sheet' id='sheet' value='background'>
 
-            <h3>Backgrounds:</h3>
-            <div class='choice-pane'>
-                <select class='submit' name='background' id='background'>
-                    <option value='{{data.background.name}}' selected hidden>{{data.background.name}}</option> 
-                    {{#with info.background as | background |}}
-                        {{#each background}}
-                            <option value='{{@key}}'>{{@key}}</option>
-                        {{/each}}
-                    {{/with}}
-                </select>
 
-                {{#if data.background.name}}
+    <h3>Backgrounds:</h3>
+    <div class='choice-pane'>
+        <select class='submit' name='background' id='background'>
+            <option value='{{data.background.name}}' selected hidden>{{data.background.name}}</option>
+            {{#with info.background as | background |}}
+            {{#each background}}
+            <option value='{{@key}}'>{{@key}}</option>
+            {{/each}}
+            {{/with}}
+        </select>
 
-                    <!-- Starting Equipment-->
-                    <h3>Starting Equipment:&nbsp</h3>
-                    <ul>
-                        {{#each data.background.data.equipment}}
-                            <li>{{this}}&nbsp</li>
-                        {{/each}}
-                    </ul>
-                {{/if}}
+        {{#if data.background.name}}
 
-            </div>
+        <!-- Starting Equipment-->
+        <h3>Starting Equipment:&nbsp</h3>
+        <ul>
+            {{#each data.background.data.equipment}}
+            <li>{{this}}&nbsp</li>
+            {{/each}}
+        </ul>
+        {{/if}}
 
-            <!-- Info Pane -->
-            <div class='info-pane'>
-                <iframe width='100%' height='100%' src='{{data.background.template}}'></iframe>
-            </div>
-        </div>
+    </div>
 
-        <div id='HC-navigate'>
-            <button type='submit' class='navigate prev'>PREVIOUS</button>
-            <button type='submit' class='navigate next'>NEXT</button>
-        </div>
-    </form>
+    <!-- Info Pane -->
+    <div class='info-pane'>
+        <iframe width='100%' height='100%' src='{{data.background.template}}'></iframe>
+    </div>
 </div>

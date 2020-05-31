@@ -1,45 +1,22 @@
-<div id='HC-form'>
-    <form autocomplete='off' class='form'>
-        <input type='hidden' name='sheet' id='sheet' value='bio'>
+<div class='bio-tab'>
+    <input type='hidden' name='sheet' id='sheet' value='bio'>
 
-        <!-- Tabs -->
-        <nav id='HC-header'>
-            <a class='tablinks navigate race'>RACE</a>
-            <a class='tablinks navigate class'>CLASS</a>
-            <a class='tablinks navigate abilities'>ABILITIES</a>
-            <a class='tablinks navigate background'>BACKGROUND</a>
-            <a class='tablinks navigate equipment'>EQUIPMENT</a>
-            <a class='tablinks navigate spells active'>SPELLS</a>
-            <a class='tablinks navigate feats'>FEATS</a>
-            <a class='tablinks navigate bio active'>BIO</a>
-            <a class='tablinks navigate summary'>SUMMARY</a>
-        </nav>
-        
-        <!-- Tab content -->
-        <div id='HC-content'>
-            {{#with data.bio as | bio |}}
-                <div class='choice'>
-                    <label class='choice-label' for='name'>Hero name</label>
-                    <input class='choice-input' type='text' id='name' name='name' value='{{bio.name}}'>
-                    <label class='choice-label' for='age'>Age</label>
-                    <input class='choice-input' type='text' id='age' name='age' value='{{bio.age}}'>
-                    <label class='choice-label' for='height'>Height</label>
-                    <input class='choice-input' type='text' id='height' name='height' value='{{bio.height}}'>
-                    <label class='choice-label' for='weight'>Weight</label>
-                    <input class='choice-input' type='text' id='weight' name='weight' value='{{bio.weight}}'>
-                    <label class='choice-label' for='eyes'>Eyes</label>
-                    <input class='choice-input' type='text' id='eyes' name='eyes' value='{{bio.eyes}}'>
-                    <label class='choice-label' for='hair'>Hair</label>
-                    <input class='choice-input' type='text' id='hair' name='hair' value='{{bio.hair}}'>
-                    <label class='choice-label' for='skin'>Skin</label>
-                    <input class='choice-input' type='text' id='skin' name='skin' value='{{bio.skin}}'>
-                </div>
-            {{/with}}
-        </div>
-
-        <div id='HC-navigate'>
-            <button type='submit' class='navigate prev' value='Submit'>PREVIOUS</button>
-            <button type='submit' class='navigate next' value='Submit'>NEXT</button>
-        </div>
-    </form>
+    {{#with data.bio as | bio |}}
+    <div class='choice'>
+        <label class='choice-label' for='name'>Hero name</label>
+        <input class='choice-input' type='text' id='name' name='name' value='{{bio.name}}'>
+        <label class='choice-label' for='age'>Age</label>
+        <input class='choice-input' type='text' id='age' name='age' value='{{bio.age}}'>
+        <label class='choice-label' for='height'>Height</label>
+        <input class='choice-input' type='text' id='height' name='height' value='{{bio.height}}'>
+        <label class='choice-label' for='weight'>Weight</label>
+        <input class='choice-input' type='text' id='weight' name='weight' value='{{bio.weight}}'>
+        <label class='choice-label' for='eyes'>Eyes</label>
+        <input class='choice-input' type='text' id='eyes' name='eyes' value='{{bio.eyes}}'>
+        <label class='choice-label' for='hair'>Hair</label>
+        <input class='choice-input' type='text' id='hair' name='hair' value='{{bio.hair}}'>
+        <label class='choice-label' for='skin'>Skin</label>
+        <input class='choice-input' type='text' id='skin' name='skin' value='{{bio.skin}}'>
+    </div>
+    {{/with}}
 </div>

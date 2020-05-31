@@ -14,7 +14,7 @@
             <a class='tablinks navigate bio'>BIO</a>
             <a class='tablinks navigate summary'>SUMMARY</a>
         </nav>
-        
+
         <!-- Tab content -->
         <div id='HC-content'>
             <nav class='subtab'>
@@ -23,21 +23,29 @@
             </nav>
 
             {{#if data.class.name}}
-                <div class='choice-pane'>
+            <div class='choice-pane'>
 
-                    <h3>1st Level Spells:&nbsp</h3>
-                    {{#each data.class.spells.[1]}}
-                        <div class='class-entry'>
-                            <img style="box-shadow:{{this.border}};" class='selector data-click' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells' id='{{this.name}}'>
-                            <h3>{{this.name}}</h3> 
-                        </div>
-                    {{/each}}
+                <h3>1st Level Spells:&nbsp</h3>
+                {{#each data.class.spells.[1]}}
+                <div class='class-entry'>
+                    <img class='selector draggable' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells'
+                        id='{{this.name}}'>
+                    <h3>{{this.name}}</h3>
                 </div>
+                {{/each}}
+            </div>
 
-                <!-- Info Pane -->
-                <div class='info-pane class-info'>
-                    <p>{{{data.spells.template}}}</p>
+            <div class='spellbook droppable' style='border: 3px #000000 solid'>
+                <div style='text-align:center;'>
+                    <span>Spellbook:&nbsp</span>
                 </div>
+                {{#each data.spells.imgs}}
+                <div class='class-entry'>
+                    <img class='selector draggable' src='{{this}}' name='spells'>
+                </div>
+                {{/each}}
+            </div>
+
             {{/if}}
 
         </div>

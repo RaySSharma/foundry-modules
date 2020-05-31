@@ -1,52 +1,29 @@
-<div id='HC-form'>
-    <form autocomplete='off' class='form'>
-        <input type='hidden' name='sheet' id='sheet' value='spells'>
+<div class='spells-tab'>
+    <input type='hidden' name='sheet' id='sheet' value='spells'>
 
-        <!-- Tabs -->
-        <nav id='HC-header'>
-            <a class='tablinks navigate race'>RACE</a>
-            <a class='tablinks navigate class'>CLASS</a>
-            <a class='tablinks navigate abilities'>ABILITIES</a>
-            <a class='tablinks navigate background'>BACKGROUND</a>
-            <a class='tablinks navigate equipment'>EQUIPMENT</a>
-            <a class='tablinks navigate spells active'>SPELLS</a>
-            <a class='tablinks navigate feats'>FEATS</a>
-            <a class='tablinks navigate bio'>BIO</a>
-            <a class='tablinks navigate summary'>SUMMARY</a>
-        </nav>
-        
-        <!-- Tab content -->
-        <div id='HC-content'>
-            <nav class='subtab'>
-                <a class='subtablinks navigate spells-cantrip'>0</a>
-                <a class='subtablinks navigate spells-first'>I</a>
-            </nav>
+    <nav class='subtab'>
+        <a class='subtablinks navigate spells-cantrip'>0</a>
+        <a class='subtablinks navigate spells-first'>I</a>
+    </nav>
 
-            {{#unless data.class.name}}
-                <div class='choice-pane'>
-                    <h3>Choose a class first</h3>
-                </div>
-            {{/unless}}
+    {{#unless data.class.name}}
+    <div class='choice-pane'>
+        <h3>Choose a class first</h3>
+    </div>
+    {{/unless}}
 
-            {{#if data.class.name}}
-                <div class='choice-pane'>
-                    <h3>Choose a Spell Level</h3>
-                </div>
+    {{#if data.class.name}}
+    <div class='choice-pane'>
+        <h3>Choose a Spell Level</h3>
+    </div>
 
-                <!-- Info Pane -->
-                <div class='secondary-choice-pane'>
-                    <h3>Spellbook:&nbsp</h3>
-                    {{#each data.spells.names}}
-                        <span>{{this}}</span>
-                    {{/each}}
-                </div>
-            {{/if}}
+    <!-- Info Pane -->
+    <div class='spellbook'>
+        <h3>Spellbook:&nbsp</h3>
+        {{#each data.spells.names}}
+        <span>{{this}}</span>
+        {{/each}}
+    </div>
+    {{/if}}
 
-        </div>
-
-        <div id='HC-navigate'>
-            <button type='submit' class='navigate prev'>PREVIOUS</button>
-            <button type='submit' class='navigate next'>NEXT</button>
-        </div>
-    </form>
 </div>

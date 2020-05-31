@@ -1,110 +1,84 @@
-<div id='HC-form'>
-    <form autocomplete='off' class='form'>
-        <input type='hidden' name='sheet' id='sheet' value='class'>
-        
-        <!-- Tabs -->
-        <nav id='HC-header'>
-            <a class='tablinks navigate race'>RACE</a>
-            <a class='tablinks navigate class active'>CLASS</a>
-            <a class='tablinks navigate abilities'>ABILITIES</a>
-            <a class='tablinks navigate background'>BACKGROUND</a>
-            <a class='tablinks navigate equipment'>EQUIPMENT</a>
-            <a class='tablinks navigate spells'>SPELLS</a>
-            <a class='tablinks navigate feats'>FEATS</a>
-            <a class='tablinks navigate bio'>BIO</a>
-            <a class='tablinks navigate summary'>SUMMARY</a>
-        </nav>
+<div id='class-tab'>
+    <input type='hidden' name='sheet' id='sheet' value='class'>
 
-        <!-- Abilities -->
-        <ul id='HC-abilities'>
+    <ul id='HC-abilities'>
 
-            {{#with data.abilities as | ability |}}
-                {{#each ability}}
-                <li class='abilities large'>
-                    <div class='abilities small border'>
-                        <h3 class='score'>{{@key}}</h3>
-                        <p class='score'>{{this}}</p>
-                    </div>
-                </li>
-                {{/each}}
-            {{/with}}
-        </ul>
-        
-        <!-- Tab content -->
-        <div id='HC-content'>
-
-            <!-- Select Class-->
-            <h3>Classes:</h3>
-            <div class='choice-pane'>
-                {{#with info.classData as | class |}}
-                    {{#each this}}
-                        <div class='class-entry'>
-                            <img style="box-shadow:{{this.border}};" class='selector data-click' name='class' id='{{this.name}}' src='{{this.data.img}}'>
-                            <h3>{{this.name}}</h3> 
-                        </div>
-                    {{/each}}
-                {{/with}}
-
-                {{#if data.class.name}}
-                
-                    {{{data.class.pack.data.description.value}}}
-                    
-                    <!-- Hit Die -->
-                    <h3>Hit Die:&nbsp</h3>
-                    <div>
-                        <h3>{{upperCase data.class.pack.data.hitDice}}</h3>
-                    </div>
-
-                    <!-- Weapon Proficiencies -->
-                    <h3>Weapon Proficiencies:&nbsp</h3>
-                    <ul>
-                        {{#each data.class.data.weapon_prof}}
-                            <li>{{this}}&nbsp</li>
-                        {{/each}}
-                    </ul>
-
-                    <!-- Armor Proficiencies -->
-                    <h3>Armor Proficiencies:&nbsp</h3>
-                    <ul>
-                        {{#each data.class.data.armor_prof}}
-                            <li>{{this}}&nbsp</li>
-                        {{/each}}
-                    </ul>
-
-                    <!-- Starting Equipment-->
-                    <h3>Starting Equipment:&nbsp</h3>
-                    <ul>
-                        {{#each data.class.data.equipment}}
-                            <li>{{this}}&nbsp</li>
-                        {{/each}}
-                    </ul>
-
-                    <!-- Choose Skills -->
-                    <h3>Choose {{data.class.data.num_skills}} skills</h3>
-                    <ul style="list-style: none;">
-                        {{#each data.class.data.skills}}
-                            <li>
-                                <input type='checkbox' id='{{this}}' name='skill' value='{{this}}'>
-                                <label for='{{this}}'>{{this}}</label>
-                            </li>
-                        {{/each}}
-                    </ul>
-
-                {{/if}}
+        {{#with data.abilities as | ability |}}
+        {{#each ability}}
+        <li class='abilities large'>
+            <div class='abilities small border'>
+                <h3 class='score'>{{@key}}</h3>
+                <p class='score'>{{this}}</p>
             </div>
+        </li>
+        {{/each}}
+        {{/with}}
+    </ul>
 
-            {{#if data.class.name}}
-                <!-- Info Pane -->
-                <div class='info-pane class-info'>
-                    <iframe width='100%' height='100%' src='{{data.class.template}}'></iframe>
-                </div>
-            {{/if}}
+    <div class='choice-pane'>
+        {{!-- Select Class--}}
+        {{#with info.classData as | class |}}
+        {{#each this}}
+        <div class='class-entry'>
+            <img style="box-shadow:{{this.border}};" class='selector data-click' name='class' id='{{this.name}}'
+                src='{{this.data.img}}'>
+            <h3>{{this.name}}</h3>
+        </div>
+        {{/each}}
+        {{/with}}
 
+        {{#if data.class.name}}
+
+        {{{data.class.pack.data.description.value}}}
+
+        {{!-- Hit Die --}}
+        <h3>Hit Die:&nbsp</h3>
+        <div>
+            <h3>{{upperCase data.class.pack.data.hitDice}}</h3>
         </div>
 
-        <div id='HC-navigate'>
-            <button type='submit' class='navigate prev'>PREVIOUS</button>
-            <button type='submit' class='navigate next'>NEXT</button>
-        </div>
-    </form>
+        {{!-- Weapon Proficiencies --}}
+        <h3>Weapon Proficiencies:&nbsp</h3>
+        <ul>
+            {{#each data.class.data.weapon_prof}}
+            <li>{{this}}&nbsp</li>
+            {{/each}}
+        </ul>
+
+        {{!-- Armor Proficiencies --}}
+        <h3>Armor Proficiencies:&nbsp</h3>
+        <ul>
+            {{#each data.class.data.armor_prof}}
+            <li>{{this}}&nbsp</li>
+            {{/each}}
+        </ul>
+
+        {{!-- Starting Equipment--}}
+        <h3>Starting Equipment:&nbsp</h3>
+        <ul>
+            {{#each data.class.data.equipment}}
+            <li>{{this}}&nbsp</li>
+            {{/each}}
+        </ul>
+
+        {{!-- Choose Skills --}}
+        <h3>Choose {{data.class.data.num_skills}} skills</h3>
+        <ul style="list-style: none;">
+            {{#each data.class.data.skills}}
+            <li>
+                <input type='checkbox' id='{{this}}' name='skill' value='{{this}}'>
+                <label for='{{this}}'>{{this}}</label>
+            </li>
+            {{/each}}
+        </ul>
+
+        {{/if}}
+    </div>
+
+    {{#if data.class.name}}
+    {{!-- Info Pane --}}
+    <div class='info-pane'>
+        <iframe width='100%' height='100%' src='{{data.class.template}}'></iframe>
+    </div>
+    {{/if}}
 </div>
