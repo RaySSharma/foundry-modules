@@ -1,6 +1,4 @@
-<div id='class-tab'>
-    <input type='hidden' name='sheet' id='sheet' value='class'>
-
+<div id='class-tab' class='fill'>
     <ul id='HC-abilities'>
 
         {{#with data.abilities as | ability |}}
@@ -15,14 +13,16 @@
         {{/with}}
     </ul>
 
+    <h1 style='text-align: center;'>Choose a class</h1>
+
     <div class='choice-pane'>
         {{!-- Select Class--}}
         {{#with info.classData as | class |}}
         {{#each this}}
         <div class='class-entry'>
-            <img style="box-shadow:{{this.border}};" class='selector data-click' name='class' id='{{this.name}}'
+            <img style="box-shadow:{{this.border}};" class='load-template selector class-icon' name='class' id='{{this.name}}'
                 src='{{this.data.img}}'>
-            <h3>{{this.name}}</h3>
+            <h3 style='text-align: center;'>{{this.name}}</h3>
         </div>
         {{/each}}
         {{/with}}
@@ -78,7 +78,7 @@
     {{#if data.class.name}}
     {{!-- Info Pane --}}
     <div class='info-pane'>
-        <iframe width='100%' height='100%' src='{{data.class.template}}'></iframe>
+        <iframe class='fill' src='{{data.class.template}}'></iframe>
     </div>
     {{/if}}
 </div>

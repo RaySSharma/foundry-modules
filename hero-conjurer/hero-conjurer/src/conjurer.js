@@ -5,15 +5,18 @@ export class HeroConjurer extends FormApplication {
         super(options);
 
         this.data = {
-            race: {},
+            race: {
+                'hide_subrace': 'hidden',
+                'hide_options': 'hidden'
+            },
             class: {},
             abilities: {
-                'Str': 0,
-                'Dex': 0,
-                'Con': 0,
-                'Int': 0,
-                'Wis': 0,
-                'Cha': 0
+                'Str': 8,
+                'Dex': 8,
+                'Con': 8,
+                'Int': 8,
+                'Wis': 8,
+                'Cha': 8
             },
             abilitiesForm: {
                 'Str': 8,
@@ -34,32 +37,15 @@ export class HeroConjurer extends FormApplication {
             summary: {}
         };
         this.info = {};
-        this.pages = {
-            'race': 'modules/hero-conjurer/templates/race.html',
-            'class': 'modules/hero-conjurer/templates/class.html',
-            'abilities': 'modules/hero-conjurer/templates/abilities.html',
-            'background': 'modules/hero-conjurer/templates/background.html',
-            'equipment': 'modules/hero-conjurer/templates/equipment.html',
-            'spells': 'modules/hero-conjurer/templates/spells.html',
-            'spells-cantrip': 'modules/hero-conjurer/templates/parts/spells/spells-cantrip.html',
-            'spells-first': 'modules/hero-conjurer/templates/parts/spells/spells-first.html',
-            'feats': 'modules/hero-conjurer/templates/feats.html',
-            'bio': 'modules/hero-conjurer/templates/bio.html',
-            'summary': 'modules/hero-conjurer/templates/summary.html'
-        };
 
-        Handlebars.registerHelper('objectLength', function (json) {
-            return Object.keys(json).length;
+        Handlebars.registerHelper('upperCase', function (str) {
+            return str.toUpperCase();
         });
         Handlebars.registerHelper('pointBuySum', function (json) {
             return 27 - (Object.values(json).reduce(function (a, b) {
                 return parseInt(a) + parseInt(b);
             }, 0) - 48);
         });
-        Handlebars.registerHelper('upperCase', function (str) {
-            return str.toUpperCase();
-        });
-
         Handlebars.registerHelper('range', function (n, block) {
             var accum = '';
             for (var i = 0; i < n; ++i)
@@ -75,13 +61,19 @@ export class HeroConjurer extends FormApplication {
             template: 'modules/hero-conjurer/templates/start.html',
             closeOnSubmit: false,
             submitOnClose: true,
+            submitOnChange: true,
             popOut: true,
-            width: 'auto',
-            height: 'auto',
-            tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "start" }]
+            width: 941,
+            height: 800,
+            tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "start" },
+            { navSelector: ".subtabs", contentSelector: ".subcontent", initial: "spells" }]
         });
     }
 
+    _onChangeTab(event, tabs, active) {
+        super._onChangeTab();
+        this.currentSheet = active;
+    }
     async getData() {
         if (jQuery.isEmptyObject(this.info)) {
             await this.readDataFiles();
@@ -97,9 +89,22 @@ export class HeroConjurer extends FormApplication {
         super.activateListeners(html);
         html[0].render = this.render;
 
-        $('.navigate').click(this._loadNavigationTemplate.bind(this));
-
         $('.submit').change(this._submitAndRender.bind(this));
+        $('.dropdown').change(function (event) {
+            if (this.currentSheet == 'race') {
+                if (event.target.id == 'race') {
+                    let subraces = this.info.race[event.target.value].subraces;
+                    if (Object.keys(subraces).length) {
+                        this.data.race.hide_subrace = '';
+                    }
+                    else {
+                        this.data.race.hide_subrace = 'hidden';
+                    }
+                    this.data.race.hide_options = '';
+                }
+            }
+            this._submitAndRender();
+        }.bind(this));
 
         $('#HC-abilities .square').click(this._abilityIncrementDecrement.bind(this));
 
@@ -109,7 +114,7 @@ export class HeroConjurer extends FormApplication {
             this._submitAndRender();
         }.bind(this));
 
-        $('.data-click').click(this._loadDataTemplate.bind(this));
+        $('.load-template').click(this._loadDataTemplate.bind(this));
         $('.selector').click(function (event) {
             if (event.target.name == "class") {
                 var target = this.info.classData.find(x => x.name == event.target.id);
@@ -125,17 +130,16 @@ export class HeroConjurer extends FormApplication {
             }
             target.border = '0 0 18px red';
             nonTarget.forEach(x => x.border = 'none');
-
-            this.render();
+            this._submitAndRender();
         }.bind(this));
 
         html.find(".draggable").each((i, li) => {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", function (event) {
                 event.dataTransfer.setData("text/plain", JSON.stringify({
-                    src: event.target.src,
-                    id: event.target.id,
-                    name: event.target.name
+                    src: event.target.children.spells.src,
+                    id: event.target.children.spells.id,
+                    name: event.target.children.spells.name
                 }));
             });
         });
@@ -143,24 +147,43 @@ export class HeroConjurer extends FormApplication {
         html.find(".droppable").each((i, li) => {
             li.addEventListener("drop", function (event) {
                 let data = JSON.parse(event.dataTransfer.getData("text/plain"));
-                this.data.spells.imgs.push(data.src);
-                this.render();
+                if (!this.data.spells.names.includes(data.id)) {
+                    this.data.spells.imgs.push(data.src);
+                    this.data.spells.names.push(data.id)
+                }
+                this._submitAndRender();
             }.bind(this));
         });
+
+        $(".droppable")
+            .on('dragover', function (event) {
+                $(this).css({
+                    "outline": "3px solid black"
+                })
+                
+            })
+            .on('dragleave', function (event) {
+                $(this).css({
+                    "outline": ""
+                })
+            });
     }
 
     _updateObject(event, formData) {
         event.preventDefault();
-        this.data.race = (formData.sheet.includes('race')) ? {
-            'name': formData.race,
-            'data': this.info.race[formData.race],
-            'size': this.info.race[formData.race].size,
-            'speed': this.info.race[formData.race].speed,
-            'alignment': formData.alignment,
-            'subrace': formData.subrace
+
+        this.data.race = (this.currentSheet == 'race') ? {
+            'name': formData.race[0],
+            'subrace': formData.race[1],
+            'alignment': formData.race[2],
+            'data': this.info.race[formData.race[0]],
+            'size': this.info.race[formData.race[0]].size,
+            'speed': this.info.race[formData.race[0]].speed,
+            'hide_subrace': this.data.race.hide_subrace,
+            'hide_options': this.data.race.hide_options
         } : this.data.race;
 
-        this.data.abilitiesForm = (formData.sheet.includes('abilities')) ? {
+        this.data.abilitiesForm = (this.currentSheet == 'abilities') ? {
             'Str': formData.Str,
             'Dex': formData.Dex,
             'Con': formData.Con,
@@ -169,7 +192,7 @@ export class HeroConjurer extends FormApplication {
             'Cha': formData.Cha
         } : this.data.abilitiesForm;
 
-        this.data.bio = (formData.sheet == 'bio') ? {
+        this.data.bio = (this.currentSheet == 'bio') ? {
             'name': formData.name,
             'age': formData.age,
             'height': formData.height,
@@ -178,9 +201,8 @@ export class HeroConjurer extends FormApplication {
             'hair': formData.hair,
             'skin': formData.skin
         } : this.data.bio;
-        this._calculateAbilityScores();
 
-        this.data.class = (formData.sheet == 'class') ? {
+        this.data.class = (this.currentSheet == 'class') ? {
             'name': this.data.class.name,
             'pack': this.info.classData.find(x => x.name == this.data.class.name).data,
             'data': this.info.class[this.data.class.name],
@@ -191,36 +213,20 @@ export class HeroConjurer extends FormApplication {
             'num_spells': this.info.class[this.data.class.name].num_spells
         } : this.data.class;
 
-        this.data.background = (formData.sheet == 'background') ? {
+        this.data.background = (this.currentSheet == 'background') ? {
             'name': formData.background,
             'data': this.info.background[formData.background],
             'template': this.info.background[formData.background].template,
             'skills': this.info.background[formData.background].skills
         } : this.data.background;
 
-        this.data.spells = (formData.sheet == 'spells') ? {
-            'names': formData.spell,
-            'data': this.info.spellData.filter(x => x.name.includes(formData.spell)).data,
+        this.data.spells = ((this.currentSheet == 'spells') || (this.currentSheet == 'spells-cantrip') || (this.currentSheet == 'spells-first')) ? {
+            'names': this.data.spells.names,
+            'data': this.info.spellData.filter(x => x.name.includes(this.data.spells.names)),
             'imgs': this.data.spells.imgs,
         } : this.data.spells;
-    }
 
-    /**
-     * Navigate and page templates for each tab
-     *
-     * @param {*} event
-     * @memberof HeroConjurer
-     */
-    _loadNavigationTemplate(event) {
-        let classlist = event.currentTarget.classList;
-        if (classlist.contains('next') | classlist.contains('prev')) {
-            /* This will change when next/prev buttons are fixed */
-        }
-        else {
-            let template = this.pages[classlist[2]];
-            this.options.template = template;
-        }
-        this._submitAndRender();
+        this._calculateAbilityScores();
     }
 
     /**
@@ -234,8 +240,6 @@ export class HeroConjurer extends FormApplication {
         let templateChild = event.target.id;
         this.data[templateType].template = this.info[templateType][templateChild].template;
         this.data[templateType].name = templateChild;
-
-        this._submitAndRender();
     }
 
     _submitAndRender() {
@@ -328,9 +332,9 @@ export class HeroConjurer extends FormApplication {
             'Wis': 0,
             'Cha': 0
         };
-        if (this.data.race.race) {
+        if (this.data.race.name) {
 
-            let raceInfo = this.info.race[this.data.race.race];
+            let raceInfo = this.info.race[this.data.race.name];
             for (let [key, value] of Object.entries(raceInfo.abilities)) {
                 recalculated[key] += value;
             }
@@ -410,4 +414,4 @@ Hooks.once("init", () => {
 Hooks.on('getSceneControlButtons', ConjureButton.getSceneControlButtons);
 
 
-
+;

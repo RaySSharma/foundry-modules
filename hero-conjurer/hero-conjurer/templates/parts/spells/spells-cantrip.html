@@ -1,52 +1,25 @@
-<div id='HC-form'>
-    <form autocomplete='off' class='form'>
-        <input type='hidden' name='sheet' id='sheet' value='spells'>
-
-        <!-- Tabs -->
-        <nav id='HC-header'>
-            <a class='tablinks navigate race'>RACE</a>
-            <a class='tablinks navigate class'>CLASS</a>
-            <a class='tablinks navigate abilities'>ABILITIES</a>
-            <a class='tablinks navigate background'>BACKGROUND</a>
-            <a class='tablinks navigate equipment'>EQUIPMENT</a>
-            <a class='tablinks navigate spells active'>SPELLS</a>
-            <a class='tablinks navigate feats'>FEATS</a>
-            <a class='tablinks navigate bio'>BIO</a>
-            <a class='tablinks navigate summary'>SUMMARY</a>
-        </nav>
-        
-        <!-- Tab content -->
-        <div id='HC-content'>
-            <nav class='subtab'>
-                <a class='subtablinks navigate spells-cantrip active'>0</a>
-                <a class='subtablinks navigate spells-first'>I</a>
-            </nav>
-
-            {{#if data.class.name}}
-                <div class='choice-pane'>
-                    <h3>Cantrips:&nbsp</h3>
-
-                    {{#each data.class.spells.cantrip}}
-                        <div class='class-entry'>
-                            <img style="box-shadow:{{this.border}};" class='selector' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells' id='{{this.name}}'>
-                            <h3>{{this.name}}</h3> 
-                        </div>
-                    {{/each}}
-                </div>
-
-                {{#if data.class.name}}
-                    <!-- Info Pane -->
-                    <div class='info-pane'>
-                        <iframe width='100%' height='100%' src='{{data.spells.template}}'></iframe>
-                    </div>
-                {{/if}}
-            {{/if}}
-
+<div class='spells-cantrip fill'>
+    <div class='choice-pane spell-pane'>
+        {{#each data.class.spells.cantrip}}
+        <div class='spell-entry draggable'>
+            <img class='spell-icon' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells'
+                id='{{this.name}}'>
+            <span class='spell-info'>{{this.name}}</span>
+            <span class='spell-info' style='font-size: 1.6em;'>{{this.labels.school}}</span>
         </div>
+        {{/each}}
+    </div>
 
-        <div id='HC-navigate'>
-            <button type='submit' class='navigate prev'>PREVIOUS</button>
-            <button type='submit' class='navigate next'>NEXT</button>
+    {{!-- Spellbook --}}
+    <div class='spellbook droppable'>
+        <div style='text-align:center;'>
+            <h2 style='width: 100%;'>Spellbook:&nbsp</h2>
         </div>
-    </form>
+        {{#each data.spells.imgs}}
+        <div class='spell-recorded draggable'>
+            <img class='spell-recorded-icon' style='position: relative; width: 30px; height: 30px;' src='{{this}}' name='spells'>
+            <span class='spell-recorded-info'>{{lookup ../data.spells.names @index}}</span>
+        </div>
+        {{/each}}
+    </div>
 </div>

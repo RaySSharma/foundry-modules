@@ -32,6 +32,8 @@
   * User interacts with template, which determines input data
     * Use a socket to connect template to JS?
     * Button onClick initiates script to pass in relevant data, into the correct template
+    * Every submit should carry an identifier for the originating sheet
+      * Prevents data model from updating undefined items
   * Each tab get its own template to be used with TabsV2
 
 * Data Model

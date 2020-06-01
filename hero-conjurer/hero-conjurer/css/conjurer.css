@@ -2,8 +2,9 @@
 #HC-form {
   display: flex;
   width: 941px;
-  height: 600px;
+  height: 800px;
   font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+  max-height: 800px;
 }
 #HC-form .form {
   width: 100%;
@@ -21,7 +22,7 @@
 #HC-form .banner {
   width: 100%;
   height: auto;
-  background: #fff0;
+  background-color: #fff0;
   border-style: none;
   box-shadow: none;
   position: absolute;
@@ -36,29 +37,31 @@
   margin: auto;
   margin-left: -0.5%;
 }
-/* Tab buttons hover */
-#HC-header .tablinks:hover {
-  color: #dbdbdb;
-  background-color: #b30000;
-  box-shadow: none;
-}
 
-/* HC tab buttons */
 #HC-header .tablinks {
-  background-color: #cccccc;
-  border: 1px solid #000000;
   transition: 0.3s;
   font-size: 1.3em;
   margin: auto;
   padding: 0.3em;
   text-align: center;
   width: 100%;
+  border-bottom: 1px solid #000000;
+}
+
+#HC-header .tablinks:hover {
+  color: #dbdbdb;
+  background-color: #b30000;
 }
 
 #HC-header .tablinks.active {
   color: #dbdbdb;
   background-color: #b30000;
-  box-shadow: none;
+  border: 1px solid #000000;
+  border-bottom: 0;
+  text-shadow: none;
+}
+#HC-header .tablinks.active:hover {
+  text-shadow: 0 0 8px red;
 }
 
 #HC-abilities {
@@ -82,56 +85,53 @@
 }
 
 #HC-abilities .border {
-  border: 2px groove #eeede0;
-  border-radius: 3px;
-  padding: 0 1em;
-}
-
-#HC-abilities .small {
-  height: 68px;
-}
-
-#HC-abilities .large {
-  height: 146px;
+  border: 1px black solid;
+  padding: 0 0.8em;
 }
 
 #HC-abilities .square{
-	background: #919191;
-  border-bottom:1px solid #FFF;
+  border: 1px solid #000000;
 	display:inline-block;
   height:auto;
   width:100%;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 #HC-abilities .square:hover{
-	background: #ab6a6a;
+  background-color: #b30000;
+  border: 1px solid #000000;
 }
 #HC-abilities .square:active{
-	background: #b30000;
+  transform: translateY(1px);
+  filter: saturate(110%);
 }
 
 #HC-abilities .increment:after{
   position:relative;
   top:-0.8em;
-  width: 0;
-	height: 0;
   content:'';
 	border-style: solid;
 	border-width: 0 7px 8px 7px;
-	border-color: transparent transparent #FFFFFF transparent;
+	border-color: transparent transparent #000000 transparent;
   border-radius:2px;
   margin: auto;
+}
+
+#HC-abilities .increment:hover:after {
+  border-color: transparent transparent #dbdbdb transparent;
 }
 
 #HC-abilities .decrement:after{
   position:relative;
   top:0.8em;
-  width: 0;
-	height: 0;
   content:'';
 	border-style: solid;
 	border-width: 8px 7px 0 7px;
-	border-color: #FFFFFF transparent transparent transparent;
+	border-color: #000000 transparent transparent transparent;
   border-radius:2px;
+}
+
+#HC-abilities .decrement:hover:after {
+  border-color: #dbdbdb transparent transparent transparent;
 }
 
 /* Style the tab content */
@@ -143,22 +143,33 @@
   height: 100%;
 } 
 
-#HC-content .subtab {
-  float: left;
-  width: 5%;
-  height: auto;
+#HC-content .subtabs {
+  position: relative;
+  width: 10%;
   font-size: 40px;
+  left: -1%;
+  border-bottom: 2px black solid;
+  margin: 1% auto;
+  display: flex;
 }
 
 #HC-content .subtablinks {
-  background: #919191;
   padding: 10%;
-  margin: 5% auto 5% auto;
   width: 100%;
   display: inline-block;
   text-align: center;
   position: relative;
-  left: -20%;
+  transition: 0.3s;
+}
+
+#HC-content .subtablinks.active {
+  color: #dbdbdb;
+  background-color: #b30000;
+}
+
+#HC-content .subtablinks:hover {
+  color: #dbdbdb;
+  background-color: #b30000;
 }
 
 #HC-content .choice {
@@ -188,29 +199,101 @@
 
 #HC-content .spellbook {
   float: right;
-  width: 50%;
-  height: 40%;
-  display: inline-table;
+  position: relative;
+  width: 55%;
+  height: 60%;
+  left: -2%;
+  border: 2px #000000 solid;
+  overflow: scroll;
+}
+
+#HC-content .spell-pane {
+  overflow: scroll;
+  max-height: 800px;
+  width: 40%;
+  padding: 5px;
+  border: 2px black solid;
+}
+
+#HC-content .spell-entry {
+  margin-bottom: 2%;
+  margin-right: 2%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 3px black solid;
+  width: 100%;
+  position: relative;
+  height: 100px;
+}
+
+#HC-content .spell-entry:hover {
+  background-color: #b30000;
+  color: #dbdbdb;
+}
+
+#HC-content .spell-recorded {
+  margin: 2%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 2px black solid;
+  width: 45%;
+  position: relative;
+  height: auto;
+  display: inline-block;
+}
+
+
+#HC-content .spell-icon {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  float: left;
+  margin: 2%;
+}
+
+#HC-content .spell-info {
+  float: right;
+  width: 70%;
+  margin: 2%;
+  text-align: center;
+  font-size: 2em;
+}
+
+#HC-content .spell-recorded-info {
+  float: right;
+  width: 65%;
+  text-align: center;
+  font-size: 1.5em;
+  position: relative;
+  margin-right: 10%;
+  margin-top: 3%;
+}
+
+#HC-content .spell-recorded-icon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  float: left;
+  margin: 2%;
 }
 
 #HC-content .class-entry {
   margin: auto;
 }
 
-#HC-content .selector {
+#HC-content .class-icon {
   width: 80px;
   height: 80px;
 }
 
-#HC-content .selector:hover {
+#HC-content .class-icon:hover {
   opacity: 0.5;
 }
 
 .shadow-border {
   box-shadow: 0 0 8px #b30000;
 }
-.height {
-  height: auto;
+.fill {
+  height: 100%;
+  width: 100%;
 }
 #HC-navigate .navigate:hover {
   color: #dbdbdb;

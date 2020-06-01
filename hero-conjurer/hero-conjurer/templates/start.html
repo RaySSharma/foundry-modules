@@ -1,16 +1,17 @@
 <div id='HC-form'>
     <form autocomplete='off' class='form'>
-        <input type='hidden' name='sheet' id='sheet' value='start'>
 
         {{!-- Navigation --}}
         <nav id='HC-header' class='tabs' data-group="primary">
-            <a class='tablinks item start active' data-tab="start">START</a>
+            <a hidden class='tablinks item start active' data-tab="start">START</a>
             <a class='tablinks item race' data-tab="race">RACE</a>
             <a class='tablinks item class' data-tab='class'>CLASS</a>
             <a class='tablinks item abilities' data-tab='abilities'>ABILITIES</a>
             <a class='tablinks item background' data-tab='background'>BACKGROUND</a>
             <a class='tablinks item equipment' data-tab='equipment'>EQUIPMENT</a>
             <a class='tablinks item spells' data-tab='spells'>SPELLS</a>
+            <a hidden class='tablinks item spells-cantrip' data-tab='spells-cantrip'>SPELLS</a>
+            <a hidden class='tablinks item spells-first' data-tab='spells-first'>SPELLS</a>
             <a class='tablinks item feats' data-tab='feats'>FEATS</a>
             <a class='tablinks item bio' data-tab='bio'>BIO</a>
             <a class='tablinks item summary' data-tab='summary'>SUMMARY</a>
@@ -19,46 +20,54 @@
         <section id='HC-content' class='content'>
 
             {{!-- Start Tab --}}
-            <div class='tab' data-tab='start' data-group="primary">
+            <div class='tab fill' data-tab='start' data-group="primary">
                 <div class='banner-container'>
                     <img class='banner' src="modules/hero-conjurer/images/banner.png">
                 </div>
             </div>
 
             {{!-- Race Tab --}}
-            <div class='tab' data-tab='race' data-group="primary">
+            <div class='tab fill' data-tab='race' data-group="primary">
                 {{> "modules/hero-conjurer/templates/race.html"}}
             </div>
 
-            <div class='tab' data-tab='class'>
+            {{!-- Class Tab --}}
+            <div class='tab fill' data-tab='class' data-group="primary">
                 {{> "modules/hero-conjurer/templates/class.html"}}
             </div>
 
-            <div class='tab' data-tab='abilities'>
+            {{!-- Abilities Tab --}}
+            <div class='tab fill' data-tab='abilities' data-group="primary">
                 {{> "modules/hero-conjurer/templates/abilities.html"}}
             </div>
 
-            <div class='tab' data-tab='background'>
+            {{!-- Background Tab --}}
+            <div class='tab fill' data-tab='background' data-group="primary">
                 {{> "modules/hero-conjurer/templates/background.html"}}
             </div>
 
-            <div class='tab' data-tab='equipment'>
+            {{!-- Equipment Tab --}}
+            <div class='tab fill' data-tab='equipment' data-group="primary">
                 {{> "modules/hero-conjurer/templates/equipment.html"}}
             </div>
 
-            <div class='tab' data-tab='spells'>
+            {{!-- Spells Tab --}}
+            <div class='tab fill' data-tab='spells' data-group="primary">
                 {{> "modules/hero-conjurer/templates/spells.html"}}
             </div>
 
-            <div class='tab' data-tab='feats'>
+            {{!-- Feats Tab --}}
+            <div class='tab fill' data-tab='feats' data-group="primary">
                 {{> "modules/hero-conjurer/templates/feats.html"}}
             </div>
 
-            <div class='tab' data-tab='bio'>
+            {{!-- Biography Tab --}}
+            <div class='tab fill' data-tab='bio' data-group="primary">
                 {{> "modules/hero-conjurer/templates/bio.html"}}
             </div>
 
-            <div class='tab' data-tab='summary'>
+            {{!-- Summary Tab --}}
+            <div class='tab fill' data-tab='summary' data-group="primary">
                 {{> "modules/hero-conjurer/templates/summary.html"}}
             </div>
         </section>

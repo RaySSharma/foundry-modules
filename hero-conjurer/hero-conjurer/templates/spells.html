@@ -1,29 +1,36 @@
-<div class='spells-tab'>
-    <input type='hidden' name='sheet' id='sheet' value='spells'>
-
-    <nav class='subtab'>
-        <a class='subtablinks navigate spells-cantrip'>0</a>
-        <a class='subtablinks navigate spells-first'>I</a>
-    </nav>
+<div class='spells-tab fill'>
 
     {{#unless data.class.name}}
-    <div class='choice-pane'>
-        <h3>Choose a class first</h3>
+    <div class='fill'>
+        <h1 style='text-align: center;'>Choose a class first</h1>
     </div>
     {{/unless}}
 
-    {{#if data.class.name}}
-    <div class='choice-pane'>
-        <h3>Choose a Spell Level</h3>
-    </div>
+    <h1 style='text-align: center;'>Choose a spell level, then drag spells to your spellbook</h1>
 
-    <!-- Info Pane -->
-    <div class='spellbook'>
-        <h3>Spellbook:&nbsp</h3>
-        {{#each data.spells.names}}
-        <span>{{this}}</span>
-        {{/each}}
-    </div>
+    {{#if data.class.name}}
+    <nav class='subtabs' data-group="spells">
+        <a hidden class='item spells active' data-tab='spells'></a>
+        <a class='subtablinks item spells-cantrip' data-tab='spells-cantrip'>0</a>
+        <a class='subtablinks item spells-first' data-tab='spells-first'>I</a>
+    </nav>
+
+    <section class='subcontent fill'>
+
+        {{!-- Spells Tab --}}
+        <div class='tab fill' data-tab='spells' data-group="spells">
+        </div>
+
+        {{!-- Cantrips Tab--}}
+        <div class='tab fill' data-tab='spells-cantrip' data-group="spells">
+            {{> "modules/hero-conjurer/templates/parts/spells/spells-cantrip.html"}}
+        </div>
+
+        {{!-- First Level Spells Tab --}}
+        <div class='tab fill' data-tab='spells-first' data-group="spells">
+            {{> "modules/hero-conjurer/templates/parts/spells/spells-first.html"}}
+        </div>
+    </section>
     {{/if}}
 
 </div>

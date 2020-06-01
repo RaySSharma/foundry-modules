@@ -1,18 +1,16 @@
 <div class='abilities-tab'>
-    <input type='hidden' name='sheet' id='sheet' value='abilities'>
-
-    <h3 class='tabcontent'>Points Left: {{pointBuySum data.abilitiesForm}}/27</h3>
+    <h1 style='text-align: center;'>Point Buy: {{pointBuySum data.abilitiesForm}}/27</h1>
     <ul id='HC-abilities'>
         {{#each data.abilities}}
-        <li class='abilities large'>
-            <span class="icon square increment"></span>
-            <div class='abilities small border'>
+        <li class='abilities'>
+            <span class="icon square increment" style="border-bottom:none;"></span>
+            <div class='abilities border'>
                 <h3>{{@key}}</h3>
                 <input class='score' type="text" value="{{.}}"></input>
                 <input type='hidden' class='score-hidden' name="{{@key}}" id="{{@key}}"
                     value='{{lookup ../data/abilitiesForm @key}}'>
             </div>
-            <span class="icon square decrement"></span>
+            <span class="icon square decrement" style="border-top:none;"></span>
         </li>
         {{/each}}
     </ul>

@@ -1,6 +1,4 @@
 <div id='race-tab'>
-    <input type='hidden' name='sheet' id='sheet' value='race'>
-
     <ul id='HC-abilities'>
 
         {{#with data.abilities as | ability |}}
@@ -15,23 +13,23 @@
         {{/with}}
     </ul>
 
+    <h1 style='text-align: center;'>Choose a race</h1>
+
     <div class='choice-pane'>
 
         {{!-- Select Race--}}
         <label for='race'>Race:</label>
-        <select class='submit' style='width: 100%; margin: auto;' name='race' id='race'>
+        <select class='dropdown' name='race' id='race'>
             <option value='{{data.race.name}}' selected hidden>{{data.race.name}}</option>
             {{#each info.race}}
             <option value='{{@key}}'>{{@key}}</option>
             {{/each}}
         </select>
 
-        {{#if data.race.name}}
 
         {{!-- Select Subrace--}}
-        {{#if (objectLength data.race.data.subraces)}}
-        <label for='subrace'>Subrace:</label>
-        <select class='submit' name='subrace' id='subrace'>
+        <label {{data.race.hide_subrace}} for='subrace'>Subrace:</label>
+        <select {{data.race.hide_subrace}} class='dropdown' name='race' id='subrace'>
             <option value='{{data.race.subrace}}' selected hidden>{{data.race.subrace}}</option>
             {{#with data.race.data.subraces as | subrace |}}
             {{#each subrace}}
@@ -39,11 +37,10 @@
             {{/each}}
             {{/with}}
         </select>
-        {{/if}}
 
         {{!--Select Alignment--}}
-        <label for='alignment'>Alignment:</label>
-        <select class='submit' name='alignment' id='alignment'>
+        <label {{data.race.hide_options}} for='alignment'>Alignment:</label>
+        <select {{data.race.hide_options}} class='dropdown' name='race' id='alignment'>
             <option value='{{data.race.alignment}}' selected hidden>{{data.race.alignment}}</option>
             {{#with info.alignment as | alignment |}}
             {{#each alignment}}
@@ -53,12 +50,11 @@
         </select>
 
         {{!-- Race Characteristics--}}
-        <label for='size' name='size' id='size'>Size: {{data.race.size}}</label>
-        <label for='speed' name='speed' id='speed'>Speed: {{data.race.speed}}</label>
-        <label for='languages' name='languages' id='languages'>Languages:</label>
+        <label {{data.race.hide_options}} for='size' name='race' id='size'>Size: {{data.race.size}}</label>
+        <label {{data.race.hide_options}} for='speed' name='race' id='speed'>Speed: {{data.race.speed}}</label>
+        <label {{data.race.hide_options}} for='languages' name='race' id='languages'>Languages:</label>
         {{#each data.race.data.languages}}
         <label>{{this}}</label>
         {{/each}}
-        {{/if}}
     </div>
 </div>

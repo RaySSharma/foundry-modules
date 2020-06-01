@@ -1,10 +1,8 @@
 <div class='background-tab'>
-    <input type='hidden' name='sheet' id='sheet' value='background'>
-
 
     <h3>Backgrounds:</h3>
     <div class='choice-pane'>
-        <select class='submit' name='background' id='background'>
+        <select class='dropdown' name='background' id='background'>
             <option value='{{data.background.name}}' selected hidden>{{data.background.name}}</option>
             {{#with info.background as | background |}}
             {{#each background}}
