@@ -13,7 +13,8 @@
         "feats": {},
         "resistance": {},
         "languages": ["Common", "Draconic"],
-        "subraces": {}
+        "subraces": {},
+        "template": "modules/hero-conjurer/templates/parts/races/dragonborn.html"
     },
     "Dwarf": {
         "abilities": {
@@ -41,7 +42,8 @@
                 },
                 "feats": {}
             } 
-        }
+        },
+        "template": "modules/hero-conjurer/templates/parts/races/dwarf.html"
     },
     "Elf": {
         "abilities": {
@@ -69,7 +71,8 @@
                 },
                 "feats": {}
             }
-        }
+        },
+        "template": "modules/hero-conjurer/templates/parts/races/elf.html"
     },
     "Gnome": {
         "abilities": {
@@ -97,7 +100,8 @@
                 },
                 "feats": {}
             }
-        }
+        },
+        "template": "modules/hero-conjurer/templates/parts/races/gnome.html"
     },
     "Half-Elf": {
         "abilities": {
@@ -113,7 +117,8 @@
         "feats": {},
         "resistance": {},
         "languages": ["Common", "Elvish"],
-        "subraces": {}
+        "subraces": {},
+        "template": "modules/hero-conjurer/templates/parts/races/half-elf.html"
     },
     "Half-Orc": {
         "abilities": {
@@ -129,7 +134,8 @@
         "feats": {},
         "resistance": {},
         "languages": ["Common", "Orc"],
-        "subraces": {}
+        "subraces": {},
+        "template": "modules/hero-conjurer/templates/parts/races/half-orc.html"
     },
     "Halfling": {
         "abilities": {
@@ -157,7 +163,8 @@
                 },
                 "feats": {}
             }
-        }
+        },
+        "template": "modules/hero-conjurer/templates/parts/races/halfling.html"
     },
     "Human": {
         "abilities": {
@@ -173,7 +180,8 @@
         "feats": {},
         "resistance": {},
         "languages": ["Common"],
-        "subraces": {}
+        "subraces": {},
+        "template": "modules/hero-conjurer/templates/parts/races/human.html"
     },
     "Tiefling": {
         "abilities": {
@@ -189,6 +197,7 @@
         "feats": {},
         "resistance": {},
         "languages": ["Common", "Infernal"],
-        "subraces": {}
+        "subraces": {},
+        "template": "modules/hero-conjurer/templates/parts/races/tiefling.html"
     }
 }

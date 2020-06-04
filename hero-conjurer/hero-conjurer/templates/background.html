@@ -1,8 +1,8 @@
-<div class='background-tab'>
+<div id='background-tab' class='fill'>
 
     <h3>Backgrounds:</h3>
     <div class='choice-pane'>
-        <select class='dropdown' name='background' id='background'>
+        <select class='dropdown lighten' name='background' id='background'>
             <option value='{{data.background.name}}' selected hidden>{{data.background.name}}</option>
             {{#with info.background as | background |}}
             {{#each background}}
@@ -25,7 +25,9 @@
     </div>
 
     <!-- Info Pane -->
+    {{#if data.background.name}}
     <div class='info-pane'>
         <iframe width='100%' height='100%' src='{{data.background.template}}'></iframe>
     </div>
+    {{/if}}
 </div>

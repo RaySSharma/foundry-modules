@@ -1,5 +1,11 @@
 <div class='spells-cantrip fill'>
     <div class='choice-pane spell-pane'>
+        <div class='search-bar lighten'>
+            <input type="text" class="spell-search" placeholder="Search" style='font-size: 1.3em'>
+            <input {{data.spells.restrict_spells}} type='checkbox' id='spell-restrict' class='spell-restrict' name='spell-restrict'>
+            <label for='spell-restrict' style='font-size: 1.3em;'>Class-specific Spells</label>
+        </div>
+        {{#if data.spells.restrict_spells}}
         {{#each data.class.spells.cantrip}}
         <div class='spell-entry draggable'>
             <img class='spell-icon' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells'
@@ -8,18 +14,17 @@
             <span class='spell-info' style='font-size: 1.6em;'>{{this.labels.school}}</span>
         </div>
         {{/each}}
-    </div>
+        {{/if}}
 
-    {{!-- Spellbook --}}
-    <div class='spellbook droppable'>
-        <div style='text-align:center;'>
-            <h2 style='width: 100%;'>Spellbook:&nbsp</h2>
-        </div>
-        {{#each data.spells.imgs}}
-        <div class='spell-recorded draggable'>
-            <img class='spell-recorded-icon' style='position: relative; width: 30px; height: 30px;' src='{{this}}' name='spells'>
-            <span class='spell-recorded-info'>{{lookup ../data.spells.names @index}}</span>
+        {{#unless data.spells.restrict_spells}}
+        {{#each info.spellList.cantrip}}
+        <div class='spell-entry draggable'>
+            <img class='spell-icon' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells'
+                id='{{this.name}}'>
+            <span class='spell-info'>{{this.name}}</span>
+            <span class='spell-info' style='font-size: 1.6em;'>{{this.labels.school}}</span>
         </div>
         {{/each}}
+        {{/unless}}
     </div>
 </div>

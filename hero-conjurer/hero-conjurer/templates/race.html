@@ -1,10 +1,10 @@
-<div id='race-tab'>
+<div id='race-tab' class='fill'>
     <ul id='HC-abilities'>
 
         {{#with data.abilities as | ability |}}
         {{#each ability}}
         <li class='abilities large'>
-            <div class='abilities small border'>
+            <div class='abilities border'>
                 <h3 class='score'>{{@key}}</h3>
                 <p class='score'>{{this}}</p>
             </div>
@@ -18,8 +18,8 @@
     <div class='choice-pane'>
 
         {{!-- Select Race--}}
-        <label for='race'>Race:</label>
-        <select class='dropdown' name='race' id='race'>
+        <h3 class='header' style='text-align: left; width: 100%;'>Race:</h3>
+        <select class='dropdown lighten' name='race' id='race'>
             <option value='{{data.race.name}}' selected hidden>{{data.race.name}}</option>
             {{#each info.race}}
             <option value='{{@key}}'>{{@key}}</option>
@@ -28,8 +28,8 @@
 
 
         {{!-- Select Subrace--}}
-        <label {{data.race.hide_subrace}} for='subrace'>Subrace:</label>
-        <select {{data.race.hide_subrace}} class='dropdown' name='race' id='subrace'>
+        <h3 {{data.race.hide_subrace}} class='header' style='text-align: left; width: 100%;'>Subrace:</h3>
+        <select {{data.race.hide_subrace}} class='dropdown lighten' name='race' id='subrace'>
             <option value='{{data.race.subrace}}' selected hidden>{{data.race.subrace}}</option>
             {{#with data.race.data.subraces as | subrace |}}
             {{#each subrace}}
@@ -39,8 +39,8 @@
         </select>
 
         {{!--Select Alignment--}}
-        <label {{data.race.hide_options}} for='alignment'>Alignment:</label>
-        <select {{data.race.hide_options}} class='dropdown' name='race' id='alignment'>
+        <h3 {{data.race.hide_options}} class='header' style='text-align: left; width: 100%;'>Alignment:</h3>
+        <select {{data.race.hide_options}} class='dropdown lighten' name='race' id='alignment'>
             <option value='{{data.race.alignment}}' selected hidden>{{data.race.alignment}}</option>
             {{#with info.alignment as | alignment |}}
             {{#each alignment}}
@@ -50,11 +50,31 @@
         </select>
 
         {{!-- Race Characteristics--}}
-        <label {{data.race.hide_options}} for='size' name='race' id='size'>Size: {{data.race.size}}</label>
-        <label {{data.race.hide_options}} for='speed' name='race' id='speed'>Speed: {{data.race.speed}}</label>
-        <label {{data.race.hide_options}} for='languages' name='race' id='languages'>Languages:</label>
-        {{#each data.race.data.languages}}
-        <label>{{this}}</label>
-        {{/each}}
+        <div class='container' style='width: 100%;'>
+            <div class='subheader flex-item' style='margin-top: 0'>
+                <h3 {{data.race.hide_options}}>Size:</h3>
+                <h3 class='entry' name='race' id='size'>{{data.race.size}}</h3>
+            </div>
+            <div class='subheader flex-item' style='margin-top: 0'>
+                <h3 {{data.race.hide_options}}>Speed:</h3>
+                <h3 {{data.race.hide_options}} style='margin: 0' class='entry' name='race' id='speed'>{{data.race.speed}} ft</h3>
+            </div>
+            <div class='subheader flex-item' style='margin-top: 0'>
+                <h3 {{data.race.hide_options}}>Languages:</h3>
+                <ul style='list-style: none; text-align: left;' name='race' id='languages'>
+                    {{#each data.race.data.languages}}
+                    <li class='entry'>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
     </div>
+
+    {{#if data.race.name}}
+    {{!-- Info Pane --}}
+    <div class='info-pane'>
+        <iframe class='fill lighten' src='{{data.race.template}}'></iframe>
+    </div>
+    {{/if}}
+
 </div>

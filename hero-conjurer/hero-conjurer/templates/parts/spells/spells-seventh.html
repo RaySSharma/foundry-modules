@@ -1,4 +1,4 @@
-<div class='spells-first fill'>
+<div class='spells-seventh fill'>
     <div class='choice-pane spell-pane'>
         <div class='search-bar lighten'>
             <input type="text" class="spell-search" placeholder="Search" style='font-size: 1.3em'>
@@ -6,7 +6,7 @@
             <label for='spell-restrict' style='font-size: 1.3em;'>Class-specific Spells</label>
         </div>
         {{#if data.spells.restrict_spells}}
-        {{#each data.class.spells.[1]}}
+        {{#each data.class.spells.[7]}}
         <div class='spell-entry draggable'>
             <img class='spell-icon' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells'
                 id='{{this.name}}'>
@@ -17,7 +17,7 @@
         {{/if}}
 
         {{#unless data.spells.restrict_spells}}
-        {{#each info.spellList.[1]}}
+        {{#each info.spellList.[7]}}
         <div class='spell-entry draggable'>
             <img class='spell-icon' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells'
                 id='{{this.name}}'>

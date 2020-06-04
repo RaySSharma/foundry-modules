@@ -1,36 +1,94 @@
-<div class='spells-tab fill'>
-
-    {{#unless data.class.name}}
-    <div class='fill'>
-        <h1 style='text-align: center;'>Choose a class first</h1>
-    </div>
-    {{/unless}}
-
-    <h1 style='text-align: center;'>Choose a spell level, then drag spells to your spellbook</h1>
+<div class='spells-tab fill' style='position: relative;'>
 
     {{#if data.class.name}}
-    <nav class='subtabs' data-group="spells">
-        <a hidden class='item spells active' data-tab='spells'></a>
-        <a class='subtablinks item spells-cantrip' data-tab='spells-cantrip'>0</a>
-        <a class='subtablinks item spells-first' data-tab='spells-first'>I</a>
-    </nav>
+        {{#if (canCastSpells data.class.caster_type) }}
+        <h1 style='text-align: center;'>Choose a spell level, then drag spells to your spellbook</h1>
 
-    <section class='subcontent fill'>
+        <nav class='subtabs' data-group="spells">
+            <a hidden class='item spells active' data-tab='spells'></a>
+            <a class='subtablinks item spells-cantrip' data-tab='spells-cantrip'>0</a>
+            <a class='subtablinks item spells-first' data-tab='spells-first'>I</a>
+            <a class='subtablinks item spells-second' data-tab='spells-second'>II</a>
+            <a class='subtablinks item spells-third' data-tab='spells-third'>III</a>
+            <a class='subtablinks item spells-fourth' data-tab='spells-fourth'>IV</a>
+            <a class='subtablinks item spells-fifth' data-tab='spells-fifth'>V</a>
+            <a class='subtablinks item spells-sixth' data-tab='spells-sixth'>VI</a>
+            <a class='subtablinks item spells-seventh' data-tab='spells-seventh'>VII</a>
+            <a class='subtablinks item spells-eighth' data-tab='spells-eighth'>VIII</a>
+            <a class='subtablinks item spells-ninth' data-tab='spells-ninth'>IX</a>
 
-        {{!-- Spells Tab --}}
-        <div class='tab fill' data-tab='spells' data-group="spells">
+        </nav>
+
+        <section class='subcontent fill'>
+
+            {{!-- Spells Tab --}}
+            <div class='tab fill' data-tab='spells' data-group="spells">
+            </div>
+
+            <div class='tab fill' data-tab='spells-cantrip' data-group="spells">
+                {{> "modules/hero-conjurer/templates/parts/spells/spells-cantrip.html"}}
+            </div>
+
+            <div class='tab fill' data-tab='spells-first' data-group="spells">
+                {{> "modules/hero-conjurer/templates/parts/spells/spells-first.html"}}
+            </div>
+
+            <div class='tab fill' data-tab='spells-second' data-group="spells">
+                {{> "modules/hero-conjurer/templates/parts/spells/spells-second.html"}}
+            </div>
+
+            <div class='tab fill' data-tab='spells-third' data-group="spells">
+                {{> "modules/hero-conjurer/templates/parts/spells/spells-third.html"}}
+            </div>
+
+            <div class='tab fill' data-tab='spells-fourth' data-group="spells">
+                {{> "modules/hero-conjurer/templates/parts/spells/spells-fourth.html"}}
+            </div>
+
+            <div class='tab fill' data-tab='spells-fifth' data-group="spells">
+                {{> "modules/hero-conjurer/templates/parts/spells/spells-fifth.html"}}
+            </div>
+
+            <div class='tab fill' data-tab='spells-sixth' data-group="spells">
+                {{> "modules/hero-conjurer/templates/parts/spells/spells-sixth.html"}}
+            </div>
+
+            <div class='tab fill' data-tab='spells-seventh' data-group="spells">
+                {{> "modules/hero-conjurer/templates/parts/spells/spells-seventh.html"}}
+            </div>
+
+            <div class='tab fill' data-tab='spells-eighth' data-group="spells">
+                {{> "modules/hero-conjurer/templates/parts/spells/spells-eighth.html"}}
+            </div>
+
+            <div class='tab fill' data-tab='spells-ninth' data-group="spells">
+                {{> "modules/hero-conjurer/templates/parts/spells/spells-ninth.html"}}
+            </div>
+        </section>
+        {{!-- Spellbook --}}
+        <div class='spellbook droppable'>
+            <div style='text-align:center;'>
+                <h2 style='width: 100%;'>Spellbook:&nbsp</h2>
+            </div>
+            {{#each data.spells.names}}
+            <div class='spell-recorded drag-remove'>
+                <img class='spell-recorded-icon' src='{{lookup ../data.spells.imgs @index}}'
+                    name='spells' id='{{this}}'>
+                <span class='spell-recorded-info' name='name'>{{this}}</span>
+                <span class='spell-recorded-info' name='level'>{{lookup ../data.spells.levels @index}}</span>
+            </div>
+            {{/each}}
         </div>
+        {{else}}
+            <div class='fill'>
+                <h1 style='text-align: center;'>This class cannot cast spells</h1>
+            </div>
+        {{/if}}
 
-        {{!-- Cantrips Tab--}}
-        <div class='tab fill' data-tab='spells-cantrip' data-group="spells">
-            {{> "modules/hero-conjurer/templates/parts/spells/spells-cantrip.html"}}
+    {{else}}
+        <div class='fill'>
+            <h1 style='text-align: center;'>Choose a class first</h1>
         </div>
-
-        {{!-- First Level Spells Tab --}}
-        <div class='tab fill' data-tab='spells-first' data-group="spells">
-            {{> "modules/hero-conjurer/templates/parts/spells/spells-first.html"}}
-        </div>
-    </section>
     {{/if}}
 
 </div>

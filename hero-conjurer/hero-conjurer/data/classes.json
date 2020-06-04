@@ -26,7 +26,13 @@
             "An explorer's pack and four javelins"
         ],
         "caster_type": "none",
-        "num_spells": [0, 0]
+        "num_spells": [
+            0,
+            0
+        ],
+        "description": "An unarmoured warrior of great strength fueled, either by rage or their bond with nature.",
+        "hit_dice": "D12",
+        "img": "systems/dnd5e/icons/skills/weapon_01.jpg"
     },
     "Bard": {
         "template": "modules/hero-conjurer/templates/parts/classes/bard.html",
@@ -69,7 +75,13 @@
             "Leather armor and a dagger"
         ],
         "caster_type": "known",
-        "num_spells": [2, 2]
+        "num_spells": [
+            2,
+            2
+        ],
+        "description": "A story teller or performer that weaves the threads of magic into their songs and dance.",
+        "hit_dice": "D8",
+        "img": "systems/dnd5e/icons/skills/affliction_24.jpg"
     },
     "Cleric": {
         "template": "modules/hero-conjurer/templates/parts/classes/cleric.html",
@@ -98,7 +110,13 @@
             "A shield and a holy symbol"
         ],
         "caster_type": "prepared",
-        "num_spells": [3, 2]
+        "num_spells": [
+            3,
+            2
+        ],
+        "description": "A chosen champion blessed with strength and magic by their deity, capable of inflicting and curing injuries.",
+        "hit_dice": "D8",
+        "img": "systems/dnd5e/icons/skills/light_04.jpg"
     },
     "Druid": {
         "template": "modules/hero-conjurer/templates/parts/classes/druid.html",
@@ -137,7 +155,13 @@
             "Leather armor, an explorer's pack, and a druidic focus"
         ],
         "caster_type": "prepared",
-        "num_spells": [2, 2]
+        "num_spells": [
+            2,
+            2
+        ],
+        "description": "A magician who wields powers born of nature and the elements, often taking the form of the animals they seek to protect.",
+        "hit_dice": "D8",
+        "img": "systems/dnd5e/icons/skills/green_13.jpg"
     },
     "Fighter": {
         "template": "modules/hero-conjurer/templates/parts/classes/fighter.html",
@@ -170,7 +194,13 @@
             "(a) a dungeoneer's pack or (b) and explorer's pack"
         ],
         "caster_type": "none",
-        "num_spells": [0, 0]
+        "num_spells": [
+            0,
+            0
+        ],
+        "description": "Trained in a variety of marital combat, capable of dealing devastating blows and weathering the same.",
+        "hit_dice": "D10",
+        "img": "systems/dnd5e/icons/skills/gray_08.jpg"
     },
     "Monk": {
         "template": "modules/hero-conjurer/templates/parts/classes/monk.html",
@@ -195,7 +225,13 @@
             "10 darts"
         ],
         "caster_type": "none",
-        "num_spells": [0, 0]
+        "num_spells": [
+            0,
+            0
+        ],
+        "description": "Warrior trained in the use of their body as a weapon, capable of harnessing the ki to devastating effect.",
+        "hit_dice": "D8",
+        "img": "systems/dnd5e/icons/skills/blue_35.jpg"
     },
     "Paladin": {
         "template": "modules/hero-conjurer/templates/parts/classes/paladin.html",
@@ -226,7 +262,13 @@
             "Chain mail and a holy symbol"
         ],
         "caster_type": "prepared",
-        "num_spells": [0, 0]
+        "num_spells": [
+            0,
+            0
+        ],
+        "description": "A warrior sworn to duty by the oath they swore either to themselves or the god they serve.",
+        "hit_dice": "D10",
+        "img": "systems/dnd5e/icons/skills/light_05.jpg"
     },
     "Ranger": {
         "template": "modules/hero-conjurer/templates/parts/classes/ranger.html",
@@ -258,7 +300,13 @@
             "A longbow and a quiver of 20 arrows"
         ],
         "caster_type": "prepared",
-        "num_spells": [0, 0]
+        "num_spells": [
+            0,
+            0
+        ],
+        "description": "A combatant trained in the use of martial weapons and magic, relying on their knowledge of their surroundings they fight in remote areas.",
+        "hit_dice": "D10",
+        "img": "systems/dnd5e/icons/skills/green_01.jpg"
     },
     "Rogue": {
         "template": "modules/hero-conjurer/templates/parts/classes/rogue.html",
@@ -294,7 +342,13 @@
             "(a) Leather armor, two daggers, and thieves' tools"
         ],
         "caster_type": "none",
-        "num_spells": [0, 0]
+        "num_spells": [
+            0,
+            0
+        ],
+        "description": "Trained in shadowy skills such as assassination and infiltration, capable of delivering killing blows from the shadows.",
+        "hit_dice": "D8",
+        "img": "systems/dnd5e/icons/skills/gray_04.jpg"
     },
     "Sorcerer": {
         "template": "modules/hero-conjurer/templates/parts/classes/sorcerer.html",
@@ -323,7 +377,13 @@
             "Two daggers"
         ],
         "caster_type": "known",
-        "num_spells": [4, 2]
+        "num_spells": [
+            4,
+            2
+        ],
+        "description": "A magic wielder who drawers their power either from their ancestry or the wild magic around them.",
+        "hit_dice": "D6",
+        "img": "systems/dnd5e/icons/skills/fire_08.jpg"
     },
     "Warlock": {
         "template": "modules/hero-conjurer/templates/parts/classes/warlock.html",
@@ -351,7 +411,13 @@
             "Leather armor, any simple weapon, and two daggers"
         ],
         "caster_type": "known",
-        "num_spells": [2, 2]
+        "num_spells": [
+            2,
+            2
+        ],
+        "description": "Once a mortal, they are now capable of wielding great power gifted to them by a greater power in exchange for their service.",
+        "hit_dice": "D8",
+        "img": "systems/dnd5e/icons/skills/violet_21.jpg"
     },
     "Wizard": {
         "template": "modules/hero-conjurer/templates/parts/classes/wizard.html",
@@ -380,6 +446,12 @@
             "A spellbook"
         ],
         "caster_type": "prepared",
-        "num_spells": [3, 6]
+        "num_spells": [
+            3,
+            6
+        ],
+        "description": "A magic wielder who draws their power from study and understanding of the arcane, capable of creation and destruction in equal measure.",
+        "hit_dice": "D6",
+        "img": "systems/dnd5e/icons/skills/blue_13.jpg"
     }
 }
