@@ -52,7 +52,9 @@
     * [x] Armor prof
     * [x] Skill prof
       * [x] Limit with num_skills
-    * [ ] Class feats
+    * [x] Class feats
+      * [ ] Handling choices (e.g, sorcerous origins, domains)
+    * [ ] Class-bestowed languages
     * [x] Starting equipment
     * [x] Hit die
     * [x] Information Panel
@@ -93,7 +95,9 @@
     * [x] Restrict templating to casters
     * [x] Add ability to turn off class restrictions
     * [x] Add search bar
-    * [ ] Counter for class-granted spell levels
+    * [x] Counter for class-granted spell levels
+    * [x] Spell info
+    * [ ] Account for caster type
   * Racial Features
     * Data model
       * Draw from a feat pool

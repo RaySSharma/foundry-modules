@@ -252,6 +252,8 @@
 #HC-content .spell-entry:hover {
   background-color: #b30000;
   color: #dbdbdb;
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
 }
 
 #HC-content .spell-recorded {
@@ -264,6 +266,12 @@
   display: inline-block;
 }
 
+#HC-content .spell-recorded:hover {
+  background-color: #b30000;
+  color: #dbdbdb;
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+}
 
 #HC-content .spell-icon {
   width: 80px;
@@ -281,6 +289,20 @@
   font-size: 2em;
 }
 
+#HC-content .info-icon {
+  position: absolute;
+  color: #000000;
+  right: 10px;
+  top: 30%;
+  font-size: 25px;
+}
+
+#HC-content .info-icon:hover {
+  background-color: #b30000;
+  color: #dbdbdb;
+  cursor: default;
+}
+
 #HC-content .spell-recorded-info {
   float: right;
   width: 65%;
@@ -288,7 +310,6 @@
   font-size: 1.5em;
   position: relative;
   margin-right: 10%;
-  margin-top: 3%;
 }
 
 #HC-content .spell-recorded-icon {
@@ -296,7 +317,7 @@
   height: 40px;
   position: absolute;
   float: left;
-  margin-top: 4%;
+  margin-top: 2%;
   margin-left: 4%;
 }
 #HC-content .header {

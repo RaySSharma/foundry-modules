@@ -59,21 +59,11 @@
             </ul>
         </div>
 
-        {{!-- Starting Equipment--}}
-        <div style='text-align: left; width:100%'>
-            <h3 class='subheader' style='margin-bottom: 10px'>Starting Equipment:</h3>
-            <ul class='general-text'>
-                {{#each data.class.data.equipment}}
-                <li>{{this}}</li>
-                {{/each}}
-            </ul>
-        </div>
-
         <hr class='section-break'>
 
         {{!-- Choose Skills --}}
         <div style='text-align: left; width:100%'>
-            <h3 class='subheader' style='margin-bottom: 10px'>Choose {{data.class.data.num_skills}} skills:</h3>
+            <h3 class='header' style='margin-bottom: 10px'>Choose {{data.class.data.num_skills}} skills:</h3>
             <ul class='general-text' style="list-style: none;">
                 {{#each data.class.data.skills}}
                 <li>
@@ -83,6 +73,35 @@
                 {{/each}}
             </ul>
         </div>
+
+        <hr class='section-break'>
+
+        {{!-- Class Features --}}
+        <div class='flex-item'>
+            <h3 class='header' style='margin-bottom: 10px'>Class Features:</h3>
+            <ul class='subheader' style='list-style: none;'>
+                {{#each data.class.feats}}
+                <li class='feat-entry tooltip'>
+                    <img src='{{this.img}}' class='feat-icon'>
+                    <span style='margin: auto'>{{this.name}}</span>
+                    <span class='tooltiptext'>{{stripHTML this.data.description.value}}</span> 
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <hr class='section-break'>
+
+        {{!-- Starting Equipment--}}
+        <div style='text-align: left; width:100%'>
+            <h3 class='header' style='margin-bottom: 10px'>Starting Equipment:</h3>
+            <ul class='general-text'>
+                {{#each data.class.data.equipment}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+
         {{/if}}
     </div>
 

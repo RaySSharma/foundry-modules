@@ -2,7 +2,7 @@
 
     {{#if data.class.name}}
         {{#if (canCastSpells data.class.caster_type) }}
-        <h1 style='text-align: center;'>Choose a spell level, then drag spells to your spellbook</h1>
+        <h1 style='text-align: center;'>Choose a spell level, then drag spells to/from your spellbook.</h1>
 
         <nav class='subtabs' data-group="spells">
             <a hidden class='item spells active' data-tab='spells'></a>
@@ -68,7 +68,10 @@
         {{!-- Spellbook --}}
         <div class='spellbook droppable'>
             <div style='text-align:center;'>
-                <h2 style='width: 100%;'>Spellbook:&nbsp</h2>
+                <h3 class='header'>Spellbook</h3>
+                <hr class='section-break' style='width: 50%; margin: auto;'>
+                <span class='subheader'>Cantrips: {{countLevels data.spells.levels "Cantrip"}}/{{data.class.num_spells.[0]}}</span>
+                <span class='subheader'>1st Level: {{countLevels data.spells.levels "1st Level"}}/{{data.class.num_spells.[1]}}</span>
             </div>
             {{#each data.spells.names}}
             <div class='spell-recorded drag-remove'>

@@ -32,7 +32,11 @@
         ],
         "description": "An unarmoured warrior of great strength fueled, either by rage or their bond with nature.",
         "hit_dice": "D12",
-        "img": "systems/dnd5e/icons/skills/weapon_01.jpg"
+        "img": "systems/dnd5e/icons/skills/weapon_01.jpg",
+        "feats": [
+            "Rage",
+            "Unarmored Defense (Barbarian)"
+        ]
     },
     "Bard": {
         "template": "modules/hero-conjurer/templates/parts/classes/bard.html",
@@ -81,7 +85,10 @@
         ],
         "description": "A story teller or performer that weaves the threads of magic into their songs and dance.",
         "hit_dice": "D8",
-        "img": "systems/dnd5e/icons/skills/affliction_24.jpg"
+        "img": "systems/dnd5e/icons/skills/affliction_24.jpg",
+        "feats": [
+            "Bardic Inspiraton"
+        ]
     },
     "Cleric": {
         "template": "modules/hero-conjurer/templates/parts/classes/cleric.html",
@@ -116,7 +123,8 @@
         ],
         "description": "A chosen champion blessed with strength and magic by their deity, capable of inflicting and curing injuries.",
         "hit_dice": "D8",
-        "img": "systems/dnd5e/icons/skills/light_04.jpg"
+        "img": "systems/dnd5e/icons/skills/light_04.jpg",
+        "feats": []
     },
     "Druid": {
         "template": "modules/hero-conjurer/templates/parts/classes/druid.html",
@@ -161,7 +169,8 @@
         ],
         "description": "A magician who wields powers born of nature and the elements, often taking the form of the animals they seek to protect.",
         "hit_dice": "D8",
-        "img": "systems/dnd5e/icons/skills/green_13.jpg"
+        "img": "systems/dnd5e/icons/skills/green_13.jpg",
+        "feats": []
     },
     "Fighter": {
         "template": "modules/hero-conjurer/templates/parts/classes/fighter.html",
@@ -200,7 +209,15 @@
         ],
         "description": "Trained in a variety of marital combat, capable of dealing devastating blows and weathering the same.",
         "hit_dice": "D10",
-        "img": "systems/dnd5e/icons/skills/gray_08.jpg"
+        "img": "systems/dnd5e/icons/skills/gray_08.jpg",
+        "feats": [
+            "Fighting Style: Archery",
+            "Fighting Style: Defense",
+            "Fighting Style: Dueling",
+            "Fighting Style: Great Weapon Fighting",
+            "Fighting Style: Protection",
+            "Fighting Style: Two Weapon Fighting"
+        ]
     },
     "Monk": {
         "template": "modules/hero-conjurer/templates/parts/classes/monk.html",
@@ -231,7 +248,11 @@
         ],
         "description": "Warrior trained in the use of their body as a weapon, capable of harnessing the ki to devastating effect.",
         "hit_dice": "D8",
-        "img": "systems/dnd5e/icons/skills/blue_35.jpg"
+        "img": "systems/dnd5e/icons/skills/blue_35.jpg",
+        "feats": [
+            "Unarmored Defense (Monk)",
+            "Martial Arts"
+        ]
     },
     "Paladin": {
         "template": "modules/hero-conjurer/templates/parts/classes/paladin.html",
@@ -268,7 +289,11 @@
         ],
         "description": "A warrior sworn to duty by the oath they swore either to themselves or the god they serve.",
         "hit_dice": "D10",
-        "img": "systems/dnd5e/icons/skills/light_05.jpg"
+        "img": "systems/dnd5e/icons/skills/light_05.jpg",
+        "feats": [
+            "Divine Sense",
+            "Lay on Hands"
+        ]
     },
     "Ranger": {
         "template": "modules/hero-conjurer/templates/parts/classes/ranger.html",
@@ -306,7 +331,11 @@
         ],
         "description": "A combatant trained in the use of martial weapons and magic, relying on their knowledge of their surroundings they fight in remote areas.",
         "hit_dice": "D10",
-        "img": "systems/dnd5e/icons/skills/green_01.jpg"
+        "img": "systems/dnd5e/icons/skills/green_01.jpg",
+        "feats": [
+            "Favored Enemy",
+            "Natural Explorer"
+        ]
     },
     "Rogue": {
         "template": "modules/hero-conjurer/templates/parts/classes/rogue.html",
@@ -348,7 +377,11 @@
         ],
         "description": "Trained in shadowy skills such as assassination and infiltration, capable of delivering killing blows from the shadows.",
         "hit_dice": "D8",
-        "img": "systems/dnd5e/icons/skills/gray_04.jpg"
+        "img": "systems/dnd5e/icons/skills/gray_04.jpg",
+        "feats": [
+            "Sneak Attack",
+            "Thieves’ Cant"
+        ]
     },
     "Sorcerer": {
         "template": "modules/hero-conjurer/templates/parts/classes/sorcerer.html",
@@ -383,7 +416,10 @@
         ],
         "description": "A magic wielder who drawers their power either from their ancestry or the wild magic around them.",
         "hit_dice": "D6",
-        "img": "systems/dnd5e/icons/skills/fire_08.jpg"
+        "img": "systems/dnd5e/icons/skills/fire_08.jpg",
+        "feats": [
+            "Sorcerous Origins"
+        ]
     },
     "Warlock": {
         "template": "modules/hero-conjurer/templates/parts/classes/warlock.html",
@@ -417,7 +453,11 @@
         ],
         "description": "Once a mortal, they are now capable of wielding great power gifted to them by a greater power in exchange for their service.",
         "hit_dice": "D8",
-        "img": "systems/dnd5e/icons/skills/violet_21.jpg"
+        "img": "systems/dnd5e/icons/skills/violet_21.jpg",
+        "feats": [
+            "Otherworldly Patron",
+            "Eldritch Invocations"
+        ]
     },
     "Wizard": {
         "template": "modules/hero-conjurer/templates/parts/classes/wizard.html",
@@ -452,6 +492,9 @@
         ],
         "description": "A magic wielder who draws their power from study and understanding of the arcane, capable of creation and destruction in equal measure.",
         "hit_dice": "D6",
-        "img": "systems/dnd5e/icons/skills/blue_13.jpg"
+        "img": "systems/dnd5e/icons/skills/blue_13.jpg",
+        "feats": [
+            "Arcane Recovery"
+        ]
     }
 }

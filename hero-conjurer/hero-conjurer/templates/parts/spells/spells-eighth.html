@@ -1,7 +1,7 @@
 <div class='spells-eighth fill'>
     <div class='choice-pane spell-pane'>
         <div class='search-bar lighten'>
-            <input type="text" class="spell-search" placeholder="Search" style='font-size: 1.3em'>
+            <input type="text" class="spell-search general-text" placeholder="Search" style='font-size: 1.3em'>
             <input {{data.spells.restrict_spells}} type='checkbox' id='spell-restrict' class='spell-restrict' name='spell-restrict'>
             <label for='spell-restrict' style='font-size: 1.3em;'>Class-specific Spells</label>
         </div>
@@ -12,6 +12,7 @@
                 id='{{this.name}}'>
             <span class='spell-info'>{{this.name}}</span>
             <span class='spell-info' style='font-size: 1.6em;'>{{this.labels.school}}</span>
+            <span class='info-icon'>🛈</span>
         </div>
         {{/each}}
         {{/if}}

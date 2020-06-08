@@ -56,6 +56,15 @@ export class HeroConjurer extends FormApplication {
                 return true;
             }
         });
+        Handlebars.registerHelper('countLevels', function (spellLevels, levelToCount) {
+            let count = 0
+            spellLevels.forEach( (level) => {
+                if (level == levelToCount) {
+                    count += 1
+                }
+            })
+            return count
+        });
         Handlebars.registerHelper('isFolder', function (obj) {
             return (Array.isArray(obj)) ? true : false;
         });
@@ -206,6 +215,13 @@ export class HeroConjurer extends FormApplication {
                 });
             });
 
+        $(".info-icon")
+            .click( function (event) {
+                let spellName = $(event.target).siblings('img').attr('id')
+                let spell = this.info.spells.find(x => x.data.name == spellName)
+                spell.sheet.render(true)
+            }.bind(this))
+
         $('input[name="skill"]').on('change', function (event) {
             let limit = this.data.class.data.num_skills;
             if ($('input[name="skill"]:checked').length > limit) {
@@ -286,7 +302,8 @@ export class HeroConjurer extends FormApplication {
             'num_spells': this.info.class[this.data.class.name].num_spells,
             'description': this.info.class[this.data.class.name].description,
             'hit_dice': this.info.class[this.data.class.name].hit_dice,
-            'img': this.info.class[this.data.class.name].img
+            'img': this.info.class[this.data.class.name].img,
+            'feats': this._getClassFeats(this.info.class[this.data.class.name].feats)
         } : this.data.class;
 
         this.data.background = (this.currentSheet == 'background') ? {
@@ -338,6 +355,18 @@ export class HeroConjurer extends FormApplication {
         }
     }
 
+    _getClassFeats(feats) {
+        let featData = {}
+        for (let i = 0; i < feats.length; i++) {
+            let feat = feats[i]
+            let featEntry = this.info.classFeatures.find(x => x.data.name === feat)
+            if (featEntry) {
+                featData[feat] = featEntry.data
+            }
+        }
+        return featData
+    }
+
     _packRaceFeats(feats) {
         let featNames = feats.map(feat => this._stripSubtext(feat.name));
         let uniqueFeatNames = [...new Set(featNames)];
@@ -381,7 +410,9 @@ export class HeroConjurer extends FormApplication {
         this.info.background = await fetch('modules/hero-conjurer/data/backgrounds.json').then(response => response.json());
         this.info.extraSpellInfo = await fetch('modules/hero-conjurer/data/spells.json').then(response => response.json());
 
-        /* Pull out class compendiums according to classes.json */
+        /* Pull out class feature compendia */
+        this.info.classFeatureCompendia = ['dnd5e.classfeatures'];
+        this.info.classFeatures = await this._unpackCompendia(this.info.classFeatureCompendia);
 
         /* Pull out race compendia */
         this.info.raceCompendia = ['hero-conjurer.races-srd'];
@@ -389,8 +420,7 @@ export class HeroConjurer extends FormApplication {
         this.info.raceFeatureCompendia = ['hero-conjurer.racial-features-srd'];
         this.info.raceFeatures = await this._unpackCompendia(this.info.raceFeatureCompendia);
 
-
-        /* Pull out spell data compendiums */
+        /* Pull out spell data compendia */
         this.info.spellCompendia = ['dnd5e.spells'];
         this.info.spells = await this._unpackCompendia(this.info.spellCompendia);
 
@@ -431,6 +461,13 @@ export class HeroConjurer extends FormApplication {
         }
     }
 
+    /**
+     * Get content from list of compendia
+     *
+     * @param {*} compendia
+     * @returns
+     * @memberof HeroConjurer
+     */
     async _unpackCompendia(compendia) {
         let unpacked = [];
         await Promise.all(compendia.map(async (c) => {
