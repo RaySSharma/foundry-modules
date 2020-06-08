@@ -3,10 +3,10 @@
 
         {{#with data.abilities as | ability |}}
         {{#each ability}}
-        <li class='abilities large'>
-            <div class='abilities border'>
-                <h3 class='score'>{{@key}}</h3>
-                <p class='score'>{{this}}</p>
+        <li class='ability-entry large'>
+            <div class='ability-entry border'>
+                <h3 class='ability-score'>{{@key}}</h3>
+                <p class='ability-score'>{{this}}</p>
             </div>
         </li>
         {{/each}}
@@ -19,10 +19,11 @@
         {{!-- Select Class--}}
         {{#with info.class as | class |}}
         {{#each this}}
-        <div class='class-entry'>
+        <div class='class-entry tooltip'>
             <img style="box-shadow:{{this.border}};" class='load-template selector class-icon' name='class'
                 id='{{@key}}' src='{{this.img}}'>
-            <h3 style='text-align: center;'>{{@key}}</h3>
+            <h3 class='subheader'>{{@key}}</h3>
+            <p class='tooltiptext'>{{stripHTML this.description}}</p>
         </div>
         {{/each}}
         {{/with}}
@@ -31,15 +32,17 @@
 
         <h3 class='header' style='margin: 5%;'>{{data.class.description}}</h3>
 
+        <hr class='section-break'>
+
         {{!-- Hit Die --}}
-        <div class='subheader' style='text-align: left; width: 100%;'>
+        <div class='subheader' style='width: 100%;'>
             <h3>Hit Die: {{data.class.hit_dice}}</h3>
         </div>
 
         {{!-- Weapon Proficiencies --}}
-        <div class='subheader' style='text-align: left; width: 100%'>
-            <h3>Weapon Proficiencies:</h3>
-            <ul>
+        <div style='text-align: left; width: 100%'>
+            <h3 class='subheader' style='margin-bottom: 10px'>Weapon Proficiencies:</h3>
+            <ul class='general-text'>
                 {{#each data.class.data.weapon_prof}}
                 <li>{{this}}</li>
                 {{/each}}
@@ -47,9 +50,9 @@
         </div>
 
         {{!-- Armor Proficiencies --}}
-        <div class='subheader' style='text-align: left; width:100%'>
-            <h3>Armor Proficiencies:</h3>
-            <ul>
+        <div style='text-align: left; width:100%'>
+            <h3 class='subheader' style='margin-bottom: 10px'>Armor Proficiencies:</h3>
+            <ul class='general-text'>
                 {{#each data.class.data.armor_prof}}
                 <li>{{this}}</li>
                 {{/each}}
@@ -57,19 +60,21 @@
         </div>
 
         {{!-- Starting Equipment--}}
-        <div class='subheader' style='text-align: left; width:100%'>
-            <h3>Starting Equipment:</h3>
-            <ul>
+        <div style='text-align: left; width:100%'>
+            <h3 class='subheader' style='margin-bottom: 10px'>Starting Equipment:</h3>
+            <ul class='general-text'>
                 {{#each data.class.data.equipment}}
                 <li>{{this}}</li>
                 {{/each}}
             </ul>
         </div>
 
+        <hr class='section-break'>
+
         {{!-- Choose Skills --}}
-        <div class='subheader' style='text-align: left; width:100%'>
-            <h3>Choose {{data.class.data.num_skills}} skills:</h3>
-            <ul style="list-style: none;">
+        <div style='text-align: left; width:100%'>
+            <h3 class='subheader' style='margin-bottom: 10px'>Choose {{data.class.data.num_skills}} skills:</h3>
+            <ul class='general-text' style="list-style: none;">
                 {{#each data.class.data.skills}}
                 <li>
                     <input type='checkbox' id='{{this}}' name='skill' value='{{this}}'>

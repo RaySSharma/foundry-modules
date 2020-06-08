@@ -67,15 +67,18 @@
   font-size: 28px;
 }
 
-#HC-abilities .abilities {
+#HC-abilities .ability-entry {
   height: auto !important;
   width: 100px;
   text-align: center;
   margin: auto;
 }
 
-#HC-abilities .score {
-  margin: 0 auto;
+#HC-abilities .ability-score {
+  margin: auto;
+  font-size: 1.3em;
+  margin-bottom: 5px;
+  height: 100%;
 }
 
 #HC-abilities .border {
@@ -83,31 +86,30 @@
   padding: 0 0.8em;
 }
 
-#HC-abilities .square{
+#HC-abilities .increment-button{
   border: 1px solid #000000;
 	display:inline-block;
   height:auto;
   width:100%;
   background-color: rgba(0, 0, 0, 0.05);
 }
-#HC-abilities .square:hover{
+#HC-abilities .increment-button:hover{
   background-color: #b30000;
   border: 1px solid #000000;
 }
-#HC-abilities .square:active{
+#HC-abilities .increment-button:active{
   transform: translateY(1px);
   filter: saturate(110%);
 }
 
 #HC-abilities .increment:after{
   position:relative;
-  top:-0.8em;
+  top:-0.6em;
   content:'';
 	border-style: solid;
 	border-width: 0 7px 8px 7px;
 	border-color: transparent transparent #000000 transparent;
   border-radius:2px;
-  margin: auto;
 }
 
 #HC-abilities .increment:hover:after {
@@ -135,7 +137,18 @@
   height: 100%;
 } 
 
-#HC-content .dropdown {
+#HC-content .section-break {
+  margin: 10px;
+  width: 100%;
+  border: 1px darkred solid;
+}
+
+#HC-content .race-dropdown {
+  width: 100%;
+  margin: auto;
+}
+
+#HC-content .background-dropdown {
   width: 100%;
   margin: 5%;
 }
@@ -196,6 +209,16 @@
   float: right;
   width: 68%;
   height: 100%;
+}
+
+#HC-content .feat-icon {
+  width: 40px;
+  height: 40px;
+}
+
+#HC-content .feat-entry {
+  display: flex;
+  margin-bottom: 8%;
 }
 
 #HC-content .spellbook {
@@ -277,10 +300,17 @@
   margin-left: 4%;
 }
 #HC-content .header {
-  font-size: 1.6em;
+  font-size: 1.8em;
   width: 100%;
   text-align: center;
   margin: auto;
+}
+
+#HC-content .subheader {
+  font-size: 1.6em;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 10px;
 }
 
 #HC-content .title {
@@ -290,18 +320,32 @@
   margin: auto;
 }
 
-#HC-content .subheader {
-  font-size: 1.4em;
-  text-align: center;
+#HC-content .general-text {
+  font-size: 1.1em;
   margin: auto;
+  font-family: "Signika"
+
 }
+
 #HC-content .class-entry {
   margin: auto;
+  border: 0;
 }
 
 #HC-content .class-icon {
   width: 80px;
   height: 80px;
+}
+
+#HC-content .background-button {
+  width: 100%;
+  margin: auto;
+}
+
+#HC-content .button-container {
+  width: 20%;
+  margin: auto;
+  margin-top: 10px;
 }
 
 #HC-content .class-icon:hover {
@@ -394,3 +438,51 @@
 .lighten {
   background-color: rgba(255, 255, 255, 0.4);
 }
+
+ /* Tooltip container */
+ .tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200%;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5%;
+  border-radius: 6px;
+  font-size: medium;
+  font-family: "Signika";
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 15%;
+  margin-left: -5px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+} 

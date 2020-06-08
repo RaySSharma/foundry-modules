@@ -1,17 +1,18 @@
-<div class='abilities-tab'>
-    <h1 style='text-align: center;'>Point Buy: {{pointBuySum data.abilitiesForm}}/27</h1>
+<div class='abilities-tab' style='height: 100%;'>
     <ul id='HC-abilities'>
         {{#each data.abilities}}
-        <li class='abilities'>
-            <span class="icon square increment" style="border-bottom:none;"></span>
-            <div class='abilities border'>
-                <h3>{{@key}}</h3>
-                <input class='score' type="text" value="{{.}}"></input>
-                <input type='hidden' class='score-hidden' name="{{@key}}" id="{{@key}}"
-                    value='{{lookup ../data/abilitiesForm @key}}'>
+        <li class='ability-entry'>
+            <span class="increment-button increment" style="border-bottom:none;"></span>
+            <div class='ability-entry border'>
+                <h3 class="ability-score">{{@key}}</h3>
+                <input class='ability-score' name="{{@key}}" type="text" value="{{.}}"></input>
             </div>
-            <span class="icon square decrement" style="border-top:none;"></span>
+            <span class="increment-button decrement" style="border-top:none;"></span>
         </li>
         {{/each}}
     </ul>
+    <h1 style='text-align: center;'>Point Buy: {{pointBuySum data.abilities}}/27</h1>
+    <div class='info-pane' style='width: 100%;'>
+        <iframe class='fill lighten' src='modules/hero-conjurer/templates/parts/abilityScores.html'></iframe>
+    </div>
 </div>

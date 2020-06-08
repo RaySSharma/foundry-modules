@@ -1,8 +1,9 @@
 <div id='background-tab' class='fill'>
 
-    <h3>Backgrounds:</h3>
+    <h1 style='text-align: center;'>Choose a background</h1>
     <div class='choice-pane'>
-        <select class='dropdown lighten' name='background' id='background'>
+        <h3 class='header' style='width: 100%;'>Backgrounds:</h3>
+        <select class='background-dropdown lighten' name='background' id='background'>
             <option value='{{data.background.name}}' selected hidden>{{data.background.name}}</option>
             {{#with info.background as | background |}}
             {{#each background}}
@@ -11,16 +12,58 @@
             {{/with}}
         </select>
 
-        {{#if data.background.name}}
 
-        <!-- Starting Equipment-->
-        <h3>Starting Equipment:&nbsp</h3>
-        <ul>
-            {{#each data.background.data.equipment}}
-            <li>{{this}}&nbsp</li>
-            {{/each}}
-        </ul>
-        {{/if}}
+        {{!-- Starting Equipment --}}
+        <div style='width:100%'>
+            <h3 {{data.background.hide_options}} class='subheader'>Starting Equipment:</h3>
+            <ul {{data.background.hide_options}} class='general-text' style='text-align: left'>
+                {{#each data.background.data.equipment}}
+                <li>
+                    <span>{{this}}</span>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <hr {{data.background.hide_options}} class='section-break'>
+
+        {{!-- Select Traits --}}
+        <h3 {{data.background.hide_options}} class='subheader' style='width: 100%;'>Traits:</h3>
+        <span {{data.background.hide_options}} class='general-text'>{{data.background.traits}}</span>
+        <div class='button-container' >
+            <button {{data.background.hide_options}} type="button" class='random-choice background-button'
+                id='traits'>Roll</button>
+        </div>
+
+        <hr {{data.background.hide_options}} class='section-break'>
+
+        {{!-- Select Ideals --}}
+        <h3 {{data.background.hide_options}} class='subheader' style='width: 100%;'>Ideals:</h3>
+        <span {{data.background.hide_options}} class='general-text'>{{data.background.ideals}}</span>
+        <div class='button-container' >
+            <button {{data.background.hide_options}} type="button" class='random-choice background-button'
+                id='ideals'>Roll</button>
+        </div>
+        <hr {{data.background.hide_options}} class='section-break'>
+
+        {{!-- Select Bonds --}}
+        <h3 {{data.background.hide_options}} class='subheader' style='width: 100%;'>Bonds:</h3>
+        <span {{data.background.hide_options}} class='general-text'>{{data.background.bonds}}</span>
+        <div class='button-container' >
+            <button {{data.background.hide_options}} type="button" class='random-choice background-button'
+                id='bonds'>Roll</button>
+        </div>
+        <hr {{data.background.hide_options}} class='section-break'>
+
+        {{!-- Select Flaws --}}
+        <h3 {{data.background.hide_options}} class='subheader' style='width: 100%;'>Flaws:</h3>
+        <span {{data.background.hide_options}} class='general-text'>{{data.background.flaws}}</span>
+        <div class='button-container'>
+            <button {{data.background.hide_options}} type="button" class='random-choice background-button'
+                id='flaws'>Roll</button>
+        </div>
+
+
 
     </div>
 

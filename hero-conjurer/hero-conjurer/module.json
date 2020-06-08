@@ -1,8 +1,8 @@
 {
     "name": "hero-conjurer",
-    "title": "Hero Conjurer",
-    "description": "This module makes it easy to create new heroes!",
-    "version": "0.1.0",
+    "title": "Hero Conjurer 5E",
+    "description": "<p>Build a 5e character, with style</p>",
+    "version": "0.0.1",
     "author": "RaySSharma",
     "esmodules": ["./src/conjurer.js"],
     "languages": [{
@@ -11,11 +11,27 @@
         "path": "lang/en.json"
     }],
     "styles": ["./css/conjurer.css"],
-    "packs": [],
+    "packs": [
+        {
+            "name": "racial-features-srd",
+            "label": "Racial Features (SRD)",
+            "path": "./packs/racial-features-srd.db",
+            "entity": "Item",
+            "module": "hero-conjurer"
+        },
+        {
+            "name": "races-srd",
+            "label": "Races (SRD)",
+            "path": "./packs/races-srd.db",
+            "entity": "Actor",
+            "module": "hero-conjurer"
+        }
+    ],
     "minimumCoreVersion": "0.5.6",
-    "compatibleCoreVersion": "0.5.7",
-    "url": "https://github.com/RaySSharma/foundry-modules/tree/master/rolltable-buttons",
-    "manifest": "https://raw.githubusercontent.com/RaySSharma/foundry-modules/master/rolltable-buttons/rolltable-buttons/module.json",
-    "download": "https://github.com/RaySSharma/foundry-modules/raw/master/rolltable-buttons/rolltable-buttons.zip"
+    "compatibleCoreVersion": "0.6.0",
+    "url": "https://github.com/RaySSharma/foundry-modules/tree/master/hero-conjurer",
+    "manifest": "https://raw.githubusercontent.com/RaySSharma/foundry-modules/master/hero-conjurer/hero-conjurer/module.json",
+    "download": "https://github.com/RaySSharma/foundry-modules/raw/master/hero-conjurer/hero-conjurer.zip",
+    "changelog": "https://github.com/RaySSharma/foundry-modules/tree/master/hero-conjurer"
   }
   

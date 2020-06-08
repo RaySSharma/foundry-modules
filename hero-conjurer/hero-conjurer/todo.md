@@ -1,7 +1,7 @@
 # Todo List
 
 * SRD Content
-  * [ ] Race
+  * [x] Race
   * [ ] Class
   * [x] Abilities
   * [ ] Backgrounds
@@ -16,16 +16,17 @@
 * [ ] Integration with existing compendia
 * [ ] Allow for custom races etc without compendium entries
 * [x] Button to open Conjurer
-  * [ ] Integrate into *Create Actor*
+  * [x] Integrate into *Create Actor*
   * [x] Add temporary button
 * [x] Move to TabsV2
 * [ ] Pipe inputs into character sheet
 * [x] Prettify HTML
+* [ ] Move away from multiple submits
 * [ ] Clean CSS
 * [ ] Add settings menu
   * [ ] Add ability to specify compendia
 * [ ] Sanitize inputs
-* [ ] Compatibility with alternate sheets (probably just Sky5e)
+* [ ] Compatibility with alternate sheets (probably just Sky5e, Tidy5e)
 * [x] Licensing under 5e SRD rules
 * [ ] Allow for localization
 
@@ -43,7 +44,7 @@
     * [x] Size
     * [x] Speed
     * [x] Language
-    * [ ] Racial Feats
+    * [x] Racial Feats
     * [x] *Add* ability bonuses to total ability scores (including possible subrace bonuses)
     * [x] Information Panel
   * Class
@@ -66,11 +67,11 @@
   * Background
     * [x] Skill prof
     * [ ] Language prof
-    * [ ] Personality traits
-    * [ ] Ideal
-    * [ ] Bond
-    * [ ] Flaw
-    * [ ] Equipment
+    * [x] Personality traits
+    * [x] Ideal
+    * [x] Bond
+    * [x] Flaw
+    * [x] Equipment
     * [x] Information Panel
   * Equipment
     * [ ] Choose equipment or starting wealth
@@ -92,6 +93,7 @@
     * [x] Restrict templating to casters
     * [x] Add ability to turn off class restrictions
     * [x] Add search bar
+    * [ ] Counter for class-granted spell levels
   * Racial Features
     * Data model
       * Draw from a feat pool

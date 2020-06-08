@@ -4,31 +4,30 @@ export class HeroConjurer extends FormApplication {
     constructor(options = {}) {
         super(options);
 
-
-
         this.data = {
             race: {
-                'hide_subrace': 'hidden',
                 'hide_options': 'hidden'
             },
             class: {},
             abilities: {
-                'Str': 8,
-                'Dex': 8,
-                'Con': 8,
-                'Int': 8,
-                'Wis': 8,
-                'Cha': 8
+                'str': 8,
+                'dex': 8,
+                'con': 8,
+                'int': 8,
+                'wis': 8,
+                'cha': 8
             },
             abilitiesForm: {
-                'Str': 8,
-                'Dex': 8,
-                'Con': 8,
-                'Int': 8,
-                'Wis': 8,
-                'Cha': 8
+                'str': 8,
+                'dex': 8,
+                'con': 8,
+                'int': 8,
+                'wis': 8,
+                'cha': 8
             },
-            background: {},
+            background: {
+                'hide_options': 'hidden'
+            },
             spells: {
                 'names': [],
                 'data': [],
@@ -36,7 +35,6 @@ export class HeroConjurer extends FormApplication {
                 'levels': [],
                 'restrict_spells': 'checked'
             },
-            feats: {},
             bio: {},
             summary: {}
         };
@@ -50,12 +48,6 @@ export class HeroConjurer extends FormApplication {
                 return parseInt(a) + parseInt(b);
             }, 0) - 48);
         });
-        Handlebars.registerHelper('range', function (n, block) {
-            var accum = '';
-            for (var i = 0; i < n; ++i)
-                accum += block.fn(i);
-            return accum;
-        });
         Handlebars.registerHelper('canCastSpells', function (str) {
             if (str == 'none') {
                 return false;
@@ -64,6 +56,10 @@ export class HeroConjurer extends FormApplication {
                 return true;
             }
         });
+        Handlebars.registerHelper('isFolder', function (obj) {
+            return (Array.isArray(obj)) ? true : false;
+        });
+        Handlebars.registerHelper('stripHTML', this._stripHTML);
     }
 
     static get defaultOptions() {
@@ -72,9 +68,8 @@ export class HeroConjurer extends FormApplication {
             id: 'hero-conjurer',
             template: 'modules/hero-conjurer/templates/start.html',
             closeOnSubmit: false,
-            submitOnClose: true,
+            submitOnClose: false,
             submitOnChange: true,
-            popOut: true,
             width: 941,
             height: 800,
             tabs: [{ navSelector: ".tabs", contentSelector: ".content", initial: "start" },
@@ -82,10 +77,6 @@ export class HeroConjurer extends FormApplication {
         });
     }
 
-    _onChangeTab(event, tabs, active) {
-        super._onChangeTab();
-        this.currentSheet = active;
-    }
     async getData() {
         if (jQuery.isEmptyObject(this.info)) {
             await this.readDataFiles();
@@ -101,29 +92,40 @@ export class HeroConjurer extends FormApplication {
         super.activateListeners(html);
         html[0].render = this.render;
 
-        $('.submit').change(this._submitAndRender.bind(this));
-        $('.dropdown').change(function (event) {
-            if (this.currentSheet == 'race') {
-                if (event.target.id == 'race') {
-                    let subraces = this.info.race[event.target.value].subraces;
-                    if (Object.keys(subraces).length) {
-                        this.data.race.hide_subrace = '';
-                    }
-                    else {
-                        this.data.race.hide_subrace = 'hidden';
-                    }
-                    this.data.race.hide_options = '';
+        $('.race-dropdown').change(function (event) {
+            if (event.target.id == 'race') {
+                this.data.race.hide_options = '';
+            }
+            else if (event.target.name == 'feat') {
+
+                let selectedFeat = this.data.sheet.data.items.find(x => x.name === event.target.value);
+                let selectedName = this._stripSubtext(selectedFeat.name);
+                let lastFeatAdded = this.data.race.feats[this.data.race.feats.length - 1];
+                let lastFeatAddedName = (lastFeatAdded.name) ? this._stripSubtext(lastFeatAdded.name) : '';
+
+                if (selectedName === lastFeatAddedName) {
+                    this.data.race.feats.pop();
                 }
+                this.data.race.feats.push(selectedFeat);
             }
             this._submitAndRender();
         }.bind(this));
 
-        $('#HC-abilities .square').click(this._abilityIncrementDecrement.bind(this));
-
-        $('#HC-abilities .score').change(function (event) {
-            let $button = $(event.target);
-            $button.next().val($button.val());
+        $('.background-dropdown').change(function (event) {
+            if (event.target.id == 'background') {
+                this.data.background.hide_options = '';
+            }
             this._submitAndRender();
+        }.bind(this));
+
+        $('#HC-abilities .increment-button').click(this._abilityScoreIncrementDecrement.bind(this));
+
+        $('#HC-abilities .ability-score').change(function (event) {
+            let abilityScore = parseInt(event.target.value);
+            if (abilityScore) {
+                this.data.abilities[event.target.name] = abilityScore;
+                this._calculateAbilityScores(true);
+            }
         }.bind(this));
 
         $('.load-template').click(this._loadDataTemplate.bind(this));
@@ -228,33 +230,41 @@ export class HeroConjurer extends FormApplication {
             spellEntries.filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
             });
-
         });
+
+        $('.random-choice').click(function (event) {
+            let arr = this.data.background.data[event.target.id];
+            let choice = arr[Math.floor(Math.random() * arr.length)];
+            this.data.background[event.target.id] = choice;
+            this._submitAndRender();
+        }.bind(this));
+
+        /*$('.feat-icon').hover( function (event) {
+            $(event.target).siblings('p').show()
+        }.bind(this), function (event) {
+            $(event.target).siblings('p').hide()
+        })*/
     }
 
     _updateObject(event, formData) {
         event.preventDefault();
 
+        this.data.sheet = (this.currentSheet == 'race') ? this.info.race.find(x => x.data.name == formData.race[0]) : this.data.sheet;
+
         this.data.race = (this.currentSheet == 'race') ? {
             'name': formData.race[0],
-            'subrace': formData.race[1],
-            'alignment': formData.race[2],
-            'data': this.info.race[formData.race[0]],
-            'size': this.info.race[formData.race[0]].size,
-            'speed': this.info.race[formData.race[0]].speed,
-            'template': this.info.race[formData.race[0]].template,
-            'hide_subrace': this.data.race.hide_subrace,
-            'hide_options': this.data.race.hide_options
+            'alignment': formData.race[1],
+            'size': this.data.sheet.data.data.traits.size,
+            'speed': this.data.sheet.data.data.attributes.speed.value,
+            'template': this._getRaceTemplate(formData.race[0]),
+            'hide_options': this.data.race.hide_options,
+            'languages': this.data.sheet.data.data.traits.languages.value,
+            'feats': this._packRaceFeats(this.data.sheet.data.items.filter(x => x.type == 'feat'))
         } : this.data.race;
 
-        this.data.abilitiesForm = (this.currentSheet == 'abilities') ? {
-            'Str': formData.Str,
-            'Dex': formData.Dex,
-            'Con': formData.Con,
-            'Int': formData.Int,
-            'Wis': formData.Wis,
-            'Cha': formData.Cha
-        } : this.data.abilitiesForm;
+        if (this.currentSheet == 'race') {
+            this._calculateAbilityScores(false);
+        }
 
         this.data.bio = (this.currentSheet == 'bio') ? {
             'name': formData.name,
@@ -283,7 +293,12 @@ export class HeroConjurer extends FormApplication {
             'name': formData.background,
             'data': this.info.background[formData.background],
             'template': this.info.background[formData.background].template,
-            'skills': this.info.background[formData.background].skills
+            'skills': this.info.background[formData.background].skills,
+            'hide_options': this.data.background.hide_options,
+            'traits': this.data.background.traits,
+            'ideals': this.data.background.ideals,
+            'bonds': this.data.background.bonds,
+            'flaws': this.data.background.flaws
         } : this.data.background;
 
         this.data.spells = ((this.currentSheet == 'spells') || (this.currentSheet == 'spells-cantrip') || (this.currentSheet == 'spells-first')) ? {
@@ -293,8 +308,11 @@ export class HeroConjurer extends FormApplication {
             'levels': this.data.spells.levels,
             'restrict_spells': this.data.spells.restrict_spells,
         } : this.data.spells;
+    }
 
-        this._calculateAbilityScores();
+    _onChangeTab(event, tabs, active) {
+        super._onChangeTab();
+        this.currentSheet = active;
     }
 
     /**
@@ -310,6 +328,42 @@ export class HeroConjurer extends FormApplication {
         this.data[templateType].name = templateChild;
     }
 
+    _getRaceTemplate(name) {
+        let raceName = this._stripSubtext(name);
+        if (raceName in this.info.extraRaceInfo) {
+            return this.info.extraRaceInfo[raceName].template;
+        }
+        else {
+            return '';
+        }
+    }
+
+    _packRaceFeats(feats) {
+        let featNames = feats.map(feat => this._stripSubtext(feat.name));
+        let uniqueFeatNames = [...new Set(featNames)];
+        let packagedFeats = [];
+        uniqueFeatNames.forEach((unique) => {
+            let whichFeatsToPackage = [];
+            for (let i = 0; i < featNames.length; i++) {
+                if (featNames[i] === unique) {
+                    whichFeatsToPackage.push(i);
+                }
+            }
+
+            if (whichFeatsToPackage.length > 1) {
+                let pack = [];
+                whichFeatsToPackage.forEach((index) => {
+                    pack.push(feats[index]);
+                });
+                packagedFeats.push(pack);
+            }
+            else {
+                packagedFeats.push(feats[featNames.indexOf(unique)]);
+            }
+        });
+        return packagedFeats;
+    }
+
     _submitAndRender() {
         this.submit();
         this.render();
@@ -321,46 +375,27 @@ export class HeroConjurer extends FormApplication {
      * @memberof HeroConjurer
      */
     async readDataFiles() {
-        this.info.race = await fetch('modules/hero-conjurer/data/races.json').then(response => response.json());
+        this.info.extraRaceInfo = await fetch('modules/hero-conjurer/data/races.json').then(response => response.json());
         this.info.alignment = await fetch('modules/hero-conjurer/data/alignments.json').then(response => response.json());
         this.info.class = await fetch('modules/hero-conjurer/data/classes.json').then(response => response.json());
         this.info.background = await fetch('modules/hero-conjurer/data/backgrounds.json').then(response => response.json());
         this.info.extraSpellInfo = await fetch('modules/hero-conjurer/data/spells.json').then(response => response.json());
-        this.info.spells = [];
 
         /* Pull out class compendiums according to classes.json */
 
-        /*let classPacks = [];
-        for (let value of Object.values(this.info.class)) {
-            classPacks.push(value.pack);
-        }
-        this.info.classPacks = [...new Set(classPacks)];
+        /* Pull out race compendia */
+        this.info.raceCompendia = ['hero-conjurer.races-srd'];
+        this.info.race = await this._unpackCompendia(this.info.raceCompendia);
+        this.info.raceFeatureCompendia = ['hero-conjurer.racial-features-srd'];
+        this.info.raceFeatures = await this._unpackCompendia(this.info.raceFeatureCompendia);
 
-        this.info.classData = [];
-        for (let i = 0; i < this.info.classPacks.length; i++) {
-            let packName = this.info.classPacks[i];
-            let pack = game.packs.find(x => x.collection === packName);
-
-            if (pack) {
-                pack = await pack.getContent();
-                this.info.classData = this.info.classData.concat(pack);
-            }
-        }*/
 
         /* Pull out spell data compendiums */
-        this.info.spellCompendiums = ['dnd5e.spells'];
-        for (let i = 0; i < this.info.spellCompendiums.length; i++) {
-            let packName = this.info.spellCompendiums[i];
-            let pack = game.packs.find(x => x.collection === packName);
-            if (pack) {
-                pack = await pack.getContent();
-                this.info.spells.push(...pack);
-            }
-        }
+        this.info.spellCompendia = ['dnd5e.spells'];
+        this.info.spells = await this._unpackCompendia(this.info.spellCompendia);
 
-        /* Add additional info to spell data if its missing */
-        for (let i = 0; i < this.info.spells.length; i++) {
-            let spell = this.info.spells[i];
+        /* Add additional info to spell data if its missing, currently classes and spell levels*/
+        this.info.spells.forEach((spell) => {
             if (!spell.tags) {
                 let extraSpellInfo = this.info.extraSpellInfo.filter(e => e.name == spell.name, this)[0];
                 if (extraSpellInfo) {
@@ -368,8 +403,10 @@ export class HeroConjurer extends FormApplication {
                     spell.level = extraSpellInfo.level;
                 }
             }
-        }
+        });
+
         this.info.spells = this.info.spells.filter(s => s.tags, this);
+
 
         /* Generate general spell-lists */
         this.info.spellList = {
@@ -394,40 +431,49 @@ export class HeroConjurer extends FormApplication {
         }
     }
 
+    async _unpackCompendia(compendia) {
+        let unpacked = [];
+        await Promise.all(compendia.map(async (c) => {
+            let pack = game.packs.find(x => x.collection === c);
+            if (pack) {
+                pack = await pack.getContent();
+                unpacked.push(...pack);
+            }
+        }));
+        return unpacked;
+    }
+
     /**
      * Gather all relevant inputs and calculate ability scores
      *
      * @memberof HeroConjurer
      */
-    _calculateAbilityScores() {
-        let recalculated = {
-            'Str': 0,
-            'Dex': 0,
-            'Con': 0,
-            'Int': 0,
-            'Wis': 0,
-            'Cha': 0
-        };
-        if (this.data.race.name) {
-
-            let raceInfo = this.info.race[this.data.race.name];
-            for (let [key, value] of Object.entries(raceInfo.abilities)) {
-                recalculated[key] += value;
-            }
-            if (raceInfo.subraces[this.data.race.subrace]) {
-
-                let subraceInfo = raceInfo.subraces[this.data.race.subrace];
-                for (let [key, value] of Object.entries(subraceInfo.abilities)) {
-                    recalculated[key] += value;
+    _calculateAbilityScores(scoresManuallyInput = false) {
+        if (scoresManuallyInput) {
+            this.data.abilities = this.data.abilities;
+        }
+        else {
+            let recalculated = {
+                'str': 0,
+                'dex': 0,
+                'con': 0,
+                'int': 0,
+                'wis': 0,
+                'cha': 0
+            };
+            if (this.data.race.name) {
+                for (let key of Object.keys(this.data.sheet.data.data.abilities)) {
+                    recalculated[key.toLowerCase()] += this.data.sheet.data.data.abilities[key].value;
                 }
             }
-        }
-        if (this.data.abilitiesForm) {
             for (let [key, value] of Object.entries(this.data.abilitiesForm)) {
-                recalculated[key] += parseInt(value);
+                if (parseInt(value)) {
+                    recalculated[key.toLowerCase()] += parseInt(value);
+                }
             }
+            this.data.abilities = recalculated;
         }
-        this.data.abilities = recalculated;
+        this._submitAndRender();
     }
 
     /**
@@ -436,33 +482,45 @@ export class HeroConjurer extends FormApplication {
      * @param {*} event
      * @memberof HeroConjurer
      */
-    _abilityIncrementDecrement(event) {
+    _abilityScoreIncrementDecrement(event) {
         let $button = $(event.target);
-        let abilityTrackers = $button.siblings().find('input');
-        for (let i = 0; i < 2; i++) {
+        let abilityTracker = $button.siblings().find('input.ability-score');
 
-            let oldValue = $(abilityTrackers[i]).val();
-            let newVal = undefined;
+        let abilityName = abilityTracker[0].name;
 
-            if ($button.hasClass('increment')) {
-                newVal = parseFloat(oldValue) + 1;
-            }
-            else if ($button.hasClass('decrement')) {
-                // Don't allow decrementing below zero
-                if (oldValue > 0) {
-                    newVal = parseFloat(oldValue) - 1;
-                }
-                else {
-                    newVal = 0;
-                }
-            }
-            $(abilityTrackers[i]).val(newVal);
+        if ($button.hasClass('increment')) {
+            this.data.abilitiesForm[abilityName] += 1;
         }
-        this._submitAndRender();
+        else if ($button.hasClass('decrement')) {
+            // Don't allow decrementing below zero
+            if (this.data.abilitiesForm[abilityName] > 0) {
+                this.data.abilitiesForm[abilityName] -= 1;
+            }
+        }
+        this._calculateAbilityScores(false);
+        //this._submitAndRender();
     }
 
+    /**
+     * Strip HTML tags and nbsp tags
+     *
+     * @param {*} html
+     * @returns
+     * @memberof HeroConjurer
+     */
     _stripHTML(html) {
-        return html.replace(/<(.|\n)*?>/g, '');
+        return html.replace(/<(.|\n)*?>/g, '').replace(/&nbsp;/g, '');
+    }
+
+    /**
+     * Strip text within parentheses
+     *
+     * @param {*} str
+     * @returns
+     * @memberof HeroConjurer
+     */
+    _stripSubtext(str) {
+        return str.replace(/\((.|\n)*?\)/g, '').trim();
     }
 }
 
@@ -470,17 +528,20 @@ Hooks.once("init", () => {
     preloadHandlebarsTemplates();
 });
 
-Hooks.once("renderActorDirectory", (app, html, data) => {
-    let existingButton = $('button.create-entity:contains("Create Actor")');
-    $(existingButton).parent().addClass('dropup');
-    $(existingButton).addClass('dropbtn');
-    let newButton = $(
-        '<button class="dropup-content"><i class="fas fa-bolt"></i>Hero Conjurer</button>'
-    );
-    newButton.on('click', function (event) {
-        event.form = new HeroConjurer(game.actors);
-        event.form.render(true);
-    });
-    newButton.insertAfter(existingButton);
+Hooks.on("renderDialog", (app, html, data) => {
+    let existingButton = $(html).find('.dialog-button');
+    if (existingButton) {
+        if (existingButton.text().trim() == "Create Actor") {
+            let newButton = $(
+                '<button class="dialog-button"><i class="fas fa-hat-wizard"></i>Hero Conjurer</button>'
+            );
+            newButton.on('click', function (event) {
+                let newApp = new HeroConjurer(game.actors);
+                newApp.render(true);
+                app.close();
+            });
+            existingButton.parent().append(newButton);
+        }
+    }
 });
 
