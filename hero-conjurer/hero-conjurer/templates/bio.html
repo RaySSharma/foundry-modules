@@ -1,22 +1,54 @@
-<div class='bio-tab'>
-    <input type='hidden' name='sheet' id='sheet' value='bio'>
+<div id='bio-tab' class='fill flex-tab'>
 
-    {{#with data.bio as | bio |}}
-    <div class='choice'>
-        <label class='choice-label' for='name'>Hero name</label>
-        <input class='choice-input' type='text' id='name' name='name' value='{{bio.name}}'>
-        <label class='choice-label' for='age'>Age</label>
-        <input class='choice-input' type='text' id='age' name='age' value='{{bio.age}}'>
-        <label class='choice-label' for='height'>Height</label>
-        <input class='choice-input' type='text' id='height' name='height' value='{{bio.height}}'>
-        <label class='choice-label' for='weight'>Weight</label>
-        <input class='choice-input' type='text' id='weight' name='weight' value='{{bio.weight}}'>
-        <label class='choice-label' for='eyes'>Eyes</label>
-        <input class='choice-input' type='text' id='eyes' name='eyes' value='{{bio.eyes}}'>
-        <label class='choice-label' for='hair'>Hair</label>
-        <input class='choice-input' type='text' id='hair' name='hair' value='{{bio.hair}}'>
-        <label class='choice-label' for='skin'>Skin</label>
-        <input class='choice-input' type='text' id='skin' name='skin' value='{{bio.skin}}'>
+    <h1 class='title'>Fill in a biography</h1>
+    <div class='fill flex-row'>
+        <div class='choice-pane flex-column'>
+
+            {{!-- Name --}}
+            <label class='header required' for='name'>Hero name</label>
+            <input class='big-choice-input general-text darken' type='text' id='name' name='bio' value='{{data.bio.name}}' required>
+
+            {{!-- Age --}}
+            <label class='header' for='age'>Age</label>
+            <input class='big-choice-input general-text darken' type='text' id='age' name='bio' value='{{data.bio.age}}'>
+
+            {{!-- Height --}}
+            <label class='header' for='height'>Height</label>
+            <input class='big-choice-input general-text darken' type='text' id='height' name='bio'
+                value='{{data.bio.height}}'>
+
+            {{!-- Weight --}}
+            <label class='header' for='weight'>Weight</label>
+            <input class='big-choice-input general-text darken' type='text' id='weight' name='bio'
+                value='{{data.bio.weight}}'>
+
+            {{!-- Eyes --}}
+            <label class='header' for='eyes'>Eyes</label>
+            <input class='big-choice-input general-text darken' type='text' id='eyes' name='bio' value='{{data.bio.eyes}}'>
+
+            {{!-- Hair --}}
+            <label class='header' for='hair'>Hair</label>
+            <input class='big-choice-input general-text darken' type='text' id='hair' name='bio' value='{{data.bio.hair}}'>
+
+            {{!-- Skin --}}
+            <label class='header' for='skin'>Skin</label>
+            <input class='big-choice-input general-text darken' type='text' id='skin' name='bio' value='{{data.bio.skin}}'>
+
+            <hr class='section-break'>
+        </div>
+        <div class="info-pane flex-column" style='height: 100%;'>
+            <div style='height: 20%; margin-bottom: 10%;'>
+                <h3 class='header' style='margin: 1% auto;'>Personality</h3>
+                <div class='editor-container general-text darken'>
+                    {{editor content=data.bio.personality target="data.bio.personality" button=true owner=true editable=true}}
+                </div>
+            </div>
+            <div style='height: 40%;'>
+                <h3 class='header' style='margin: 1% auto;'>Biography</h3>
+                <div class='editor-container general-text darken'>
+                    {{editor content=data.bio.biography target="data.bio.biography" button=true owner=true editable=true}}
+                </div>
+            </div>
+        </div>
     </div>
-    {{/with}}
 </div>

@@ -10,7 +10,6 @@ export const preloadHandlebarsTemplates = async function() {
       'modules/hero-conjurer/templates/background.html',
       'modules/hero-conjurer/templates/equipment.html',
       'modules/hero-conjurer/templates/spells.html',
-      'modules/hero-conjurer/templates/feats.html',
       'modules/hero-conjurer/templates/bio.html',
       'modules/hero-conjurer/templates/summary.html',
       'modules/hero-conjurer/templates/parts/spells/spells-cantrip.html',

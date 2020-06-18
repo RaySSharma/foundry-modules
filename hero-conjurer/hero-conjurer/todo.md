@@ -2,31 +2,29 @@
 
 * SRD Content
   * [x] Race
-  * [ ] Class
+  * [x] Class
   * [x] Abilities
-  * [ ] Backgrounds
-  * [ ] Equipment
+  * [x] Backgrounds
+  * [x] Equipment
   * [x] Spells
-  * [ ] Feats
-  * [ ] Bio
-  * [ ] Review
+  * [x] Bio
+  * [x] Review
 
 * [x] Template format
 * [x] Pipe inputs into backend
-* [ ] Integration with existing compendia
-* [ ] Allow for custom races etc without compendium entries
+* [x] Integration with existing compendia
 * [x] Button to open Conjurer
   * [x] Integrate into *Create Actor*
   * [x] Add temporary button
 * [x] Move to TabsV2
 * [ ] Pipe inputs into character sheet
-* [x] Prettify HTML
+* [ ] Prettify HTML
 * [ ] Move away from multiple submits
 * [ ] Clean CSS
+* [ ] Clean EventListeners
 * [ ] Add settings menu
   * [ ] Add ability to specify compendia
 * [ ] Sanitize inputs
-* [ ] Compatibility with alternate sheets (probably just Sky5e, Tidy5e)
 * [x] Licensing under 5e SRD rules
 * [ ] Allow for localization
 
@@ -53,8 +51,8 @@
     * [x] Skill prof
       * [x] Limit with num_skills
     * [x] Class feats
-      * [ ] Handling choices (e.g, sorcerous origins, domains)
-    * [ ] Class-bestowed languages
+      * [x] Handling choices (e.g, sorcerous origins, domains)
+    * [x] Class-bestowed languages
     * [x] Starting equipment
     * [x] Hit die
     * [x] Information Panel
@@ -65,10 +63,9 @@
     * [x] Add/remove points
     * [x] *Add* ability bonuses to total ability scores
     * [x] Display point-buy points
-    * [ ] Recommended abilities
   * Background
     * [x] Skill prof
-    * [ ] Language prof
+    * [x] Language prof
     * [x] Personality traits
     * [x] Ideal
     * [x] Bond
@@ -76,7 +73,7 @@
     * [x] Equipment
     * [x] Information Panel
   * Equipment
-    * [ ] Choose equipment or starting wealth
+    * [x] Choose equipment or starting wealth
   * Spells
     * [x] Cantrips
     * [x] 1st Level Spells
@@ -98,6 +95,7 @@
     * [x] Counter for class-granted spell levels
     * [x] Spell info
     * [ ] Account for caster type
+    * [ ] Spell casting ability
   * Racial Features
     * Data model
       * Draw from a feat pool
@@ -127,5 +125,13 @@
     * [x] Eyes
     * [x] Hair
     * [x] Skin
-    * [ ] Rearrange input fields
+    * [x] Appearance
+    * [x] Biography
+    * [x] Rearrange input fields
   * Gather data and pipe into character sheet
+    * [x] Instantiate new character
+    * [x] Merge race sheet
+    * [x] Add items/spells separately
+    * [x] Add easily pipe-able fields
+    * [ ] Add proficiencies
+    * [ ] Add skills

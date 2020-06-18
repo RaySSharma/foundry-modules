@@ -29,13 +29,20 @@ export class HeroConjurer extends FormApplication {
                 'hide_options': 'hidden'
             },
             spells: {
-                'names': [],
-                'data': [],
-                'imgs': [],
                 'levels': [],
-                'restrict_spells': 'checked'
+                'restrict_spells': 'checked',
+                'spells': []
             },
-            bio: {},
+            equipment: {
+                'items': [],
+                'gp': 0,
+                'sp': 0,
+                'cp': 0
+            },
+            bio: {
+                'biography': '',
+                'personality': ''
+            },
             summary: {}
         };
         this.info = {};
@@ -57,18 +64,26 @@ export class HeroConjurer extends FormApplication {
             }
         });
         Handlebars.registerHelper('countLevels', function (spellLevels, levelToCount) {
-            let count = 0
-            spellLevels.forEach( (level) => {
+            let count = 0;
+            spellLevels.forEach((level) => {
                 if (level == levelToCount) {
-                    count += 1
+                    count += 1;
                 }
-            })
-            return count
+            });
+            return count;
         });
         Handlebars.registerHelper('isFolder', function (obj) {
             return (Array.isArray(obj)) ? true : false;
         });
         Handlebars.registerHelper('stripHTML', this._stripHTML);
+        Handlebars.registerHelper('stripSubtext', this._stripSubtext);
+        Handlebars.registerHelper('getSubtext', this._getSubtext);
+        Handlebars.registerHelper('range', function (n, block) {
+            var accum = '';
+            for (var i = 0; i < n; ++i)
+                accum += block.fn(i);
+            return accum;
+        });
     }
 
     static get defaultOptions() {
@@ -121,15 +136,15 @@ export class HeroConjurer extends FormApplication {
         }.bind(this));
 
         $('.background-dropdown').change(function (event) {
-            if (event.target.id == 'background') {
+            if (event.target.name == 'background') {
                 this.data.background.hide_options = '';
             }
             this._submitAndRender();
         }.bind(this));
 
-        $('#HC-abilities .increment-button').click(this._abilityScoreIncrementDecrement.bind(this));
+        $('.increment-button').click(this._abilityScoreIncrementDecrement.bind(this));
 
-        $('#HC-abilities .ability-score').change(function (event) {
+        $('.ability-score').change(function (event) {
             let abilityScore = parseInt(event.target.value);
             if (abilityScore) {
                 this.data.abilities[event.target.name] = abilityScore;
@@ -138,6 +153,7 @@ export class HeroConjurer extends FormApplication {
         }.bind(this));
 
         $('.load-template').click(this._loadDataTemplate.bind(this));
+
         $('.selector').click(function (event) {
             if (event.target.name == "class") {
                 var target = this.info.class[event.target.id];
@@ -151,6 +167,7 @@ export class HeroConjurer extends FormApplication {
             else {
                 return;
             }
+
             for (let key of Object.keys(targetAndNonTargets)) {
                 targetAndNonTargets[key].border = 'none';
             }
@@ -158,51 +175,65 @@ export class HeroConjurer extends FormApplication {
             this._submitAndRender();
         }.bind(this));
 
-        html.find('.drag-remove').each((i, li) => {
-            li.setAttribute("draggable", true);
-            li.addEventListener("dragend", function (event) {
-                let spellName = event.target.children.spells.id;
-                let index = this.data.spells.names.findIndex(x => x == spellName);
-                if (index !== -1) {
-                    this.data.spells.levels.splice(index, 1);
-                    this.data.spells.imgs.splice(index, 1);
-                    this.data.spells.names.splice(index, 1);
+        $('.drag-remove')
+            .on('dragend', function (event) {
+                let eventType = $(event.target).attr('name');
+                let triggerName = $(event.target).attr('id');
+
+                if (eventType == 'item') {
+                    let obj = this.data.equipment.items.find(x => x.name == triggerName);
+                    let index = this.data.equipment.items.indexOf(obj);
+                    if (index !== -1) { this.data.equipment.items.splice(index, 1); };
                 }
+                else if (eventType == 'spell') {
+                    let obj = this.data.spells.spells.find(x => x.name == triggerName);
+                    let index = this.data.spells.spells.indexOf(obj);
+                    if (index !== -1) {
+                        this.data.spells.spells.splice(index, 1);
+                        this.data.spells.levels.splice(index, 1);
+                    }
+                }
+
                 this._submitAndRender();
             }.bind(this));
-        });
 
-        html.find(".draggable").each((i, li) => {
-            li.setAttribute("draggable", true);
-            li.addEventListener("dragstart", function (event) {
-                let spellName = event.target.children.spells.id;
-                let spell = this.info.spells.find(x => x.data.name == spellName);
-                event.dataTransfer.setData("text/plain", JSON.stringify({
-                    src: event.target.children.spells.src,
-                    id: event.target.children.spells.id,
-                    name: event.target.children.spells.name,
-                    level: spell.labels.level
+        $('.draggable')
+            .attr('draggable', 'true')
+            .on('dragstart', function (event) {
+                let eventType = $(event.target).attr('name');
+                let triggerName = $(event.target).attr('id');
+
+                let data;
+                if (eventType == 'item') {
+                    data = this.info.items.find(x => x.data.name == triggerName);
+                }
+                else if (eventType == 'spell') {
+                    data = this.info.spells.find(x => x.data.name == triggerName);
+                }
+                event.originalEvent.dataTransfer.setData('text/plain', JSON.stringify({
+                    data: data,
+                    type: eventType
                 }));
             }.bind(this));
-        });
 
-        html.find(".droppable").each((i, li) => {
-            li.addEventListener("drop", function (event) {
-                let data = event.dataTransfer.getData("text/plain");
+        $('.droppable-pane')
+            .on('drop', function (event) {
+                let data = event.originalEvent.dataTransfer.getData('text/plain');
                 if (data) {
                     data = JSON.parse(data);
-                    if (!this.data.spells.names.includes(data.id)) {
-                        this.data.spells.levels.push(data.level);
-                        this.data.spells.imgs.push(data.src);
-                        this.data.spells.names.push(data.id);
+                    if (data.type == 'item') {
+                        this.data.equipment.items.push(data.data);
+                    }
+                    else if (data.type == 'spell') {
+                        if (!this.data.spells.spells.find(x => x.name == data.data.name)) {
+                            let extraSpellInfo = this.info.spells.find(x => x.name == data.data.name);
+                            this.data.spells.spells.push(data.data);
+                            this.data.spells.levels.push(extraSpellInfo.labels.level);
+                        }
                     }
                     this._submitAndRender();
                 }
-
-            }.bind(this));
-        });
-
-        $(".droppable")
+            }.bind(this))
             .on('dragover', function (event) {
                 $(this).css({
                     "outline": "3px solid black"
@@ -215,16 +246,24 @@ export class HeroConjurer extends FormApplication {
                 });
             });
 
-        $(".info-icon")
-            .click( function (event) {
-                let spellName = $(event.target).siblings('img').attr('id')
-                let spell = this.info.spells.find(x => x.data.name == spellName)
-                spell.sheet.render(true)
-            }.bind(this))
+        $(".render-sheet")
+            .click(function (event) {
+                let eventType = $(event.target).parent().attr('name');
+                let triggerName = $(event.target).parent().attr('id');
 
-        $('input[name="skill"]').on('change', function (event) {
+                let data;
+                if (eventType == 'item') {
+                    data = this.info.items.find(x => x.name == triggerName);
+                }
+                else if (eventType == 'spell') {
+                    data = this.info.spells.find(x => x.data.name == triggerName);
+                }
+                data.sheet.render(true);
+            }.bind(this));
+
+        $('input[name="skill-choice"]').on('change', function (event) {
             let limit = this.data.class.data.num_skills;
-            if ($('input[name="skill"]:checked').length > limit) {
+            if ($('input[name="skill-choice"]:checked').length > limit) {
                 event.target.checked = false;
             }
         }.bind(this));
@@ -239,11 +278,10 @@ export class HeroConjurer extends FormApplication {
             this._submitAndRender();
         }.bind(this));
 
-        $('.spell-search').keyup(function (event) {
-            let spellEntries = $(this).parent().siblings();
-
+        $('.search-bar').keyup(function (event) {
+            let entries = $(this).parent().siblings().children();
             let searchValue = $(this).val().toLowerCase();
-            spellEntries.filter(function () {
+            entries.filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
             });
         });
@@ -255,11 +293,48 @@ export class HeroConjurer extends FormApplication {
             this._submitAndRender();
         }.bind(this));
 
-        /*$('.feat-icon').hover( function (event) {
-            $(event.target).siblings('p').show()
-        }.bind(this), function (event) {
-            $(event.target).siblings('p').hide()
-        })*/
+        $('.money-input').change(function (event) {
+            if (event.target.value < 0) {
+                event.target.value = 0;
+            }
+            this.data.equipment[event.target.id] = event.target.value;
+        }.bind(this));
+
+        $('.convert-gp').click(function (event) {
+            let itemName = $(event.target).parent().attr('id');
+            let item = this.data.equipment.items.find(x => x.data.name == itemName);
+            let itemPrice = parseInt(item.data.price);
+
+            let index = this.data.equipment.items.indexOf(item);
+            if (index !== -1) {
+                this.data.equipment.items.splice(index, 1);
+                this.data.equipment.gp += Math.ceil(0.5 * itemPrice);
+            };
+            this._submitAndRender();
+        }.bind(this));
+
+        $('input[name="bio"').on('change', function (event) {
+            this._submitAndRender();
+        }.bind(this));
+
+        $('button.finish').click(async function (event) {
+            let data = await this._pipeIntoSheet();
+
+            let items = this.data.equipment.items;
+            items.forEach(function (item) {
+                let compendium = this.info.items.find(x => x.name == item.name).compendium.collection;
+                data.importItemFromCollection(compendium, item._id);
+            }.bind(this));
+
+            let spells = this.data.spells.spells;
+            spells.forEach(function (spell) {
+                let compendium = this.info.spells.find(x => x.name == spell.name).compendium.collection;
+                data.importItemFromCollection(compendium, spell._id);
+            }.bind(this));
+
+            data.prepareData();
+
+        }.bind(this));
     }
 
     _updateObject(event, formData) {
@@ -275,22 +350,13 @@ export class HeroConjurer extends FormApplication {
             'template': this._getRaceTemplate(formData.race[0]),
             'hide_options': this.data.race.hide_options,
             'languages': this.data.sheet.data.data.traits.languages.value,
-            'feats': this._packRaceFeats(this.data.sheet.data.items.filter(x => x.type == 'feat'))
+            'feats': this._packRaceFeats(this.data.sheet.data.items.filter(x => x.type == 'feat')),
+            'extra_languages': this._countExtraLanguages(this.data.sheet.data.items.filter(x => x.type == 'feat'))
         } : this.data.race;
 
         if (this.currentSheet == 'race') {
             this._calculateAbilityScores(false);
         }
-
-        this.data.bio = (this.currentSheet == 'bio') ? {
-            'name': formData.name,
-            'age': formData.age,
-            'height': formData.height,
-            'weight': formData.weight,
-            'eyes': formData.eyes,
-            'hair': formData.hair,
-            'skin': formData.skin
-        } : this.data.bio;
 
         this.data.class = (this.currentSheet == 'class') ? {
             'name': this.data.class.name,
@@ -302,8 +368,11 @@ export class HeroConjurer extends FormApplication {
             'num_spells': this.info.class[this.data.class.name].num_spells,
             'description': this.info.class[this.data.class.name].description,
             'hit_dice': this.info.class[this.data.class.name].hit_dice,
+            'hp': this.data.class.hp,
             'img': this.info.class[this.data.class.name].img,
-            'feats': this._getClassFeats(this.info.class[this.data.class.name].feats)
+            'feats': this._getClassFeats(this.info.class[this.data.class.name].feats),
+            "extra_languages": this.info.class[this.data.class.name].extra_languages,
+            'spellcasting': 'int'
         } : this.data.class;
 
         this.data.background = (this.currentSheet == 'background') ? {
@@ -312,24 +381,101 @@ export class HeroConjurer extends FormApplication {
             'template': this.info.background[formData.background].template,
             'skills': this.info.background[formData.background].skills,
             'hide_options': this.data.background.hide_options,
-            'traits': this.data.background.traits,
-            'ideals': this.data.background.ideals,
-            'bonds': this.data.background.bonds,
-            'flaws': this.data.background.flaws
+            'trait': this.data.background.trait,
+            'ideal': this.data.background.ideal,
+            'bond': this.data.background.bond,
+            'flaw': this.data.background.flaw
         } : this.data.background;
 
-        this.data.spells = ((this.currentSheet == 'spells') || (this.currentSheet == 'spells-cantrip') || (this.currentSheet == 'spells-first')) ? {
-            'names': this.data.spells.names,
-            'data': this.info.spells.filter(x => x.name.includes(this.data.spells.names)),
-            'imgs': this.data.spells.imgs,
+        this.data.spells = this.currentSheet.includes('spells') ? {
             'levels': this.data.spells.levels,
             'restrict_spells': this.data.spells.restrict_spells,
+            'spells': this.data.spells.spells
         } : this.data.spells;
+
+        this.data.equipment = (this.currentSheet == 'equipment') ? {
+            'items': this.data.equipment.items,
+            'gp': this.data.equipment.gp,
+            'sp': this.data.equipment.sp,
+            'cp': this.data.equipment.cp
+        } : this.data.equipment;
+
+        this.data.bio = (this.currentSheet == 'biography') ? {
+            'name': formData.bio[0],
+            'age': formData.bio[1],
+            'height': formData.bio[2],
+            'weight': formData.bio[3],
+            'eyes': formData.bio[4],
+            'hair': formData.bio[5],
+            'skin': formData.bio[6],
+            'biography': this.data.bio.biography,
+            'personality': this.data.bio.personality
+        } : this.data.bio;
     }
 
     _onChangeTab(event, tabs, active) {
         super._onChangeTab();
         this.currentSheet = active;
+    }
+
+    _createEditor(target, editorOptions, initialContent) {
+        editorOptions.min_height = 200;
+        super._createEditor(target, editorOptions, initialContent);
+    }
+
+    _onEditorSave(target, element, content) {
+        super._onEditorSave(target, element, content);
+    }
+
+    async _pipeIntoSheet() {
+        let newChar = await game.dnd5e.entities.Actor5e.create({
+            name: "New Actor",
+            type: "character",
+            img: "icons/svg/mystery-man.svg",
+            data: {},
+            token: {},
+            items: [],
+            flags: {}
+        });
+        let data = {
+            'data': {
+                'name': this.data.bio.name,
+                'data': {
+                    'abilities': {
+                        'str': { 'value': this.data.abilities.str },
+                        'dex': { 'value': this.data.abilities.dex },
+                        'con': { 'value': this.data.abilities.con },
+                        'wis': { 'value': this.data.abilities.wis },
+                        'int': { 'value': this.data.abilities.int },
+                        'cha': { 'value': this.data.abilities.cha }
+                    },
+                    'attributes': {
+                        'hp': { 'value': this.data.class.hp },
+                        'speed': { 'value': this.data.race.speed },
+                        'spellcasting': this.data.class.spellcasting
+                    },
+                    'details': {
+                        'alignment': this.data.race.alignment,
+                        'background': this.data.background.name,
+                        'biography': { 'value': this.data.bio.biography },
+                        'trait': this.data.background.trait,
+                        'ideal': this.data.background.ideal,
+                        'bond': this.data.background.bond,
+                        'flaw': this.data.background.flaw
+                    },
+                    'traits': {
+                        'size': this.data.race.size
+                    },
+                    'currency': {
+                        'gp': this.data.equipment.gp,
+                        'sp': this.data.equipment.sp,
+                        'cp': this.data.equipment.cp
+                    }
+                }
+            }
+        };
+        newChar = mergeObject(newChar, data);
+        return newChar;
     }
 
     /**
@@ -356,15 +502,15 @@ export class HeroConjurer extends FormApplication {
     }
 
     _getClassFeats(feats) {
-        let featData = {}
+        let featData = {};
         for (let i = 0; i < feats.length; i++) {
-            let feat = feats[i]
-            let featEntry = this.info.classFeatures.find(x => x.data.name === feat)
+            let feat = feats[i];
+            let featEntry = this.info.classFeatures.find(x => x.data.name === feat);
             if (featEntry) {
-                featData[feat] = featEntry.data
+                featData[feat] = featEntry.data;
             }
         }
-        return featData
+        return featData;
     }
 
     _packRaceFeats(feats) {
@@ -393,6 +539,18 @@ export class HeroConjurer extends FormApplication {
         return packagedFeats;
     }
 
+    _countExtraLanguages(feats) {
+        let count = 0;
+        for (let i = 0; i < feats.length; i++) {
+            let feat = feats[i];
+            let featName = this._stripSubtext(feat.name);
+            if (featName == 'Extra Language') {
+                count += 1;
+            }
+        }
+        return count;
+    }
+
     _submitAndRender() {
         this.submit();
         this.render();
@@ -409,6 +567,10 @@ export class HeroConjurer extends FormApplication {
         this.info.class = await fetch('modules/hero-conjurer/data/classes.json').then(response => response.json());
         this.info.background = await fetch('modules/hero-conjurer/data/backgrounds.json').then(response => response.json());
         this.info.extraSpellInfo = await fetch('modules/hero-conjurer/data/spells.json').then(response => response.json());
+
+        /* Pull out item compendia */
+        this.info.itemsCompendia = ['dnd5e.items', 'dnd5e.trade goods'];
+        this.info.items = await this._unpackCompendia(this.info.itemsCompendia);
 
         /* Pull out class feature compendia */
         this.info.classFeatureCompendia = ['dnd5e.classfeatures'];
@@ -486,10 +648,7 @@ export class HeroConjurer extends FormApplication {
      * @memberof HeroConjurer
      */
     _calculateAbilityScores(scoresManuallyInput = false) {
-        if (scoresManuallyInput) {
-            this.data.abilities = this.data.abilities;
-        }
-        else {
+        if (!scoresManuallyInput) {
             let recalculated = {
                 'str': 0,
                 'dex': 0,
@@ -535,7 +694,6 @@ export class HeroConjurer extends FormApplication {
             }
         }
         this._calculateAbilityScores(false);
-        //this._submitAndRender();
     }
 
     /**
@@ -546,7 +704,9 @@ export class HeroConjurer extends FormApplication {
      * @memberof HeroConjurer
      */
     _stripHTML(html) {
-        return html.replace(/<(.|\n)*?>/g, '').replace(/&nbsp;/g, '');
+        if (html) {
+            return html.replace(/<(.|\n)*?>/g, '').replace(/&nbsp;/g, '');
+        }
     }
 
     /**
@@ -558,6 +718,14 @@ export class HeroConjurer extends FormApplication {
      */
     _stripSubtext(str) {
         return str.replace(/\((.|\n)*?\)/g, '').trim();
+    }
+    _getSubtext(str) {
+        if (str.split('(').length > 1) {
+            return str.split('(')[1].split(')')[0].trim();
+        }
+        else {
+            return str;
+        }
     }
 }
 

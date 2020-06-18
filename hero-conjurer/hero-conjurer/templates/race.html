@@ -1,104 +1,133 @@
-<div id='race-tab' class='fill'>
-    <ul id='HC-abilities'>
+<div id='race-tab' class='fill flex-tab'>
 
-        {{#with data.abilities as | ability |}}
-        {{#each ability}}
-        <li class='ability-entry large'>
-            <div class='ability-entry border'>
+    <h1 class='title'>Choose a race</h1>
+
+    <ul id='HC-abilities' class='flex-row'>
+        {{#each data.abilities}}
+        <li class='ability-container large'>
+            <div class='ability-container border'>
                 <h3 class='ability-score'>{{@key}}</h3>
                 <p class='ability-score'>{{this}}</p>
             </div>
         </li>
         {{/each}}
-        {{/with}}
     </ul>
 
-    <h1 style='text-align: center;'>Choose a race</h1>
+    <div class='fill flex-row'>
+        <div class='choice-pane flex-column'>
 
-    <div class='choice-pane'>
-
-        {{!-- Select Race--}}
-        <h3 class='header' style='width: 100%;'>Race:</h3>
-        <select class='race-dropdown lighten' name='race' id='race'>
-            <option value='{{data.race.name}}' selected hidden>{{data.race.name}}</option>
-            {{#each info.race}}
-            <option value='{{this.data.name}}'>{{this.data.name}}</option>
-            {{/each}}
-        </select>
-
-        {{!-- Race Characteristics--}}
-        <div class='container' style='width: 100%;'>
-            {{!-- Size --}}
-            <div class='flex-item' style='margin-top: 5%'>
-                <h3 {{data.race.hide_options}} class='subheader' >Size:</h3>
-                <h3 style="margin-top: 0;" class='entry subheader' name='race' id='size'>{{data.race.size}}</h3>
-            </div>
-            {{!-- Speed --}}
-            <div class='flex-item' style='margin-top: 5%'>
-                <h3 {{data.race.hide_options}} class='subheader'>Speed:</h3>
-                <h3 {{data.race.hide_options}} style='margin-top: 0;' class='entry subheader' name='race' id='speed'>
-                    {{data.race.speed}}</h3>
-            </div>
-            {{!-- Languages --}}
-            <div class='flex-item' style='margin-top: 5%'>
-                <h3 {{data.race.hide_options}} class='subheader' >Languages:</h3>
-                <ul class='entry subheader' style='list-style: none; text-align: left; margin-top: 0; padding-left: 20%;' name='race' id='languages'>
-                    {{#each data.race.languages}}
-                    <li>{{this}}</li>
+            {{!-- Select Race--}}
+            <div class='flex-column'>
+                <h3 class='header required'>Race</h3>
+                <select class='race-dropdown darken general-text' name='race' id='race' required>
+                    <option value='{{data.race.name}}' selected hidden>{{data.race.name}}</option>
+                    {{#each info.race}}
+                    <option value='{{this.data.name}}'>{{this.data.name}}</option>
                     {{/each}}
-                </ul>
+                </select>
+            </div>
+
+            {{!-- Race Characteristics--}}
+            <div class='flex-row'>
+                {{!-- Size --}}
+                <div class='trait-container'>
+                    <h3 {{data.race.hide_options}} class='subheader'>Size</h3>
+                    <h3 style="margin-top: 0;" class='container subheader' name='race' id='size'>{{data.race.size}}</h3>
+                </div>
+                {{!-- Speed --}}
+                <div class='trait-container'>
+                    <h3 {{data.race.hide_options}} class='subheader'>Speed</h3>
+                    <h3 {{data.race.hide_options}} style='margin-top: 0;' class='container subheader' name='race'
+                        id='speed'>
+                        {{data.race.speed}}</h3>
+                </div>
+                {{!-- Languages --}}
+                <div class='trait-container'>
+                    <h3 {{data.race.hide_options}} class='subheader'>Languages</h3>
+                    <ul class='container subheader' style='text-align: left; padding-left: 25%;' name='race'
+                        id='languages'>
+                        {{#each data.race.languages}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+
+            {{!-- Extra Languages --}}
+            {{#if data.race.extra_languages}}
+            <div class='flex-column'>
+                <h3 {{data.race.hide_options}} class='subheader'>Extra Languages: {{data.race.extra_languages}}</h3>
+
+                <div class='subheader general-text darken flex-column'
+                    style='list-style: none; text-align: left; padding-left: 0; width: 80%;' name='race'
+                    id='extra-languages'>
+                    {{#range data.race.extra_languages}}
+                    <input type="text" placeholder="e.g, Draconic">
+                    {{/range}}
+                </div>
+            </div>
+            {{/if}}
+
+            <hr {{data.race.hide_options}} class='section-break'>
+
+            {{!--Select Alignment--}}
+            <div class='flex-column'>
+                <h3 {{data.race.hide_options}} class='header'>Alignment</h3>
+                <select {{data.race.hide_options}} class='race-dropdown darken general-text' name='race'
+                    id='alignment'>
+                    <option value='{{data.race.alignment}}' selected hidden>{{data.race.alignment}}</option>
+                    {{#with info.alignment as | alignment |}}
+                    {{#each alignment}}
+                    <option value='{{@key}}'>{{@key}}</option>
+                    {{/each}}
+                    {{/with}}
+                </select>
+            </div>
+
+            <hr {{data.race.hide_options}} class='section-break'>
+
+            {{!-- Race Features --}}
+            <div class='flex-column'>
+                <h3 {{data.race.hide_options}} class='header'>Racial Features
+                </h3>
+                <div class='flex-column' name='race' id='languages'>
+                    {{#each data.race.feats}}
+                    {{#if (isFolder this)}}
+                    <div class='feat-container tooltip darken'>
+                        <img src='{{this.[0].img}}' class='feat-icon'>
+                        <span class='subheader'>{{stripSubtext this.[0].name}}</span>
+                        <span class='tooltiptext'>{{stripHTML this.[0].data.description.value}}</span>
+                    </div>
+                    <div class='dropdown-container'>
+                        <select {{data.race.hide_options}} class='race-dropdown darken' name='feat'>
+                            <option selected hidden disabled></option>
+                            {{#this}}
+                            <option value='{{name}}'>{{name}}</option>
+                            {{/this}}
+                        </select>
+                    </div>
+                    {{else}}
+                    <div class='feat-container tooltip darken'>
+                        <img src='{{this.img}}' class='feat-icon'>
+                        <span class='subheader'>{{this.name}}</span>
+                        <span class='tooltiptext'>{{stripHTML this.data.description.value}}</span>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                </div>
+            </div>
+
+            <hr {{data.race.hide_options}} class='section-break'>
+            
+        </div>
+
+        {{!-- Info Pane --}}
+        {{#if data.race.name}}
+        <div class='fill flex-column'>
+            <div class='info-pane'>
+                <iframe class='fill darken' src='{{data.race.template}}'></iframe>
             </div>
         </div>
-
-        <hr {{data.race.hide_options}} class='section-break'>
-
-        {{!--Select Alignment--}}
-        <h3 {{data.race.hide_options}} class='header' style='width: 100%;'>Alignment:</h3>
-        <select {{data.race.hide_options}} class='race-dropdown lighten' name='race' id='alignment'>
-            <option value='{{data.race.alignment}}' selected hidden>{{data.race.alignment}}</option>
-            {{#with info.alignment as | alignment |}}
-            {{#each alignment}}
-            <option value='{{@key}}'>{{@key}}</option>
-            {{/each}}
-            {{/with}}
-        </select>
-
-        <hr {{data.race.hide_options}} class='section-break'>
-
-        {{!-- Race Features --}}
-        <div class='flex-item'>
-            <h3 {{data.race.hide_options}} class='header' style='width: 100%; margin-bottom: 10px'>Racial Features:</h3>
-            <ul class='subheader' style='list-style: none;' name='race' id='languages'>
-                {{#each data.race.feats}}
-                {{#if (isFolder this)}}
-                <div class='feat-entry tooltip'>
-                    <img src='{{this.[0].img}}' class='feat-icon'>
-                    <span class='tooltiptext'>{{stripHTML this.[0].data.description.value}}</span> 
-                    <select {{data.race.hide_options}} class='race-dropdown lighten' style='margin-left: 5%;' name='feat'>
-                        <option selected hidden disabled></option>
-                        {{#this}}
-                        <option value='{{name}}'>{{name}}</option>
-                        {{/this}}
-                    </select>
-                </div>
-                {{else}}
-                <li class='feat-entry tooltip'>
-                    <img src='{{this.img}}' class='feat-icon'>
-                    <span style='margin: auto'>{{this.name}}</span>
-                    <span class='tooltiptext'>{{stripHTML this.data.description.value}}</span> 
-                </li>
-                {{/if}}
-                {{/each}}
-            </ul>
-        </div>
-
+        {{/if}}
     </div>
-
-    {{#if data.race.name}}
-    {{!-- Info Pane --}}
-    <div class='info-pane'>
-        <iframe class='fill lighten' src='{{data.race.template}}'></iframe>
-    </div>
-    {{/if}}
-
 </div>

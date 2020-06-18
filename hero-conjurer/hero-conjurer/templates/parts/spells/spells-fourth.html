@@ -1,31 +1,29 @@
-<div class='spells-fourth fill'>
-    <div class='choice-pane spell-pane'>
-        <div class='search-bar lighten'>
-            <input type="text" class="spell-search general-text" placeholder="Search" style='font-size: 1.3em'>
-            <input {{data.spells.restrict_spells}} type='checkbox' id='spell-restrict' class='spell-restrict' name='spell-restrict'>
-            <label for='spell-restrict' style='font-size: 1.3em;'>Class-specific Spells</label>
-        </div>
+<div class='flex-column'>
+    <div class='lighten'>
+        <input type="text" class="search-bar general-text" placeholder="Search">
+        <input {{data.spells.restrict_spells}} type='checkbox' id='spell-restrict' class='spell-restrict'
+            name='spell-restrict'>
+        <label for='spell-restrict' style='font-size: 1.3em;'>Class-specific Spells</label>
+    </div>
+    <div class='flex-column'>
         {{#if data.spells.restrict_spells}}
-        {{#each data.class.spells.[4]}}
-        <div class='spell-entry draggable'>
-            <img class='spell-icon' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells'
-                id='{{this.name}}'>
-            <span class='spell-info'>{{this.name}}</span>
-            <span class='spell-info' style='font-size: 1.6em;'>{{this.labels.school}}</span>
-            <span class='info-icon'>🛈</span>
-        </div>
-        {{/each}}
+            {{#each data.class.spells.[4]}}
+                <div class='spell-container draggable' name='spell' id='{{this.name}}'>
+                    <img class='spell-icon' src='{{this.data.img}}' value='Spells:{{this.name}}'>
+                    <span class='spell-info'>{{this.name}}</span>
+                    <span class='spell-info' style='font-size: 1.6em;'>{{this.labels.school}}</span>
+                    <span class='info-icon render-sheet'>🛈</span>
+                </div>
+            {{/each}}
+        {{else}}
+            {{#each info.spellList.[4]}}
+                <div class='spell-container draggable' name='spell' id='{{this.name}}'>
+                    <img class='spell-icon' src='{{this.data.img}}' value='Spells:{{this.name}}'>
+                    <span class='spell-info'>{{this.name}}</span>
+                    <span class='spell-info' style='font-size: 1.6em;'>{{this.labels.school}}</span>
+                    <span class='info-icon render-sheet'>🛈</span>
+                </div>
+            {{/each}}
         {{/if}}
-
-        {{#unless data.spells.restrict_spells}}
-        {{#each info.spellList.[4]}}
-        <div class='spell-entry draggable'>
-            <img class='spell-icon' src='{{this.data.img}}' value='Spells:{{this.name}}' name='spells'
-                id='{{this.name}}'>
-            <span class='spell-info'>{{this.name}}</span>
-            <span class='spell-info' style='font-size: 1.6em;'>{{this.labels.school}}</span>
-        </div>
-        {{/each}}
-        {{/unless}}
     </div>
 </div>

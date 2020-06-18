@@ -36,7 +36,8 @@
         "feats": [
             "Rage",
             "Unarmored Defense (Barbarian)"
-        ]
+        ],
+        "extra_languages": 0
     },
     "Bard": {
         "template": "modules/hero-conjurer/templates/parts/classes/bard.html",
@@ -88,7 +89,8 @@
         "img": "systems/dnd5e/icons/skills/affliction_24.jpg",
         "feats": [
             "Bardic Inspiraton"
-        ]
+        ],
+        "extra_languages": 0
     },
     "Cleric": {
         "template": "modules/hero-conjurer/templates/parts/classes/cleric.html",
@@ -124,7 +126,24 @@
         "description": "A chosen champion blessed with strength and magic by their deity, capable of inflicting and curing injuries.",
         "hit_dice": "D8",
         "img": "systems/dnd5e/icons/skills/light_04.jpg",
-        "feats": []
+        "feats": [],
+        "extra_languages": 0,
+        "feat_choices": {
+            "Domain": {
+                "Life": {
+                    "spells": [
+                        "Bless",
+                        "Cure Wounds"
+                    ],
+                    "armor_prof": [
+                        "Heavy Armor"
+                    ],
+                    "feats": [
+                        "Disciple of Life"
+                    ]
+                }
+            }
+        }
     },
     "Druid": {
         "template": "modules/hero-conjurer/templates/parts/classes/druid.html",
@@ -170,7 +189,8 @@
         "description": "A magician who wields powers born of nature and the elements, often taking the form of the animals they seek to protect.",
         "hit_dice": "D8",
         "img": "systems/dnd5e/icons/skills/green_13.jpg",
-        "feats": []
+        "feats": [],
+        "extra_languages": 1
     },
     "Fighter": {
         "template": "modules/hero-conjurer/templates/parts/classes/fighter.html",
@@ -212,12 +232,43 @@
         "img": "systems/dnd5e/icons/skills/gray_08.jpg",
         "feats": [
             "Fighting Style: Archery",
-            "Fighting Style: Defense",
-            "Fighting Style: Dueling",
-            "Fighting Style: Great Weapon Fighting",
-            "Fighting Style: Protection",
-            "Fighting Style: Two Weapon Fighting"
-        ]
+            "Second Wind"
+        ],
+        "extra_languages": 0,
+        "feat_choices": {
+            "Fighting Style: Archery": {
+                "Archery": {
+                    "feats": [
+                        "Fighting Style: Archery"
+                    ]
+                },
+                "Defense": {
+                    "feats": [
+                        "Fighting Style: Defense"
+                    ]
+                },
+                "Dueling": {
+                    "feats": [
+                        "Fighting Style: Dueling"
+                    ]
+                },
+                "Great Weapon Fighting": {
+                    "feats": [
+                        "Fighting Style: Great Weapon Fighting"
+                    ]
+                },
+                "Protection": {
+                    "feats": [
+                        "Fighting Style: Protection"
+                    ]
+                },
+                "Two Weapon Fighting": {
+                    "feats": [
+                        "Fighting Style: Two Weapon Fighting"
+                    ]
+                }
+            }
+        }
     },
     "Monk": {
         "template": "modules/hero-conjurer/templates/parts/classes/monk.html",
@@ -252,7 +303,8 @@
         "feats": [
             "Unarmored Defense (Monk)",
             "Martial Arts"
-        ]
+        ],
+        "extra_languages": 0
     },
     "Paladin": {
         "template": "modules/hero-conjurer/templates/parts/classes/paladin.html",
@@ -293,7 +345,8 @@
         "feats": [
             "Divine Sense",
             "Lay on Hands"
-        ]
+        ],
+        "extra_languages": 0
     },
     "Ranger": {
         "template": "modules/hero-conjurer/templates/parts/classes/ranger.html",
@@ -335,7 +388,8 @@
         "feats": [
             "Favored Enemy",
             "Natural Explorer"
-        ]
+        ],
+        "extra_languages": 1
     },
     "Rogue": {
         "template": "modules/hero-conjurer/templates/parts/classes/rogue.html",
@@ -381,7 +435,8 @@
         "feats": [
             "Sneak Attack",
             "Thieves’ Cant"
-        ]
+        ],
+        "extra_languages": 0
     },
     "Sorcerer": {
         "template": "modules/hero-conjurer/templates/parts/classes/sorcerer.html",
@@ -419,7 +474,21 @@
         "img": "systems/dnd5e/icons/skills/fire_08.jpg",
         "feats": [
             "Sorcerous Origins"
-        ]
+        ],
+        "extra_languages": 0,
+        "feat_choices": {
+            "Sorcerous Origins": {
+                "Draconic Bloodline": {
+                    "feats": [
+                        "Dragon Ancestor",
+                        "Draconic Resilience"
+                    ],
+                    "languages": [
+                        "Draconic"
+                    ]
+                } 
+            }
+        }
     },
     "Warlock": {
         "template": "modules/hero-conjurer/templates/parts/classes/warlock.html",
@@ -457,7 +526,17 @@
         "feats": [
             "Otherworldly Patron",
             "Eldritch Invocations"
-        ]
+        ],
+        "extra_languages": 0,
+        "feat_choices": {
+            "Otherworldly Patron": {
+                "The Fiend": {
+                    "feats": [
+                        "Dark One's Blessing"
+                    ]
+                } 
+            }
+        }
     },
     "Wizard": {
         "template": "modules/hero-conjurer/templates/parts/classes/wizard.html",
@@ -495,6 +574,7 @@
         "img": "systems/dnd5e/icons/skills/blue_13.jpg",
         "feats": [
             "Arcane Recovery"
-        ]
+        ],
+        "extra_languages": 0
     }
 }

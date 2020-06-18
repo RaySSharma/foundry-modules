@@ -10,10 +10,7 @@
             <a class='tablinks item background' data-tab='background'>BACKGROUND</a>
             <a class='tablinks item equipment' data-tab='equipment'>EQUIPMENT</a>
             <a class='tablinks item spells' data-tab='spells'>SPELLS</a>
-            <a hidden class='tablinks item spells-cantrip' data-tab='spells-cantrip'>SPELLS</a>
-            <a hidden class='tablinks item spells-first' data-tab='spells-first'>SPELLS</a>
-            <!--<a class='tablinks item feats' data-tab='feats'>FEATS</a>-->
-            <a class='tablinks item bio' data-tab='bio'>BIO</a>
+            <a class='tablinks item biography' data-tab='biography'>BIO</a>
             <a class='tablinks item summary' data-tab='summary'>SUMMARY</a>
         </nav>
 
@@ -21,11 +18,13 @@
 
             {{!-- Start Tab --}}
             <div class='tab fill' data-tab='start' data-group="primary">
-                <div class='banner-container' style='margin-top: 10%; margin-bottom: 10%'>
-                    <img class='banner' src="modules/hero-conjurer/images/banner.png">
+                <div class='flex-column'>
+                    <div class='banner-container'>
+                        <img class='banner' src="modules/hero-conjurer/images/banner.png">
+                    </div>
+                    <h3 class='title'>Welcome to the D&D 5E SRD character creator</h3>
+                    <h3 class='title'>Select a tab to customize a new hero</h3>
                 </div>
-                <h3 class='title'>Welcome to the D&D 5E SRD character creator</h3>
-                <h3 class='title'>Select a tab to customize a new hero</h3>
             </div>
 
             {{!-- Race Tab --}}
@@ -58,13 +57,8 @@
                 {{> "modules/hero-conjurer/templates/spells.html"}}
             </div>
 
-            {{!-- Feats Tab --}}
-            <div class='tab fill' data-tab='feats' data-group="primary">
-                {{> "modules/hero-conjurer/templates/feats.html"}}
-            </div>
-
             {{!-- Biography Tab --}}
-            <div class='tab fill' data-tab='bio' data-group="primary">
+            <div class='tab fill' data-tab='biography' data-group="primary">
                 {{> "modules/hero-conjurer/templates/bio.html"}}
             </div>
 

@@ -1,509 +1,592 @@
 /* Parent form */
 #HC-form {
-  display: flex;
-  font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
+	display: flex;
+	font-family: "Nodesto", "Signika", "Palatino Linotype", serif;
 }
 #HC-form .form {
-  width: 100%;
+	width: 100%;
 }
 /* Container for banner */
 #HC-form .banner-container {
-  position: relative;
-  margin: auto;
-  width: 50%;
-  height: 110px;
-  margin-left: auto;
-  margin-right: auto;
+	position: relative;
+	width: 50%;
+	height: 110px;
+	margin: 10% auto;
 }
 /* Banner */
 #HC-form .banner {
-  width: 100%;
-  height: auto;
-  background-color: #fff0;
-  border-style: none;
-  box-shadow: none;
-  position: absolute;
-  top: 0px;
+	width: 100%;
+	height: auto;
+	background-color: #fff0;
+	border-style: none;
+	box-shadow: none;
+	position: absolute;
+	top: 0px;
 }
-
 /* Tab header */
 #HC-header {
-  display: flex;
-  overflow: hidden;
-  width: 100%;
-  margin: auto;
+	display: flex;
+	overflow: hidden;
+	width: 100%;
+	margin: auto;
 }
-
 #HC-header .tablinks {
-  transition: 0.3s;
-  font-size: 1.3em;
-  margin: auto;
-  padding: 0.3em;
-  text-align: center;
-  width: 100%;
-  border-bottom: 1px solid #000000;
+	transition: 0.3s;
+	font-size: 1.3em;
+	margin: auto;
+	padding: 0.3em;
+	text-align: center;
+	width: 100%;
+	border-bottom: 1px solid #000000;
 }
-
 #HC-header .tablinks:hover {
-  color: #dbdbdb;
-  background-color: #b30000;
+	color: #dbdbdb;
+	background-color: #b30000;
 }
-
 #HC-header .tablinks.active {
-  color: #dbdbdb;
-  background-color: #b30000;
-  text-shadow: none;
+	color: #dbdbdb;
+	background-color: #b30000;
+	text-shadow: none;
 }
 #HC-header .tablinks.active:hover {
-  text-shadow: 0 0 8px red;
+	text-shadow: 0 0 8px red;
 }
-
 #HC-abilities {
-  display: flex;
-  list-style: none;
-  width: 80%;
-  margin: 2% auto 2% auto;
-  padding: 0;
-  font-size: 28px;
+	display: flex;
+	list-style: none;
+	width: 80%;
+	margin: 2% auto 2% auto;
+	padding: 0;
+	font-size: 28px;
 }
-
-#HC-abilities .ability-entry {
-  height: auto !important;
-  width: 100px;
-  text-align: center;
-  margin: auto;
+#HC-abilities .ability-container {
+	height: auto !important;
+	width: 100px;
+	text-align: center;
+	margin: auto;
 }
-
 #HC-abilities .ability-score {
-  margin: auto;
-  font-size: 1.3em;
-  margin-bottom: 5px;
-  height: 100%;
+	margin: auto;
+	font-size: 1.3em;
+	margin-bottom: 5px;
+	height: 100%;
 }
-
 #HC-abilities .border {
-  border: 1px black solid;
-  padding: 0 0.8em;
+	border: 1px black solid;
+	padding: 0 0.8em;
 }
-
 #HC-abilities .increment-button{
-  border: 1px solid #000000;
+	border: 1px solid #000000;
 	display:inline-block;
-  height:auto;
-  width:100%;
-  background-color: rgba(0, 0, 0, 0.05);
+	height:auto;
+	width:100%;
+	background-color: rgba(0, 0, 0, 0.05);
 }
 #HC-abilities .increment-button:hover{
-  background-color: #b30000;
-  border: 1px solid #000000;
+	background-color: #b30000;
+	border: 1px solid #000000;
 }
 #HC-abilities .increment-button:active{
-  transform: translateY(1px);
-  filter: saturate(110%);
+	transform: translateY(1px);
+	filter: saturate(110%);
 }
-
 #HC-abilities .increment:after{
-  position:relative;
-  top:-0.6em;
-  content:'';
+	position:relative;
+	top:-0.6em;
+	content:'';
 	border-style: solid;
 	border-width: 0 7px 8px 7px;
 	border-color: transparent transparent #000000 transparent;
-  border-radius:2px;
+	border-radius:2px;
 }
-
 #HC-abilities .increment:hover:after {
-  border-color: transparent transparent #dbdbdb transparent;
+	border-color: transparent transparent #dbdbdb transparent;
 }
-
 #HC-abilities .decrement:after{
-  position:relative;
-  top:0.8em;
-  content:'';
+	position:relative;
+	top:0.8em;
+	content:'';
 	border-style: solid;
 	border-width: 8px 7px 0 7px;
 	border-color: #000000 transparent transparent transparent;
-  border-radius:2px;
+	border-radius:2px;
 }
-
 #HC-abilities .decrement:hover:after {
-  border-color: #dbdbdb transparent transparent transparent;
+	border-color: #dbdbdb transparent transparent transparent;
 }
-
 /* Style the tab content */
 #HC-content {
-  padding: 6px 12px;
-  width: 100%;
-  height: 100%;
-} 
-
+	padding: 6px 12px;
+	width: 100%;
+	height: 100%;
+}
 #HC-content .section-break {
-  margin: 10px;
-  width: 100%;
-  border: 1px darkred solid;
+	width: 90%;
+	border: 1px darkred solid;
 }
-
 #HC-content .race-dropdown {
-  width: 100%;
-  margin: auto;
+	width: 80%;
+	margin: 2.5% auto 2.5% auto;
 }
-
+#HC-content .dropdown {
+	width: 80%;
+	margin: 2.5% auto 2.5% auto;
+}
+#HC-content .dropdown-container {
+	margin: auto;
+	text-align: center;
+	width: 100%;
+}
 #HC-content .background-dropdown {
-  width: 100%;
-  margin: 5%;
+	width: 80%;
+	margin: 5%;
 }
-
-#HC-content .subtabs {
-  position: absolute;
-  width: 8%;
-  font-size: 40px;
-  left: -1%;
-  border-right: 2px black solid;
-  display: block;
+#HC-content .class-dropdown {
+	width: 100%;
 }
-
+#HC-content .subtabs-container {
+	font-size: xx-large;
+	border-right: 2px black solid;
+	width: 6%;
+	height: 0%;
+}
 #HC-content .subtablinks {
-  padding: 10%;
-  width: 100%;
-  display: inline-block;
-  text-align: center;
-  position: relative;
-  transition: 0.3s;
+	padding: 10%;
+	text-align: center;
+	transition: 0.3s;
 }
-
-#HC-content .subcontent {
-  position: absolute;
-  left: 8%;
-  width: 92%;
-}
-
 #HC-content .subtablinks.active {
-  color: #dbdbdb;
-  background-color: #b30000;
+	color: #dbdbdb;
+	background-color: #b30000;
 }
-
 #HC-content .subtablinks:hover {
-  color: #dbdbdb;
-  background-color: #b30000;
+	color: #dbdbdb;
+	background-color: #b30000;
 }
-
 #HC-content .choice {
-  width: 30%;
-  padding: 5%;
+	width: 30%;
+	padding: 5%;
 }
 #HC-content .choice-label {
-  font-size: 1.4em;
+	font-size: 1.4em;
 }
 #HC-content .choice-input {
-  height: 1.6em;
+	height: 1.6em;
 }
-
+#HC-content .big-choice-input {
+	height: 4%;
+}
 #HC-content .choice-pane {
-  width: 30%;
-  display: flex;
-  flex-wrap: wrap;
-  float: left;
+	flex: 0 0 30%;
+	margin-right: 2%
 }
-
 #HC-content .info-pane {
-  float: right;
-  width: 68%;
-  height: 100%;
+	flex: 0 0 70%;
+	padding-right: 2%;
 }
-
 #HC-content .feat-icon {
-  width: 40px;
-  height: 40px;
+	width: 40px;
+	height: 40px;
+	margin: 2%;
+}
+#HC-content .feat-container {
+	display: flex;
+	margin: 5% auto 5% auto;
+	border: 1px darkgrey solid;
+	width: 90%;
+}
+#HC-content .editor-container {
+	height: 100%;
+	border-radius: 3px;
+	border: 1px solid #7a7971;
+	padding: 2%;
 }
 
-#HC-content .feat-entry {
-  display: flex;
-  margin-bottom: 8%;
+#HC-content .editor {
+  height: 100%
 }
-
 #HC-content .spellbook {
-  float: right;
-  position: relative;
-  width: 55%;
-  height: 60%;
-  left: 1%;
-  border: 2px #000000 solid;
-  overflow: auto;
+	width: 55%;
+	border: 2px #000000 solid;
+	overflow: auto;
 }
-
 #HC-content .spell-pane {
-  overflow: auto;
-  max-height: 800px;
-  width: 40%;
-  padding: 5px;
-  border: 2px black solid;
+	overflow: auto;
+	width: 40%;
+	padding: 5px;
+	max-height: 650px;
+	border: 2px black solid;
+	margin: 0 2% 0 2%;
 }
-
-#HC-content .spell-entry {
-  margin-bottom: 2%;
-  margin-right: 2%;
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 3px black solid;
-  width: 100%;
-  position: relative;
-  height: 100px;
+#HC-content .spell-container {
+	margin-bottom: 2%;
+	margin-right: 2%;
+	background-color: rgba(0, 0, 0, 0.1);
+	border: 3px black solid;
+	width: 100%;
+	position: relative;
+	height: 100px;
 }
-
-#HC-content .spell-entry:hover {
-  background-color: #b30000;
-  color: #dbdbdb;
-  cursor: move; /* fallback if grab cursor is unsupported */
-  cursor: grab;
+#HC-content .spell-container:hover {
+	background-color: #b30000;
+	color: #dbdbdb;
+	cursor: move;
+	/* fallback if grab cursor is unsupported */
+	cursor: grab;
 }
-
+#HC-content .item-container {
+	margin-bottom: 2%;
+	margin-right: 2%;
+	background-color: rgba(0, 0, 0, 0.1);
+	border: 3px black solid;
+	width: 100%;
+	position: relative;
+	height: 80px;
+	display: inline-block;
+	line-height: 80px;
+}
+#HC-content .item-container:hover {
+	background-color: #b30000;
+	color: #dbdbdb;
+	cursor: move;
+	/* fallback if grab cursor is unsupported */
+	cursor: grab;
+}
+#HC-content .item-recorded {
+	margin: 2% auto;
+	background-color: rgba(0, 0, 0, 0.1);
+	border: 2px #000000 solid;
+	width: 80%;
+	position: relative;
+	height: 50px;
+	line-height: 50px;
+	display: inline-block;
+}
+#HC-content .item-recorded:hover {
+	background-color: #b30000;
+	color: #dbdbdb;
+	cursor: move;
+	/* fallback if grab cursor is unsupported */
+	cursor: grab;
+}
 #HC-content .spell-recorded {
-  margin: 2%;
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 2px #000000 solid;
-  width: 45%;
-  position: relative;
-  height: auto;
-  display: inline-block;
+	margin: 2%;
+	background-color: rgba(0, 0, 0, 0.1);
+	border: 2px #000000 solid;
+	width: 45%;
+	position: relative;
+	height: auto;
+	display: inline-block;
 }
-
 #HC-content .spell-recorded:hover {
-  background-color: #b30000;
-  color: #dbdbdb;
-  cursor: move; /* fallback if grab cursor is unsupported */
-  cursor: grab;
+	background-color: #b30000;
+	color: #dbdbdb;
+	cursor: move;
+	/* fallback if grab cursor is unsupported */
+	cursor: grab;
 }
-
 #HC-content .spell-icon {
-  width: 80px;
-  height: 80px;
-  position: absolute;
-  float: left;
-  margin: 2%;
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	float: left;
+	margin: 2%;
 }
-
 #HC-content .spell-info {
-  float: right;
-  width: 70%;
-  margin: 2%;
-  text-align: center;
-  font-size: 2em;
+	float: right;
+	width: 70%;
+	margin: 2%;
+	text-align: center;
+	font-size: 2em;
 }
-
+#HC-content .item-info {
+	display: inline-block;
+	width: 80%;
+	margin: auto;
+	text-align: center;
+	font-size: 2.3vh;
+	line-height: 18px;
+	padding-left: 75px;
+	vertical-align: middle;
+}
+#HC-content .money-input {
+	width: 30%;
+	margin: 2%;
+}
+#HC-content .money-label {
+	margin: 2% auto;
+}
+#HC-content .item-icon {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	float: left;
+	margin: 2%;
+}
 #HC-content .info-icon {
-  position: absolute;
-  color: #000000;
-  right: 10px;
-  top: 30%;
-  font-size: 25px;
+	position: absolute;
+	color: #000000;
+	right: 10px;
+	top: 30%;
+	font-size: 25px;
 }
-
 #HC-content .info-icon:hover {
-  background-color: #b30000;
-  color: #dbdbdb;
-  cursor: default;
+	background-color: #b30000;
+	color: #dbdbdb;
+	cursor: default;
 }
-
+#HC-content .info-icon-item {
+	padding-left: 10px;
+	color: #000000;
+	font-size: 2.2vh;
+	line-height: 18px;
+	vertical-align: middle;
+	text-align: center;
+}
+#HC-content .info-icon-item:hover {
+	background-color: #b30000;
+	color: #dbdbdb;
+	cursor: default;
+}
 #HC-content .spell-recorded-info {
-  float: right;
-  width: 65%;
-  text-align: center;
-  font-size: 1.5em;
-  position: relative;
-  margin-right: 10%;
+	float: right;
+	width: 65%;
+	text-align: center;
+	font-size: 1.5em;
+	position: relative;
+	margin-right: 10%;
 }
-
+#HC-content .item-recorded-info {
+	display: inline-block;
+	width: 85%;
+	text-align: center;
+	font-size: 2vh;
+	padding-left: 20%;
+	vertical-align: middle;
+	line-height: 18px;
+}
 #HC-content .spell-recorded-icon {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  float: left;
-  margin-top: 2%;
-  margin-left: 4%;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	float: left;
+	margin: 2%;
+}
+#HC-content .item-recorded-icon {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	float: left;
+	margin: 2%;
+}
+#HC-content .convert-gp {
+	color: #000000;
+	font-size: 2vh;
+	line-height: 18px;
+	vertical-align: middle;
+	text-align: center;
+}
+#HC-content .convert-gp:hover {
+	background-color: #b30000;
+	color: #dbdbdb;
+	cursor: default;
 }
 #HC-content .header {
-  font-size: 1.8em;
-  width: 100%;
-  text-align: center;
-  margin: auto;
+	font-size: xx-large;
+	width: 100%;
+	text-align: center;
+	margin: 2.5% auto;
 }
-
 #HC-content .subheader {
-  font-size: 1.6em;
-  text-align: center;
-  margin: auto;
-  margin-bottom: 10px;
+	font-size: x-large;
+	text-align: center;
+	margin: auto;
+	margin-bottom: 10px;
 }
-
 #HC-content .title {
-  font-size: 2em;
-  width: 100%;
-  text-align: center;
-  margin: auto;
+	font-size: 2.5em;
+	width: 100%;
+	text-align: center;
+	margin: 0 auto 2.5% auto;
 }
-
 #HC-content .general-text {
-  font-size: 1.1em;
-  margin: auto;
-  font-family: "Signika"
-
+	font-size: larger;
+	font-family: "Signika"
 }
-
-#HC-content .class-entry {
-  margin: auto;
-  border: 0;
+#HC-content .class-container {
+	margin: auto;
+	border: 0;
 }
-
 #HC-content .class-icon {
-  width: 80px;
-  height: 80px;
+	width: 80px;
+	height: 80px;
 }
-
 #HC-content .background-button {
-  width: 100%;
-  margin: auto;
+	width: 100%;
+	margin: auto;
 }
-
 #HC-content .button-container {
-  width: 20%;
-  margin: auto;
-  margin-top: 10px;
+	width: 20%;
+	margin: auto;
+	margin-top: 10px;
 }
-
 #HC-content .class-icon:hover {
-  opacity: 0.5;
+	opacity: 0.5;
 }
-
 #HC-navigate .navigate:hover {
-  color: #dbdbdb;
-  background-color: #b30000;
-  box-shadow: none;
+	color: #dbdbdb;
+	background-color: #b30000;
+	box-shadow: none;
 }
 #HC-navigate .navigate.active {
-  color: #dbdbdb;
-  background-color: #b30000;
-  box-shadow: none;
+	color: #dbdbdb;
+	background-color: #b30000;
+	box-shadow: none;
 }
-
 #HC-navigate .navigate {
-  background-color: #cccccc;
-  border: 3px solid #000000;
-  transition: 0.3s;
-  width: auto;
-  font-size: 1em;
-  font-weight: bold;
-  border-radius: 10px;
-  margin: 1em;
+	background-color: #cccccc;
+	border: 3px solid #000000;
+	transition: 0.3s;
+	width: auto;
+	font-size: 1em;
+	font-weight: bold;
+	border-radius: 10px;
+	margin: 1em;
 }
 #HC-navigate .prev {
-  float: left;
+	float: left;
 }
 #HC-navigate .next {
-  float: right;
+	float: right;
 }
-
 .shadow-border {
-  box-shadow: 0 0 8px #b30000;
+	box-shadow: 0 0 8px #b30000;
 }
 .fill {
-  height: 100%;
-  width: 100%;
+	height: 100%;
+	width: 100%;
 }
 .left {
-  text-align: left;
+	text-align: left;
 }
-.entry {
-  margin: 5%;
-  color: #b30000;
+.container {
+	margin: 5%;
+	color: #b30000;
 }
 .container{
-  display: flex;
+	display: flex;
+	flex-direction: column;
 }
-.flex-item{
-  flex-grow: 1;
+.trait-container{
+	margin: 5% auto 5% auto;
 }
-
+.flex-column {
+	display: flex;
+	flex-direction: column;
+}
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+.flex-wrap {
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+.choice-flex {
+	flex-grow: 2
+}
 /* The container <div> - needed to position the dropup content */
 .dropup {
-  position: relative;
-  display: inline-block;
+	position: relative;
+	display: inline-block;
 }
-
 /* Dropup content (Hidden by Default) */
 .dropup-content {
-  display: none;
-  position: absolute;
-  bottom: 32px;
-  background-color: #f0f0e0;
-  width: 98%;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  border-radius: 3px;
+	display: none;
+	position: absolute;
+	bottom: 32px;
+	background-color: #f0f0e0;
+	width: 98%;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	border-radius: 3px;
 }
-
 /* Links inside the dropup */
 .dropup-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
 }
-
 /* Change color of dropup links on hover */
-.dropup-content a:hover {background-color: #ddd}
-
+.dropup-content a:hover {
+	background-color: #ddd
+}
 /* Show the dropup menu on hover */
 .dropup:hover .dropup-content {
-  display: block;
+	display: block;
 }
-
+.darken {
+	background-color: rgba(0, 0, 0, 0.1);
+}
 .lighten {
-  background-color: rgba(255, 255, 255, 0.4);
+	background-color: rgba(255, 255, 255, 0.4);
 }
-
- /* Tooltip container */
- .tooltip {
-  position: relative;
-  display: inline-block;
+/* Tooltip container */
+.tooltip {
+	position: relative;
+	display: inline-block;
 }
-
 /* Tooltip text */
 .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 200%;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  padding: 5%;
-  border-radius: 6px;
-  font-size: medium;
-  font-family: "Signika";
-
-  /* Position the tooltip text */
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-
-  /* Fade in tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
+	visibility: hidden;
+	width: 200%;
+	background-color: #555;
+	color: #fff;
+	text-align: center;
+	padding: 5%;
+	border-radius: 6px;
+	font-size: medium;
+	font-family: "Signika";
+	/* Position the tooltip text */
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -60px;
+	/* Fade in tooltip */
+	opacity: 0;
+	transition: opacity 0.3s;
 }
-
 /* Tooltip arrow */
 .tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 15%;
-  margin-left: -5px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 15%;
+	margin-left: -5px;
+	border-width: 10px;
+	border-style: solid;
+	border-color: #555 transparent transparent transparent;
 }
-
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-} 
+	visibility: visible;
+	opacity: 1;
+}
+.fade-text {
+	color: rgba(0, 0, 0, 0.4)
+}
+
+.required:after {
+    content:" *";
+	color: red;
+}
+
+.missing {
+	color: darkred
+}
+
+.border {
+	border: 2px black solid;
+}

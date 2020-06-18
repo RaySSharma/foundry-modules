@@ -1,76 +1,109 @@
-<div id='background-tab' class='fill'>
+<div id='background-tab' class='fill flex-tab'>
 
-    <h1 style='text-align: center;'>Choose a background</h1>
-    <div class='choice-pane'>
-        <h3 class='header' style='width: 100%;'>Backgrounds:</h3>
-        <select class='background-dropdown lighten' name='background' id='background'>
-            <option value='{{data.background.name}}' selected hidden>{{data.background.name}}</option>
-            {{#with info.background as | background |}}
-            {{#each background}}
-            <option value='{{@key}}'>{{@key}}</option>
-            {{/each}}
-            {{/with}}
-        </select>
+    <h1 class='title'>Choose a background</h1>
+    <div class='fill flex-row'>
+        <div class='choice-pane flex-column'>
+
+            {{!-- Select Background --}}
+            <div class='flex-column'>
+                <h3 class='header required'>Backgrounds</h3>
+                <div class='dropdown-container'>
+                    <select class='background-dropdown darken general-text' name='background' id='name' required>
+                        <option value='{{data.background.name}}' selected hidden>{{data.background.name}}</option>
+                        {{#each info.background}}
+                        <option value='{{@key}}'>{{@key}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
 
 
-        {{!-- Starting Equipment --}}
-        <div style='width:100%'>
-            <h3 {{data.background.hide_options}} class='subheader'>Starting Equipment:</h3>
-            <ul {{data.background.hide_options}} class='general-text' style='text-align: left'>
-                {{#each data.background.data.equipment}}
-                <li>
-                    <span>{{this}}</span>
-                </li>
-                {{/each}}
-            </ul>
+            {{!-- Starting Equipment --}}
+            <div class='flex-column'>
+                <h3 {{data.background.hide_options}} class='header'>Starting Equipment</h3>
+                <ul {{data.background.hide_options}} class='general-text' style='text-align: left'>
+                    {{#each data.background.data.equipment}}
+                    <li>
+                        <span>{{this}}</span>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+
+            <hr {{data.background.hide_options}} class='section-break'>
+
+            {{!-- Extra Languages --}}
+            {{#if data.background.data.extra_languages}}
+            <div class='flex-column'>
+                <h3 class='header'>Extra Languages: {{data.background.data.extra_languages}}</h3>
+
+                <ul class='container' style='list-style: none; width: 80%;' name='class' id='extra-languages'>
+                    {{#range data.background.data.extra_languages}}
+                    <li class='general-text darken' style='margin: 2.5% auto 2.5% auto;'>
+                        <input type="text" placeholder="e.g, Draconic">
+                    </li>
+                    {{/range}}
+                </ul>
+            </div>
+            {{/if}}
+
+            <hr {{data.background.hide_options}} class='section-break'>
+
+            {{!-- Select Traits --}}
+            <div class='flex-column'>
+                <h3 {{data.background.hide_options}} class='subheader'>Traits</h3>
+                <span {{data.background.hide_options}} class='general-text'>{{data.background.trait}}</span>
+                <div class='button-container'>
+                    <button {{data.background.hide_options}} type="button" class='random-choice background-button'
+                        id='traits'>Roll</button>
+                </div>
+            </div>
+
+            <hr {{data.background.hide_options}} class='section-break'>
+
+            {{!-- Select Ideals --}}
+            <div class='flex-column'>
+                <h3 {{data.background.hide_options}} class='subheader'>Ideals</h3>
+                <span {{data.background.hide_options}} class='general-text'>{{data.background.ideal}}</span>
+                <div class='button-container'>
+                    <button {{data.background.hide_options}} type="button" class='random-choice background-button'
+                        id='ideals'>Roll</button>
+                </div>
+            </div>
+
+            <hr {{data.background.hide_options}} class='section-break'>
+
+            {{!-- Select Bonds --}}
+            <div class='flex-column'>
+                <h3 {{data.background.hide_options}} class='subheader'>Bonds</h3>
+                <span {{data.background.hide_options}} class='general-text'>{{data.background.bond}}</span>
+                <div class='button-container'>
+                    <button {{data.background.hide_options}} type="button" class='random-choice background-button'
+                        id='bonds'>Roll</button>
+                </div>
+            </div>
+
+            <hr {{data.background.hide_options}} class='section-break'>
+
+            {{!-- Select Flaws --}}
+            <div class='flex-column'>
+                <h3 {{data.background.hide_options}} class='subheader'>Flaws</h3>
+                <span {{data.background.hide_options}} class='general-text'>{{data.background.flaw}}</span>
+                <div class='button-container'>
+                    <button {{data.background.hide_options}} type="button" class='random-choice background-button'
+                        id='flaws'>Roll</button>
+                </div>
+            </div>
+
+            <hr {{data.background.hide_options}} class='section-break'>
+
         </div>
 
-        <hr {{data.background.hide_options}} class='section-break'>
-
-        {{!-- Select Traits --}}
-        <h3 {{data.background.hide_options}} class='subheader' style='width: 100%;'>Traits:</h3>
-        <span {{data.background.hide_options}} class='general-text'>{{data.background.traits}}</span>
-        <div class='button-container' >
-            <button {{data.background.hide_options}} type="button" class='random-choice background-button'
-                id='traits'>Roll</button>
+        <!-- Info Pane -->
+        {{#if data.background.name}}
+        <div class='info-pane'>
+            <iframe width='100%' height='100%' src='{{data.background.template}}'></iframe>
         </div>
-
-        <hr {{data.background.hide_options}} class='section-break'>
-
-        {{!-- Select Ideals --}}
-        <h3 {{data.background.hide_options}} class='subheader' style='width: 100%;'>Ideals:</h3>
-        <span {{data.background.hide_options}} class='general-text'>{{data.background.ideals}}</span>
-        <div class='button-container' >
-            <button {{data.background.hide_options}} type="button" class='random-choice background-button'
-                id='ideals'>Roll</button>
-        </div>
-        <hr {{data.background.hide_options}} class='section-break'>
-
-        {{!-- Select Bonds --}}
-        <h3 {{data.background.hide_options}} class='subheader' style='width: 100%;'>Bonds:</h3>
-        <span {{data.background.hide_options}} class='general-text'>{{data.background.bonds}}</span>
-        <div class='button-container' >
-            <button {{data.background.hide_options}} type="button" class='random-choice background-button'
-                id='bonds'>Roll</button>
-        </div>
-        <hr {{data.background.hide_options}} class='section-break'>
-
-        {{!-- Select Flaws --}}
-        <h3 {{data.background.hide_options}} class='subheader' style='width: 100%;'>Flaws:</h3>
-        <span {{data.background.hide_options}} class='general-text'>{{data.background.flaws}}</span>
-        <div class='button-container'>
-            <button {{data.background.hide_options}} type="button" class='random-choice background-button'
-                id='flaws'>Roll</button>
-        </div>
-
-
-
+        {{/if}}
     </div>
-
-    <!-- Info Pane -->
-    {{#if data.background.name}}
-    <div class='info-pane'>
-        <iframe width='100%' height='100%' src='{{data.background.template}}'></iframe>
-    </div>
-    {{/if}}
 </div>

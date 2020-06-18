@@ -1,5 +1,98 @@
-<div class='equipment-tab'>
-    <input type='hidden' name='sheet' id='sheet' value='equipment'>
+<div id='bio-tab' class='fill flex-tab'>
 
-    <h3 class='tabcontent'>Equipment menu</h3>
+    <h1 class='title'>Drag items to/from your inventory, or sell for half price.</h1>
+    <div class='fill flex-row'>
+        <div class='choice-pane flex-column'>
+            {{!-- Select Background --}}
+            <div class='flex-column'>
+                <h3 class='header'>Shopping List</h3>
+
+                <hr class='section-break'>
+
+
+                {{!-- Class Equipment--}}
+                {{#if data.class.name}}
+                <div class='flex-column'>
+                    
+                    <h3 class='subheader'>Class Equipment</h3>
+                    <ul class='general-text'>
+                        {{#each data.class.data.equipment}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+
+                <hr class='section-break'>
+
+                {{/if}}
+
+
+                {{!-- Background Equipment --}}
+                {{#if data.background.name}}
+                <div class='flex-column'>
+                    <h3 {{data.background.hide_options}} class='subheader'>Background Equipment</h3>
+                    <ul {{data.background.hide_options}} class='general-text' style='text-align: left'>
+                        {{#each data.background.data.equipment}}
+                            <li>
+                                <span>{{this}}</span>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+
+                <hr class='section-break'>
+
+                {{/if}}
+
+
+            </div>
+        </div>
+
+        {{!-- Item Shop --}}
+        <div class='choice-pane flex-column spell-pane'>
+            <div class='lighten' style='margin-bottom: 2%;'>
+                <input type='text' class='search-bar general-text' placeholder='Search'>
+            </div>
+            <div class='flex-column'>
+                {{#each info.items}}
+                    <div class='item-container draggable' name='item' id='{{this.name}}'>
+                        <img class='item-icon' src='{{this.data.img}}'>
+                        <span class='item-info'>{{this.name}}</span>
+                        <span class='info-icon-item render-sheet'>🛈</span>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+
+        {{!-- Inventory --}}
+        <div class='choice-pane flex-column darken droppable-pane spell-pane' style='border: 2px #000000 solid;'>
+            <div class='flex-column'>
+                <h3 class='header'>Inventory</h3>
+                <hr class='section-break' style='width: 50%; margin: auto;'>
+                <div class='flex-row'>
+                    <input type='number' class='money-input' id='gp' value={{data.equipment.gp}}>
+                    <label for='gp' class='money-label'>GP</label>
+                    <input type='number' class='money-input' id='sp' value={{data.equipment.sp}}>
+                    <label for='sp' class='money-label'>SP</label>
+                    <input type='number' class='money-input' id='cp' value={{data.equipment.cp}}>
+                    <label for='cp' class='money-label'>CP</label>
+                </div>
+
+                <hr class='section-break'>
+
+                <div class='flex-column' style='width: 100%; margin: auto;'>
+                    {{#each data.equipment.items}}
+                        <div class='item-recorded draggable drag-remove' name='item' id='{{this.name}}'>
+                            <img class='item-recorded-icon' src='{{this.img}}'>
+                            <span class='item-recorded-info'>{{this.name}}</span>
+                            <span class='convert-gp tooltip'>
+                                <i class='fas fa-coins'></i>
+                                <p class='tooltiptext'>Sell for {{this.data.price}} GP</p>
+                            </span>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,4 +1,88 @@
-<div class='summary-tab'>
-    <input type='hidden' name='sheet' id='sheet' value='summary'>
-    <p>Summary menu</p>
+<div id='summary-tab' class='fill flex-tab'>
+
+    <h1 class='title'>Character Summary</h1>
+
+    <ul id='HC-abilities' class='flex-row'>
+        {{#each data.abilities}}
+            <li class='ability-container large'>
+                <div class='ability-container border'>
+                    <h3 class='ability-score'>{{@key}}</h3>
+                    <p class='ability-score'>{{this}}</p>
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+
+    {{#if data.bio.name}}
+        {{#if data.race.name}}
+            {{#if data.background.name}}
+                {{#if data.class.name}}
+                    <h3 class='header'>{{data.bio.name}} the {{getSubtext data.race.name}} {{data.background.name}}
+                        {{data.class.name}}</h3>
+
+                    <div class='flex-row'>
+                        <div class='choice-pane flex-column border'>
+                            <h3 class='header'>Features</h3>
+                            {{#each data.race.feats}}
+                                <div class='feat-container darken'>
+                                    <img src='{{this.img}}' class='feat-icon'>
+                                    <span class='subheader'>{{this.name}}</span>
+                                </div>
+                            {{/each}}
+
+                            {{#each data.class.feats as | feat |}}
+                                <div class='feat-container darken'>
+                                    <img src='{{this.img}}' class='feat-icon'>
+                                    <span class='subheader'>{{feat.name}}</span>
+                                </div>
+
+                            {{/each}}
+
+                        </div>
+                        <div class='choice-pane flex-column border'>
+                            <h3 class='header'>Equipment</h3>
+                            {{#each data.equipment.items}}
+                                <div class='item-recorded' name='item' id='{{this.name}}'>
+                                    <img class='item-recorded-icon' src='{{this.img}}'>
+                                    <span class='item-recorded-info'>{{this.name}}</span>
+                                </div>
+                            {{/each}}
+                        </div>
+
+                        <div class='choice-pane flex-column border'>
+                            <h3 class='header'>Spells</h3>
+                            {{#each data.spells.spells}}
+                                <div class='spell-recorded' name='spell' id='{{this.name}}'>
+                                    <img class='spell-recorded-icon' src='{{this.img}}'>
+                                    <span class='spell-recorded-info' name='name'>{{this.name}}</span>
+                                    <span class='spell-recorded-info'
+                                        name='level'>{{lookup ../data.spells.levels @index}}</span>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                {{/if}}
+            {{/if}}
+        {{/if}}
+    {{/if}}
+
+    <div class='flex-column'>
+        {{#unless data.race.name}}
+            <h3 class='header missing'>Missing Field: Race</h3>
+        {{/unless}}
+
+        {{#unless data.class.name}}
+            <h3 class='header missing'>Missing Field: Class</h3>
+        {{/unless}}
+
+        {{#unless data.background.name}}
+            <h3 class='header missing'>Missing Field: Background</h3>
+        {{/unless}}
+
+        {{#unless data.bio.name}}
+            <h3 class='header missing'>Missing Field: Name</h3>
+        {{/unless}}
+    </div>
+
+    <button class='header finish'>Finish</button>
 </div>
