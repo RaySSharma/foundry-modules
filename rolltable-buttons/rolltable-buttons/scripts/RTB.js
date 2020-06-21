@@ -88,7 +88,9 @@ class RTB extends Application {
         const rollTable = game.tables.entities.find(b => b.name === rollTableName);
 
         if (rollTable.data.results.length > 0) {
-            const result = rollTable.roll().results[0];
+            const r = rollTable.roll();
+            const result = r.results[0]
+            const roll = r.roll
             const tableName = rollTable.data.name;
             let outcomeName = null;
             let outcomeContent = null;
@@ -96,14 +98,16 @@ class RTB extends Application {
                 outcomeName = RTB._removeHTMLTags(result.text);
                 outcomeContent = game.journal.entities.find(b => b._id === result.resultId).data.content;
                 outcomeContent = RTB._removeHTMLTags(outcomeContent);
-            } else if (result.type === CONST.TABLE_RESULT_TYPES.TEXT) {
-                outcomeContent = RTB._removeHTMLTags(result.text);
+                RTB._addChatMessage(tableName, outcomeName, outcomeContent).then();
             } else {
-                let speaker = ChatMessage.getSpeaker({ user: game.user });
-                rollTable._displayChatResult(result, speaker);
-                return result;
+                let rollMode = game.settings.get("core", "rollMode");
+                rollTable.draw({
+                    roll: roll,
+                    results: [result],
+                    displayChat: rollTable.data.displayRoll,
+                    rollMode: rollMode
+                });
             }
-            RTB._addChatMessage(tableName, outcomeName, outcomeContent).then();
             return result;
         }
     }
