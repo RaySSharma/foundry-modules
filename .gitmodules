@@ -1,0 +1,9 @@
+[submodule "hero-conjurer"]
+	path = hero-conjurer
+	url = git@github.com:RaySSharma/fvtt-hero-conjurer.git
+[submodule "encounter-builder"]
+	path = encounter-builder
+	url = git@github.com:RaySSharma/fvtt-encounter-builder.git
+[submodule "rolltable-buttons"]
+	path = rolltable-buttons
+	url = git@github.com:RaySSharma/fvtt-rolltable-buttons.git
